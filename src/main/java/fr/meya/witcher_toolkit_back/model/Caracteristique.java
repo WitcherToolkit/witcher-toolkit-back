@@ -1,5 +1,6 @@
 package fr.meya.witcher_toolkit_back.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +13,13 @@ public class Caracteristique {
 
 	private int id;
 
+	@NotBlank
 	private String nom;
 
-	private String description;
+	@NotBlank
+	private String code;
 
-	private String competence;
+	@NotBlank
+	private String description;
 
 }

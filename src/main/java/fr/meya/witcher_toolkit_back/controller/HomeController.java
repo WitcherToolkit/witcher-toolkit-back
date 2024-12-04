@@ -16,7 +16,7 @@ public class HomeController {
 		this.caracteristiqueService = caracteristiqueService;
 	}
 
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String displayHome(Model model) {
 		log.info("page d'accueil");
 		model.addAttribute("caracteristiques", caracteristiqueService.getCaracteristiqueList());

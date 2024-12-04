@@ -8,23 +8,8 @@
 <h1>Bienvenu(e) sur la page de jdr</h1>
 <h2>Actions disponibles :</h2>
 <ul>
-    <li>Liste des caracteristiques</li>
+    <li><a th:href="@{/caracteristique}">Caractéristiques disponibles</a></li>
 </ul>
-
-<table style="border-collapse: collapse;">
-    <tbody style="font-weight: bold;">
-    <tr>
-        <td style="border: 1px solid black;">nom</td>
-        <td style="border: 1px solid black;">description</td>
-        <td style="border: 1px solid black;">competence</td>
-    </tr>
-    </tbody>
-    <tr th:each="caracteristique: ${caracteristiques}">
-        <td style="border: 1px solid black;" th:text="${caracteristique.nom}"></td>
-        <td style="border: 1px solid black;" th:text="${caracteristique.description}"></td>
-        <td style="border: 1px solid black;" th:text="${caracteristique.competence}"></td>
-    </tr>
-</table>
 
 </body>
 </html>
