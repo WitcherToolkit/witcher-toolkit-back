@@ -1,5 +1,14 @@
 package fr.meya.witcher_toolkit_back.model.persistent;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +19,12 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Entity
 public class Personnage {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idPersonnage;
 
 	private String nomJoueur;
 
@@ -32,23 +44,31 @@ public class Personnage {
 
 	private String pointProgression;
 
-	// Voir pour énum
 	private String race;
 
+	@ManyToOne
+	@JoinColumn(name = "idProfession", nullable = false)
 	private Profession profession;
 
+	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceSpecifiquePersonnage> competenceSpecifiquePersonnageList;
 
+	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList;
 
+	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceGeneralePersonnage> competencePersonnageList;
 
+	@ManyToMany(mappedBy = "personnageList")
 	private List<Rituel> rituelList;
 
+	@ManyToMany(mappedBy = "personnageList")
 	private List<Envoutement> envoutementList;
 
-	private List<Signe> signe;
+	@ManyToMany(mappedBy = "personnageList")
+	private List<Signe> signeList;
 
-	private List<Sort> sort;
+	@ManyToMany(mappedBy = "personnageList")
+	private List<Sort> sortList;
 
 }
