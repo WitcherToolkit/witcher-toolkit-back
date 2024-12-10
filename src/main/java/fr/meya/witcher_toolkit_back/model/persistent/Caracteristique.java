@@ -1,4 +1,4 @@
-package fr.meya.witcher_toolkit_back.model;
+package fr.meya.witcher_toolkit_back.model.persistent;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

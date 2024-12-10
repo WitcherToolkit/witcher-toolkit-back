@@ -1,6 +1,7 @@
-package fr.meya.witcher_toolkit_back.repository;
+package fr.meya.witcher_toolkit_back.adapter.port.out;
 
-import fr.meya.witcher_toolkit_back.model.Caracteristique;
+import fr.meya.witcher_toolkit_back.model.persistent.Caracteristique;
+import fr.meya.witcher_toolkit_back.port.out.ICaracteristiqueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

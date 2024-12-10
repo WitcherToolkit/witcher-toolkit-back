@@ -1,4 +1,4 @@
-package fr.meya.witcher_toolkit_back.controller;
+package fr.meya.witcher_toolkit_back.adapter.port.in;
 
 import fr.meya.witcher_toolkit_back.service.CaracteristiqueService;
 import lombok.extern.slf4j.Slf4j;

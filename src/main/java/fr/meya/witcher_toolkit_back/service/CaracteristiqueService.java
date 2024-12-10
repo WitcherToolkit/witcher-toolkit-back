@@ -1,7 +1,7 @@
 package fr.meya.witcher_toolkit_back.service;
 
-import fr.meya.witcher_toolkit_back.model.Caracteristique;
-import fr.meya.witcher_toolkit_back.repository.CaracteristiqueRepository;
+import fr.meya.witcher_toolkit_back.model.persistent.Caracteristique;
+import fr.meya.witcher_toolkit_back.adapter.port.out.CaracteristiqueRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,4 +29,5 @@ public class CaracteristiqueService implements ICaracteristiqueService{
 	public Caracteristique getCaracteristiqueById(int id) {
 		return null;
 	}
+
 }

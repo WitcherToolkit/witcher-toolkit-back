@@ -1,4 +1,4 @@
-package fr.meya.witcher_toolkit_back;
+package fr.meya.witcher_toolkit_back.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
