@@ -1,33 +1,38 @@
 package fr.meya.witcher_toolkit_back.controller;
 
 import fr.meya.witcher_toolkit_back.model.Caracteristique;
-import fr.meya.witcher_toolkit_back.service.CaracteristiqueService;
-import jakarta.validation.Valid;
+import fr.meya.witcher_toolkit_back.service.ICaracteristiqueService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
 @Slf4j
+@RestController
 @RequestMapping("/caracteristique")
 public class CaracteristiqueController {
 
-	private final CaracteristiqueService caracteristiqueService;
+	private final ICaracteristiqueService iCaracteristiqueService;
 
-	public CaracteristiqueController(CaracteristiqueService caracteristiqueService) {
-		this.caracteristiqueService = caracteristiqueService;
+	public CaracteristiqueController(ICaracteristiqueService iCaracteristiqueService) {
+		this.iCaracteristiqueService = iCaracteristiqueService;
+	}
+
+	// Pour traiter la soumission du formulaire
+	@PostMapping
+	public Caracteristique create(@RequestBody Caracteristique caracteristique) {
+		return iCaracteristiqueService.createCaracteristique(caracteristique);
 	}
 
 	@GetMapping
-	public String displayCaracteristique(Model model) {
+	public List<Caracteristique> list() {
 		log.info("consultation caracteristique");
-		model.addAttribute("caracteristiques", caracteristiqueService.getCaracteristiqueList());
-		return "caracteristique/caracteristique-consultation";
+		return iCaracteristiqueService.getCaracteristiqueList();
 	}
 
 	// Pour afficher le formulaire
@@ -37,25 +42,6 @@ public class CaracteristiqueController {
 		return "caracteristique/caracteristique-creation";
 	}
 
-	// Pour traiter la soumission du formulaire
-	@PostMapping("/add")
-	public String addCaracteristique(@Valid @ModelAttribute Caracteristique result, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return "caracteristique/caracteristique-creation";
-		}
 
-		Caracteristique caracteristique = new Caracteristique();
-		caracteristique.setNom(result.getNom());
-		caracteristique.setCode(result.getCode());
-		caracteristique.setDescription(result.getDescription());
-
-		caracteristiqueService.getCaracteristiqueList().add(caracteristique);
-
-		// Au lieu d'ajouter directement à la liste, assurez-vous que l'ajout passe par le service
-		//caracteristiqueService.getCaracteristiqueList().add(caracteristique);
-
-		//return "redirect:/caracteristique";
-
-		return "caracteristique/caracteristique-consultation";
-	}
 }
+

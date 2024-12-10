@@ -8,15 +8,13 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CompetencePersonnage {
+public class CompetenceGeneralePersonnage {
 
 	private int id;
 
-	private Competence idCompetence;
+	private CompetenceGenerale competenceGenerale;
 
-	private Personnage idPersonnage;
+	private Personnage personnage;
 
-	private  int valeurMax;
-
-	private int valeurActuelle;
+	private  int valeur;
 }

@@ -8,14 +8,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Competence {
+public class CompetenceGenerale extends Competence{
 
-	private int id;
+	private String descriptionBase10;
 
-	private String nom;
+	private String descriptionBase13;
 
-	private String codeCaracteristique;
+	private String descriptionBase16;
 
-	private String description;
+	private String descriptionBase20;
 
 }

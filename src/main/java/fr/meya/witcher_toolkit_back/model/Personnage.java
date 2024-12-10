@@ -35,12 +35,13 @@ public class Personnage {
 	// Voir pour énum
 	private String race;
 
-	// Voir pour enum
-	private String profession;
+	private Profession profession;
+
+	private List<CompetenceSpecifiquePersonnage> competenceSpecifiquePersonnageList;
 
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList;
 
-	private List<CompetencePersonnage> competencePersonnageList;
+	private List<CompetenceGeneralePersonnage> competencePersonnageList;
 
 	private List<Rituel> rituelList;
 
