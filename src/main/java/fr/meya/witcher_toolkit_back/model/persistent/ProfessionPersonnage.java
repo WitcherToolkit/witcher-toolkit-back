@@ -1,9 +1,6 @@
 package fr.meya.witcher_toolkit_back.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +13,16 @@ public class ProfessionPersonnage {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private  Profession profession;
-
-	private Personnage personnage;
+	private int valeurActuelle;
 
 	private  int valeurMax;
 
-	private int valeurActuelle;
+	@ManyToOne
+	@JoinColumn(name = "idProfession", nullable = false)
+	private  Profession profession;
+
+	@ManyToOne
+	@JoinColumn(name = "idPersonnage", nullable = false)
+	private Personnage personnage;
+
 }

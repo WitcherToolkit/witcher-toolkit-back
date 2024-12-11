@@ -1,9 +1,6 @@
 package fr.meya.witcher_toolkit_back.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,14 +14,18 @@ public class CaracteristiquePersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int id;
-
-	private Personnage idPersonnage;
-
-	private Caracteristique idCaracteristique;
+	private int idCaracteristiquePersonnage;
 
 	private int valeurMax;
 
 	private int valeurActuelle;
+
+	@ManyToOne
+	@JoinColumn(name = "idPersonnage", nullable = false)
+	private Personnage idPersonnage;
+
+	@ManyToOne
+	@JoinColumn(name = "idCaracteristique", nullable = false)
+	private Caracteristique idCaracteristique;
 
 }

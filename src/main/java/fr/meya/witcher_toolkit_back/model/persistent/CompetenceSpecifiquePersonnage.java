@@ -16,7 +16,15 @@ public class CompetenceSpecifiquePersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idCompetenceSpecifiquePersonnage;
+
+	private int valeurActuelle;
+
+	private int valeurMax;
+
+	@ManyToOne
+	@JoinColumn(name = "idProfession", nullable = false)
+	private Profession profession;
 
 	@ManyToOne
 	@JoinColumn(name = "idCompetenceSpecifique", nullable = false)
@@ -26,7 +34,4 @@ public class CompetenceSpecifiquePersonnage {
 	@JoinColumn(name = "idPersonnage", nullable = false)
 	private Personnage personnage;
 
-	private int valeurMax;
-
-	private int valeurActuelle;
 }

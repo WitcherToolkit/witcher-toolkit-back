@@ -16,7 +16,7 @@ public class User {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idUser;
 
 	private String pseudo;
 

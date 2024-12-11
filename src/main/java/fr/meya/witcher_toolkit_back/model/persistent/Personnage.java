@@ -34,22 +34,33 @@ public class Personnage {
 
 	private String urlImage;
 
+	private String genre;
+
 	private String terreNatale;
 
-	private boolean isBestiaire;
+	private String xp;
 
 	private int age;
 
-	private String genre;
-
-	private String pointProgression;
-
-	private String race;
+	private boolean isBestiaire;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfession", nullable = false)
-	private Profession profession;
+	@JoinColumn(name = "idProfessionPersonnage")
+	private ProfessionPersonnage professionPersonnage;
 
+	@ManyToOne
+	@JoinColumn(name = "idRace", nullable = false)
+	private Race race;
+
+	@ManyToOne
+	@JoinColumn(name = "idCampagne")
+	private Campagne campagne;
+
+	@ManyToOne
+	@JoinColumn(name = "idUser")
+	private User user;
+
+	//-----------------------------------------------//
 	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceSpecifiquePersonnage> competenceSpecifiquePersonnageList;
 
@@ -57,7 +68,7 @@ public class Personnage {
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList;
 
 	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetenceGeneralePersonnage> competencePersonnageList;
+	private List<CompetencePersonnage> competencePersonnageList;
 
 	@ManyToMany(mappedBy = "personnageList")
 	private List<Rituel> rituelList;
@@ -65,10 +76,5 @@ public class Personnage {
 	@ManyToMany(mappedBy = "personnageList")
 	private List<Envoutement> envoutementList;
 
-	@ManyToMany(mappedBy = "personnageList")
-	private List<Signe> signeList;
-
-	@ManyToMany(mappedBy = "personnageList")
-	private List<Sort> sortList;
 
 }

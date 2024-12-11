@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,22 +20,29 @@ public class Envoutement {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int id;
+	private int idEnvoutement;
 
+	@NotBlank
 	private String nom;
 
+	@NotBlank
 	private String cout;
 
+	@NotBlank
 	private String effet;
+
+	@NotBlank
+	private String prerequis;
+
+	@NotBlank
+	private String danger;
 
 	@ManyToMany
 	@JoinTable(
-			name = "personnageEnvoutement", // Nom de la table de jointure
+			name = "envoutementPersonnage", // Nom de la table de jointure
 			joinColumns = @JoinColumn(name = "idEnvoutement"), // Colonne représentant l'entité Envoutement
 			inverseJoinColumns = @JoinColumn(name = "idPersonnage") // Colonne représentant l'entité Personnage
 	)
 	private List<Personnage> personnageList;
-
-	// voir si on ajoute "danger" ou encore "prérequis pour lever la malédiction"
 
 }

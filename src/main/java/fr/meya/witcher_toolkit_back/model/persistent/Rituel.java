@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,23 +20,31 @@ public class Rituel {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idRituel;
 
+	@NotBlank
 	private String nom;
 
-	private String niveau;
-
+	@NotBlank
 	private String cout;
 
+	@NotBlank
 	private String effet;
 
-	private String temps;
+	@NotBlank
+	private String tempsPreparation;
 
+	@NotBlank
 	private String sd;
 
+	@NotBlank
 	private String duree;
 
+	@NotBlank
 	private String composant;
+
+	@NotBlank
+	private String niveau;
 
 	@ManyToMany
 	@JoinTable(
