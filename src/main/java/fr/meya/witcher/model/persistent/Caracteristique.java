@@ -18,7 +18,7 @@ public class Caracteristique {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int idCaracteristique;
+	private long idCaracteristique;
 
 	@NotBlank
 	private String nom;

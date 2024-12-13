@@ -12,7 +12,7 @@ public class CompetenceSpecifique {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCompetenceSpecifique;
+	private long idCompetenceSpecifique;
 
 	@NotBlank
 	private String nom;

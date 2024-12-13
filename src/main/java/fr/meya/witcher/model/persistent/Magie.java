@@ -17,7 +17,7 @@ public class Magie {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int id;
+	private long idMagie;
 
 	@NotBlank
 	private String nom;

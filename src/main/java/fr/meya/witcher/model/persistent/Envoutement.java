@@ -20,7 +20,7 @@ public class Envoutement {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int idEnvoutement;
+	private long idEnvoutement;
 
 	@NotBlank
 	private String nom;

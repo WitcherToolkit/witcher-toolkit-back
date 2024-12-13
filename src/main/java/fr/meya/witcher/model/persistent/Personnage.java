@@ -24,7 +24,7 @@ public class Personnage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPersonnage;
+	private long idPersonnage;
 
 	private String nomJoueur;
 
@@ -40,7 +40,7 @@ public class Personnage {
 
 	private String xp;
 
-	private int age;
+	private long age;
 
 	private boolean isBestiaire;
 

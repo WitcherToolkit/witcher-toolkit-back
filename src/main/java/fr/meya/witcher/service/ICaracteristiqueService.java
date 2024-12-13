@@ -10,6 +10,4 @@ public interface ICaracteristiqueService {
 
 	List<Caracteristique> getCaracteristiqueList();
 
-	Caracteristique getCaracteristiqueById(int id);
-
 }

@@ -15,7 +15,7 @@ public class Race {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private int idRace;
+    private long idRace;
 
     @NotBlank
     private String nom;

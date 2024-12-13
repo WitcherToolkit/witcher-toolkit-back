@@ -15,7 +15,7 @@ public class CompetencePersonnage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCompetencePersonnage;
+	private long idCompetencePersonnage;
 
 	@ManyToOne
 	@JoinColumn(name = "idCompetence", nullable = false)

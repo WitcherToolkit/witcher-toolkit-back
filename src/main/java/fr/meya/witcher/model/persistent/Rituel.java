@@ -20,7 +20,7 @@ public class Rituel {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int idRituel;
+	private long idRituel;
 
 	@NotBlank
 	private String nom;

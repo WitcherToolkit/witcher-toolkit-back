@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ public class User {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int idUser;
+	private long idUser;
 
 	private String pseudo;
 
@@ -26,7 +27,9 @@ public class User {
 
 	private Boolean isAdmin;
 
+	@OneToMany(mappedBy = "user")
 	private List<Personnage> personnageList;
 
+	@OneToMany(mappedBy = "user")
 	private List<Campagne> campagneList;
 }
