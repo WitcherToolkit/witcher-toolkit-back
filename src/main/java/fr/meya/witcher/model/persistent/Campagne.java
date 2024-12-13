@@ -26,7 +26,7 @@ public class Campagne {
 	private String nom;
 
 	@ManyToOne
-	@JoinColumn(name = "idUser", nullable = false)
-	private  User user;
+	@JoinColumn(name = "idProfilUtilisateur", nullable = false)
+	private ProfilUtilisateur profilUtilisateur;
 
 }

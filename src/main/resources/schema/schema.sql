@@ -29,19 +29,19 @@ CREATE TABLE competence(
 CREATE TABLE caracteristique(
     idCaracteristique BIGINT,
     nom VARCHAR(16) NOT NULL,
-    code VARCHAR(4) NOT NULL,
+    code VARCHAR(6) NOT NULL,
     description TEXT NOT NULL,
     PRIMARY KEY(idCaracteristique)
 );
 
--- TABLE DE BASE : user
-CREATE TABLE user(
-    idUser BIGINT,
+-- TABLE DE BASE : profil_itilisateur
+CREATE TABLE profil_utilisateur(
+    idProfilUtilisateur BIGINT,
     pseudo VARCHAR(64) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     isAdmin BOOLEAN default false,
-    PRIMARY KEY(idUser),
+    PRIMARY KEY(idProfilUtilisateur),
     UNIQUE(pseudo),
     UNIQUE(email)
 );
@@ -101,9 +101,9 @@ CREATE TABLE profession_personnage(
 CREATE TABLE campagne(
     idCampagne BIGINT,
     nom VARCHAR(50) NOT NULL,
-    idUser INT NOT NULL,
+    idProfilUtilisateur INT NOT NULL,
     PRIMARY KEY(idCampagne),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idProfilUtilisateur) REFERENCES profil_utilisateur(idProfilUtilisateur)
 );
 
 -- TABLE DE BASE : competence_specifique
@@ -134,13 +134,13 @@ CREATE TABLE personnage(
     idProfessionPersonnage INT NOT NULL,
     idRace BIGINT NOT NULL,
     idCampagne BIGINT,
-    idUser BIGINT,
+    idProfilUtilisateur BIGINT,
     PRIMARY KEY(idPersonnage),
     UNIQUE(idProfessionPersonnage),
     FOREIGN KEY(idProfessionPersonnage) REFERENCES profession_personnage(idProfessionPersonnage),
     FOREIGN KEY(idRace) REFERENCES race(idRace),
     FOREIGN KEY(idCampagne) REFERENCES campagne(idCampagne),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idProfilUtilisateur) REFERENCES profil_utilisateur(idProfilUtilisateur)
 );
 
 -- TABLE DE BASE : profession_specifique_personnage
@@ -181,7 +181,6 @@ CREATE TABLE competence_personnage(
     FOREIGN KEY(idCompetence) REFERENCES competence(idCompetence)
 );
 
--- TABLE DE BASE : magie_personnage
 CREATE TABLE magie_personnage(
     idMagiePersonnage BIGINT,
     idPersonnage BIGINT,

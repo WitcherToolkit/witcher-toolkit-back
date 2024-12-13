@@ -13,11 +13,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class User {
+public class ProfilUtilisateur {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private long idUser;
+	private long idProfilUtilisateur;
 
 	private String pseudo;
 

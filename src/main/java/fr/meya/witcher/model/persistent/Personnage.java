@@ -57,8 +57,8 @@ public class Personnage {
 	private Campagne campagne;
 
 	@ManyToOne
-	@JoinColumn(name = "idUser")
-	private User user;
+	@JoinColumn(name = "idProfilUtilisateur")
+	private ProfilUtilisateur profilUtilisateur;
 
 	//----------------------------------------------------------------------------------------------------------------//
 
