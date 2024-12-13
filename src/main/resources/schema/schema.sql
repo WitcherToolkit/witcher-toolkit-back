@@ -76,7 +76,9 @@ CREATE TABLE envoutement(
 CREATE TABLE profession(
     idProfession BIGINT,
     nom VARCHAR(50) NOT NULL,
+    codeCaracteristique VARCHAR(4),
     competenceExclusive VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
     PRIMARY KEY(idProfession)
 );
 
