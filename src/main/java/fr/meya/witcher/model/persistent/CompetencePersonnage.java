@@ -15,14 +15,15 @@ public class CompetencePersonnage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDCOMPETENCEPERSONNAGE")
 	private long idCompetencePersonnage;
 
 	@ManyToOne
-	@JoinColumn(name = "idCompetence", nullable = false)
+	@JoinColumn(name = "IDCOMPETENCE", nullable = false)
 	private Competence competence;
 
 	@ManyToOne
-	@JoinColumn(name = "idPersonnage", nullable = false)
+	@JoinColumn(name = "IDPERSONNAGE", nullable = false)
 	private Personnage personnage;
 
 	@NotBlank

@@ -1,10 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +13,7 @@ public class ProfilUtilisateur {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@Column(name = "IDPROFILUTILISATEUR")
 	private long idProfilUtilisateur;
 
 	private String pseudo;
@@ -27,9 +24,9 @@ public class ProfilUtilisateur {
 
 	private Boolean isAdmin;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "profilUtilisateur")
 	private List<Personnage> personnageList;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "profilUtilisateur")
 	private List<Campagne> campagneList;
 }

@@ -1,12 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +14,7 @@ public class Envoutement {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column(name = "IDENVOUTEMENT")
 	private long idEnvoutement;
 
 	@NotBlank
@@ -40,8 +35,8 @@ public class Envoutement {
 	@ManyToMany
 	@JoinTable(
 			name = "envoutementPersonnage", // Nom de la table de jointure
-			joinColumns = @JoinColumn(name = "idEnvoutement"), // Colonne représentant l'entité Envoutement
-			inverseJoinColumns = @JoinColumn(name = "idPersonnage") // Colonne représentant l'entité Personnage
+			joinColumns = @JoinColumn(name = "IDENVOUTEMENT"), // Colonne représentant l'entité Envoutement
+			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE") // Colonne représentant l'entité Personnage
 	)
 	private List<Personnage> personnageList;
 

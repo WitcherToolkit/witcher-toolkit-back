@@ -18,6 +18,7 @@ CREATE TABLE competence(
     idCompetence BIGINT,
     nom VARCHAR(50) NOT NULL,
     codeCaracteristique VARCHAR(4) NOT NULL,
+    description TEXT NOT NULL,
     descriptionBase10 TEXT NOT NULL,
     descriptionBase13 TEXT NOT NULL,
     descriptionBase16 TEXT NOT NULL,

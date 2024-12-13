@@ -26,6 +26,5 @@ public class CaracteristiqueController {
 		return iCaracteristiqueService.getCaracteristiqueList();
 	}
 
-
 }
 

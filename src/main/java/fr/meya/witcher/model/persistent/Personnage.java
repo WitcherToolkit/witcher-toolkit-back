@@ -1,14 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +16,7 @@ public class Personnage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDPERSONNAGE")
 	private long idPersonnage;
 
 	private String nomJoueur;
@@ -45,19 +38,19 @@ public class Personnage {
 	private boolean isBestiaire;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfessionPersonnage")
+	@JoinColumn(name = "IDPREFESSIONPERSONNAGE")
 	private ProfessionPersonnage professionPersonnage;
 
 	@ManyToOne
-	@JoinColumn(name = "idRace", nullable = false)
+	@JoinColumn(name = "IDRACE", nullable = false)
 	private Race race;
 
 	@ManyToOne
-	@JoinColumn(name = "idCampagne")
+	@JoinColumn(name = "IDCAMPAGNE")
 	private Campagne campagne;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfilUtilisateur")
+	@JoinColumn(name = "IDPROFILUTILISATEUR")
 	private ProfilUtilisateur profilUtilisateur;
 
 	//----------------------------------------------------------------------------------------------------------------//

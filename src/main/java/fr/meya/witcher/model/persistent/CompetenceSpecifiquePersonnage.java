@@ -1,11 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +11,7 @@ public class CompetenceSpecifiquePersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@Column(name = "IDCOMPETENCESPECIFIQUEPERSONNAGE")
 	private long idCompetenceSpecifiquePersonnage;
 
 	private int valeurActuelle;
@@ -23,15 +19,15 @@ public class CompetenceSpecifiquePersonnage {
 	private int valeurMax;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfession", nullable = false)
+	@JoinColumn(name = "IDPROFESSION", nullable = false)
 	private Profession profession;
 
 	@ManyToOne
-	@JoinColumn(name = "idCompetenceSpecifique", nullable = false)
+	@JoinColumn(name = "IDCOMPETENCESPECIFIQUE", nullable = false)
 	private CompetenceSpecifique competenceSpecifique;
 
 	@ManyToOne
-	@JoinColumn(name = "idPersonnage", nullable = false)
+	@JoinColumn(name = "IDPERSONNAGE", nullable = false)
 	private Personnage personnage;
 
 }

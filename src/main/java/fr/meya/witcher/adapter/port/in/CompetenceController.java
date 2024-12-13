@@ -14,18 +14,17 @@ import java.util.List;
 @RequestMapping("/competence")
 public class CompetenceController {
 
-	private final ICompetenceService competenceService;
+	private final ICompetenceService iCompetenceService;
 
-	public CompetenceController (ICompetenceService competenceService) {
-		this.competenceService = competenceService;
+	public CompetenceController(ICompetenceService iCompetenceService) {
+		this.iCompetenceService = iCompetenceService;
 	}
 
 	@GetMapping(value = "/list")
 	public List<Competence> list() {
-		log.info("consultation competence");
-		return competenceService.getCompetenceList();
+		log.info("consultation compétence");
+		return iCompetenceService.getCompetenceList();
 	}
 
-
-
 }
+

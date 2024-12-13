@@ -18,11 +18,11 @@ public class ProfessionPersonnage {
 	private  int valeurMax;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfession", nullable = false)
+	@JoinColumn(name = "IDPROFESSION", nullable = false)
 	private  Profession profession;
 
 	@ManyToOne
-	@JoinColumn(name = "idPersonnage", nullable = false)
+	@JoinColumn(name = "IDPERSONNAGE", nullable = false)
 	private Personnage personnage;
 
 }

@@ -17,6 +17,7 @@ public class Magie {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column(name = "IDMAGIE")
 	private long idMagie;
 
 	@NotBlank
@@ -44,8 +45,8 @@ public class Magie {
 	private String profession;
 
 	@ManyToMany
-	@JoinTable(name = "magiePersonnage",
-			joinColumns = @JoinColumn(name = "idMagie"),
-			inverseJoinColumns = @JoinColumn(name = "idPersonnage"))
+	@JoinTable(name = "MAGIEPERSONNAGE",
+			joinColumns = @JoinColumn(name = "IDMAGIE"),
+			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE"))
 	private List<Personnage> personnageList;
 }

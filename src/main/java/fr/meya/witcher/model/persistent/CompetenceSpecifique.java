@@ -12,6 +12,7 @@ public class CompetenceSpecifique {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDCOMPETENCESPECIFIQUE")
 	private long idCompetenceSpecifique;
 
 	@NotBlank

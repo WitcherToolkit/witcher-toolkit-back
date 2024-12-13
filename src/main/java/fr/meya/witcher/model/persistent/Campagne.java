@@ -1,11 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,13 +15,14 @@ public class Campagne {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column(name = "IDCAMPAGNE")
 	private long idCampagne;
 
 	@NotBlank
 	private String nom;
 
 	@ManyToOne
-	@JoinColumn(name = "idProfilUtilisateur", nullable = false)
+	@JoinColumn(name = "IDPROFILEUTILISATEUR", nullable = false)
 	private ProfilUtilisateur profilUtilisateur;
 
 }
