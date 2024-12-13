@@ -1,6 +1,6 @@
-package fr.meya.witcher_toolkit_back.port.out;
+package fr.meya.witcher.port.out;
 
-import fr.meya.witcher_toolkit_back.model.persistent.Competence;
+import fr.meya.witcher.model.persistent.Competence;
 import org.springframework.data.repository.ListCrudRepository;
 
 

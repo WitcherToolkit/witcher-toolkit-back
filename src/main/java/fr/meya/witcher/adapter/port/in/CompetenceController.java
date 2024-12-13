@@ -1,7 +1,7 @@
-package fr.meya.witcher_toolkit_back.adapter.port.in;
+package fr.meya.witcher.adapter.port.in;
 
-import fr.meya.witcher_toolkit_back.model.persistent.Competence;
-import fr.meya.witcher_toolkit_back.service.ICompetenceService;
+import fr.meya.witcher.model.persistent.Competence;
+import fr.meya.witcher.service.ICompetenceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
