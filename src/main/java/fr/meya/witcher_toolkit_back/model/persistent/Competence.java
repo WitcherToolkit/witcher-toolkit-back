@@ -18,7 +18,7 @@ public class Competence {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCompetence;
+	private long idCompetence;
 
 	@NotBlank
 	private String nom;

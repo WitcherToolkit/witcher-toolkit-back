@@ -11,7 +11,7 @@ public class ProfessionPersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int id;
+	private long idProfessionPersonnage;
 
 	private int valeurActuelle;
 

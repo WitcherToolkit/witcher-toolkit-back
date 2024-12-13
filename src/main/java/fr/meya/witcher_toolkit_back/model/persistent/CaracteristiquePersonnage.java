@@ -14,7 +14,7 @@ public class CaracteristiquePersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private int idCaracteristiquePersonnage;
+	private long idCaracteristiquePersonnage;
 
 	private int valeurMax;
 
@@ -22,7 +22,7 @@ public class CaracteristiquePersonnage {
 
 	@ManyToOne
 	@JoinColumn(name = "idPersonnage", nullable = false)
-	private Personnage idPersonnage;
+	private Personnage personnage;
 
 	@ManyToOne
 	@JoinColumn(name = "idCaracteristique", nullable = false)

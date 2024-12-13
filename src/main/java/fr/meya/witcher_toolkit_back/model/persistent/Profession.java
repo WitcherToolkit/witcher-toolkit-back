@@ -18,13 +18,13 @@ public class Profession {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProfession;
+	private long idProfession;
 
 	private String nom;
 
 	private String competenceExclusive;
 
-	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceSpecifique> competenceSpecifique;
 
 

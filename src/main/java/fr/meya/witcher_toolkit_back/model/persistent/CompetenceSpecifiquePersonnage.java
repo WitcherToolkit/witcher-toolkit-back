@@ -16,7 +16,7 @@ public class CompetenceSpecifiquePersonnage {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private int idCompetenceSpecifiquePersonnage;
+	private long idCompetenceSpecifiquePersonnage;
 
 	private int valeurActuelle;
 
