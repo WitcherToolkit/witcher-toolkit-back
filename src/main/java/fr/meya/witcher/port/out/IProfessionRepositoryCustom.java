@@ -1,11 +1,9 @@
-package fr.meya.witcher.service;
+package fr.meya.witcher.port.out;
 
 import fr.meya.witcher.model.persistent.Profession;
 
 import java.util.List;
 
-public interface IProfessionService {
-
-    List<Profession> getProfessionList();
+public interface IProfessionRepositoryCustom {
     List<Profession> exempleDeMethode(String name, String competence);
 }

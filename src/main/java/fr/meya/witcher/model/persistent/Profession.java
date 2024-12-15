@@ -1,5 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class Profession {
 	private  String codeCaracteristique;
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference // Gère la sérialisation vers competenceSpecifique
 	private List<CompetenceSpecifique> competenceSpecifique;
 
 }

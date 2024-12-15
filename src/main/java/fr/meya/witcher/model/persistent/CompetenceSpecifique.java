@@ -1,5 +1,6 @@
 package fr.meya.witcher.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class CompetenceSpecifique {
 
 	@ManyToOne
 	@JoinColumn(name = "IDPROFESSION", nullable = false)
+	@JsonBackReference // Empêche la sérialisation "retour" vers profession
 	private Profession profession;
 
 }

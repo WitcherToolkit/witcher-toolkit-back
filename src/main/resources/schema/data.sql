@@ -35,4 +35,25 @@ INSERT INTO profession (idProfession, nom, codeCaracteristique, competenceExclus
     (2, 'Barde', 'EMP', 'Prestation', 'Le barde est un compagnon des plus précieux, surtout quand le groupe commence à manquer d''argent. Il peut réaliser un jet de prestation et se donner en spectacle sur la place de la ville durant une heure. Le résultat du jet correspond au montant qu’il a récolté en se produisant dans la rue. Un échec critique peut diminuer le résultat du jet, et si le total devient négatif, cela signifie que la barde n’a pas réussi à recueillir une seule pièce. Il se fait huer par les habitants pour sa piètre performance et subit un malus de -2 en charisme lorsqu’il interagit avec les citadins jusqu''à la fin de la journée.'),
     (3, 'Criminel', 'INT', 'Paranoïa exercée', 'Qu''ils soient assassins, voleurs faussaires ou contrebandiers, tous les hors-la-loi ont en commun une paranoïa constante qui leur permet d’éviter les problèmes. Lorsqu’un criminel arrive à moins de 10m d''un piège (ce qui inclut les pièges expérimentaux, les chausses-trappes des hommes d''armes et les embuscades), il effectue immédiatement un jet de paranoïa exercée dont le SD est égal à celui requis pour déceler le piège, au résultat du jet de furtivité du groupe posté en embuscade ou au SD fixé par le MJ. Même s''il n''arrive pas à repérer le piège, il sentira au fond de lui-même que quelque-chose ne va pas.');
 
-
+-- Ajout de Compétences Spécifique
+INSERT INTO competence_specifique (
+    idCompetenceSpecifique, nom, description, codeCaracteristique, specialisation, prerequis, idProfession
+) VALUES
+      (1, 'Catalogue étendu',
+       'Un artisan expérimenté garde en mémoire tout un catalogue de schémas. Lorsqu’un artisan a fini de mémoriser le plus de diagrammes possibles, il peut réaliser un jet de Catalogue étendu SD. 15 pour en retenir un de plus. Il n’existe pas de limite au nombre de schémas qu’il peut mémoriser, mais tous les 10 schémas, le SD augmente de +1.',
+       'INT',
+       'Maître artisan',
+       'Aucun',
+       1),
+      (2, 'Compagnon',
+       'Quand il commence à fabriquer un objet, l’artisan peut effectuer un jet de compagnon dont le SD est égal au SD de fabrication de l’objet. En cas de réussite, l’objet gagne +1 DÉG (pour les armes) ou +1 PA (pour les armures) par tranche de 2 points au-dessus du SD. La valeur de bonus ne peut pas excéder 5.',
+       'TECH',
+       'Maître artisan',
+       'Catalogue étendu',
+       1),
+      (3, 'Maître compagnon',
+       'Grâce à Maître compagnon, l’artisan réalise des armes d’excellente facture. Il peut réaliser à tout moment un jet de Maître compagnon dont le SD est égal au SD de fabrication de l’objet pour octroyer une résistance permanente de son choix à une armure, ou une valeur de saignement 50% ou d’écourdissement -2 à une arme (selon le type de dégât qu’elle inflige).',
+       'TECH',
+       'Maître artisan',
+       'Compagnon',
+       1);

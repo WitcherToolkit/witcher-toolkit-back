@@ -1,7 +1,6 @@
 package fr.meya.witcher.service;
 
 import fr.meya.witcher.model.persistent.Profession;
-import fr.meya.witcher.port.out.ICompetenceRepository;
 import fr.meya.witcher.port.out.IProfessionRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +18,10 @@ public class ProfessionService implements IProfessionService{
     @Override
     public List<Profession> getProfessionList() {
         return iProfessionRepository.findAll();
+    }
+
+    @Override
+    public List<Profession> exempleDeMethode(String name, String competence) {
+        return iProfessionRepository.exempleDeMethode(name, competence);
     }
 }
