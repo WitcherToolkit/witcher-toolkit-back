@@ -21,7 +21,7 @@ public class CompetenceController {
 	}
 
 	@GetMapping(value = "/list")
-	public List<Competence> list() {
+	public List<Competence> listCompetence() {
 		log.info("consultation compétence");
 		return iCompetenceService.getCompetenceList();
 	}

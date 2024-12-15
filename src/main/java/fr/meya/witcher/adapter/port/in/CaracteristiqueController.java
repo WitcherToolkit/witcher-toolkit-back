@@ -21,7 +21,7 @@ public class CaracteristiqueController {
 	}
 
 	@GetMapping(value = "/list")
-	public List<Caracteristique> list() {
+	public List<Caracteristique> listCaracteristique() {
 		log.info("consultation caracteristique");
 		return iCaracteristiqueService.getCaracteristiqueList();
 	}

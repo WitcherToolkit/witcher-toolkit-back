@@ -14,20 +14,20 @@ public class Profession {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JoinColumn(name = "IDPROFESSION")
+	@Column(name = "IDPROFESSION")
 	private long idProfession;
 
 	@NotBlank
 	private String nom;
 
 	@NotBlank
-	@JoinColumn(name = "COMPETENCEEXCLUSIVE")
+	@Column(name = "COMPETENCEEXCLUSIVE")
 	private String competenceExclusive;
 
 	@NotBlank
 	private String description;
 
-	@JoinColumn(name = "CODECARACTERISTIQUE")
+	@Column(name = "CODECARACTERISTIQUE")
 	private  String codeCaracteristique;
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)

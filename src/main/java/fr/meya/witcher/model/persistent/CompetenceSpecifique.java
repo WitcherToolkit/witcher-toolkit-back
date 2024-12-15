@@ -22,15 +22,17 @@ public class CompetenceSpecifique {
 	private String description;
 
 	@NotBlank
+	@Column(name = "CODECARACTERISTIQUE")
 	private String codeCaracteristique;
 
 	@NotBlank
 	private String specialisation;
 
 	@NotBlank
-	private String presrequis;
+	private String prerequis;
 
 	@ManyToOne
+	@JoinColumn(name = "IDPROFESSION", nullable = false)
 	private Profession profession;
 
 }
