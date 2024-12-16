@@ -1,7 +1,7 @@
 package fr.meya.witcher.service;
 
 import fr.meya.witcher.model.persistent.Caracteristique;
-import fr.meya.witcher.port.out.ICaracteristiqueRepository;
+import fr.meya.witcher.adapter.port.out.ICaracteristiqueRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

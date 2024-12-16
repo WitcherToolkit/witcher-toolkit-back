@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+//@EnableJpaRepositories(basePackages = "fr.meya.witcher.port.out")
 public class WitcherToolkitBackApplication {
 
 	public static void main(String[] args) {

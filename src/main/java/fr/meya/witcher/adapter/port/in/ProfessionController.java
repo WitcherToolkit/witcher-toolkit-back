@@ -1,8 +1,9 @@
 package fr.meya.witcher.adapter.port.in;
 
-import fr.meya.witcher.model.persistent.Profession;
+import fr.meya.witcher.model.message.ProfessionVolatile;
 import fr.meya.witcher.service.IProfessionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +22,10 @@ public class ProfessionController {
     }
 
     @GetMapping(value = "/list")
-    public List<Profession> listProfession() {
+    public ResponseEntity<List<ProfessionVolatile>> listProfession() {
         log.info("consultation profession");
-        return iProfessionService.getProfessionList();
+        List<ProfessionVolatile> result = iProfessionService.getListeDesProfessionsVolatiles();
+        return ResponseEntity.ok(result);
     }
 
 }

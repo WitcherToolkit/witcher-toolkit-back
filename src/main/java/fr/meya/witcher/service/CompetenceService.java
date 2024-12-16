@@ -1,7 +1,7 @@
 package fr.meya.witcher.service;
 
 import fr.meya.witcher.model.persistent.Competence;
-import fr.meya.witcher.port.out.ICompetenceRepository;
+import fr.meya.witcher.adapter.port.out.ICompetenceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

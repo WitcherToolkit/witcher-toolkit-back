@@ -1,11 +1,10 @@
 package fr.meya.witcher.service;
 
-import fr.meya.witcher.model.persistent.Profession;
+import fr.meya.witcher.model.message.ProfessionVolatile;
 
 import java.util.List;
 
 public interface IProfessionService {
 
-    List<Profession> getProfessionList();
-    List<Profession> exempleDeMethode(String name, String competence);
+    List<ProfessionVolatile> getListeDesProfessionsVolatiles();
 }
