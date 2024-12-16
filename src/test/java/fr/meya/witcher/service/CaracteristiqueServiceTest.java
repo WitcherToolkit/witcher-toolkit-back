@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CaracteristiqueServiceTest {
+class CaracteristiqueServiceTest {
 
 	@Mock
 	private ICaracteristiqueRepository caracteristiqueRepository;
@@ -29,7 +29,7 @@ public class CaracteristiqueServiceTest {
 	}
 
 	@Test
-	public void test_findAll_renvois_une_liste_de_caracteristique() {
+	void test_findAll_renvois_une_liste_de_caracteristique() {
 
 		List<Caracteristique> caracteristiqueList = new ArrayList<>();
 
