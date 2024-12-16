@@ -16,12 +16,6 @@ public class CaracteristiqueService implements ICaracteristiqueService{
 	}
 
 	@Override
-	public Caracteristique createCaracteristique(Caracteristique caracteristique) {
-
-		return caracteristique;
-	}
-
-	@Override
 	public List<Caracteristique> getCaracteristiqueList(){
 		return caracteristiqueRepository.findAll();
 	}

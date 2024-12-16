@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface ICaracteristiqueService {
 
-	Caracteristique createCaracteristique(Caracteristique caracteristique);
-
 	List<Caracteristique> getCaracteristiqueList();
 
 }
