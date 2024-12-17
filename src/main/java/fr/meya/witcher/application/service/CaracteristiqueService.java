@@ -67,7 +67,6 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 
 	@Override
 	public Caracteristique getCaracteristique(Long idCaracteristique) {
-
 		if (idCaracteristique == null) {
 			throw new WitcherToolkitExeption("L'ID de la caractéristique est null.");
 		}
@@ -77,11 +76,9 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 
 	@Override
 	public Caracteristique updateCaracteristique(Long idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile) {
-
 		if (idCaracteristique == null) {
 			throw new WitcherToolkitExeption("L'ID de la caractéristique est null.");
 		}
-
 		if (caracteristiqueVolatile == null) {
 			throw new WitcherToolkitExeption("Les données de mise à jour sont nulles.");
 		}
@@ -92,17 +89,13 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 		if (caracteristiqueVolatile.getNom() != null) {
 			caracteristiqueExistant.setNom(caracteristiqueVolatile.getNom());
 		}
-
 		if (caracteristiqueVolatile.getCode() != null) {
 			caracteristiqueExistant.setCode(caracteristiqueVolatile.getCode());
 		}
-
 		if (caracteristiqueVolatile.getDescription() != null) {
 			caracteristiqueExistant.setDescription(caracteristiqueVolatile.getDescription());
 		}
-
 		return caracteristiqueRepository.save(caracteristiqueExistant);
-
 	}
 
 	@Override
