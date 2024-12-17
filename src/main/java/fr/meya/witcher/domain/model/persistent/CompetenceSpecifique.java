@@ -39,7 +39,6 @@ public class CompetenceSpecifique {
 
 	@ManyToOne
 	@JoinColumn(name = "IDPROFESSION", nullable = false)
-	//@JsonBackReference // Empêche la sérialisation "retour" vers profession
 	private Profession profession;
 
 }

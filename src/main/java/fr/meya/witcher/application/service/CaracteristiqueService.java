@@ -18,10 +18,51 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 		this.caracteristiqueRepository = caracteristiqueRepository;
 	}
 
+	public boolean isValid(CaracteristiqueVolatile caracteristiqueVolatile) {
+		if (caracteristiqueVolatile == null) {
+			throw new WitcherToolkitExeption("Aucune caractéristique fournie.");
+		}
+
+		// Vérification du champ 'nom'
+		if (caracteristiqueVolatile.getNom() == null || caracteristiqueVolatile.getNom().isBlank()) {
+			throw new WitcherToolkitExeption("Le nom de la caractéristique est obligatoire.");
+		}
+		if (caracteristiqueVolatile.getNom().length() > 16) {
+			throw new WitcherToolkitExeption("Le nom de la caractéristique ne peut pas dépasser 16 caractères.");
+		}
+
+		// Vérification du champ 'code'
+		if (caracteristiqueVolatile.getCode() == null || caracteristiqueVolatile.getCode().isBlank()) {
+			throw new WitcherToolkitExeption("Le code de la caractéristique est obligatoire.");
+		}
+		if (caracteristiqueVolatile.getCode().length() > 6) {
+			throw new WitcherToolkitExeption("Le code de la caractéristique ne peut pas dépasser 6 caractères.");
+		}
+
+		// Vérification du champ 'description'
+		if (caracteristiqueVolatile.getDescription() == null || caracteristiqueVolatile.getDescription().isBlank()) {
+			throw new WitcherToolkitExeption("La description de la caractéristique est obligatoire.");
+		}
+
+		// Si toutes les vérifications passent
+		return true;
+	}
+
 	@Override
-	public Caracteristique createCaracteristique(Caracteristique caracteristique) {
-		caracteristiqueRepository.save(caracteristique);
-		return caracteristique;
+	public Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristiqueVolatile) {
+		// Valider l'objet CaracteristiqueVolatile
+		if (!isValid(caracteristiqueVolatile)) {
+			throw new WitcherToolkitExeption("Les informations de la caractéristique ne sont pas valides.");
+		}
+
+		// Mapper CaracteristiqueVolatile vers Caracteristique
+		Caracteristique caracteristique = new Caracteristique();
+		caracteristique.setNom(caracteristiqueVolatile.getNom());
+		caracteristique.setCode(caracteristiqueVolatile.getCode());
+		caracteristique.setDescription(caracteristiqueVolatile.getDescription());
+
+		// Sauvegarder l'entité dans la base de données
+		return caracteristiqueRepository.save(caracteristique);
 	}
 
 	@Override

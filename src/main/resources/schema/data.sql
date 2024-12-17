@@ -18,8 +18,10 @@ INSERT INTO caracteristique (idCaracteristique, nom, code, description) VALUES
     (15, 'Endurance', 'END', 'L''endurance représente l''énergie que vous pouvez dépenser lors d''un effort physique ou d''un acte magique avant de finir épuisé (elle représente également la difficulté à vous mettre K.O.). Lorsque vous n''avez plus de points d''endurance, vous êtes étourdi et vous ne pouvez rien faire à part vous remettre. Lorsque vous n’en avez plus, vous devenez épuisé et ne pouvez plus rien faire à part récupérer. Lorsque vous lancez un sort, que vous effectuez des actions supplémentaires en combat, que vous utilisez certaines capacités ou que vous subissez des dégâts non létaux, vous piochez aussi dans votre réserve d''endurance. En général, 1 minute d’effort intense ou 1 heure de travail répétitif fait perdre 2 points d''endurance. Quand vous effectuez une action Récupérer, vous regagnez un nombre de points d''endurance égal à votre valeur de récupération.'),
     (16, 'Encombrement', 'ENC', 'Cette valeur reflète le poids que vous pouvez porter sans être ralentis. Dès que vous êtes encombré, vous diminuez de -1 vos valeurs de RÉF, DEX et VIT pour chaque tranche de 5 points au-dessus de votre valeur d''encombrement, avec un minimum de 1. Vous pouvez soulever au maximum 50 fois votre valeur de corps en kilogrammes.'),
     (17, 'Récupération', 'RÉC', 'La récupération indique le nombre de points de santé que vous regagnez par jour de repos au calme dans un lit. Pour retrouver ces points de santé, quelqu’un doit d''abord réussir un jet de premiers soins ou de mains thérapeutiques sur vous.'),
-    (18, 'Pieds', 'Pieds', 'Cette caractéristique indique le nombre de dégâts non létaux que vous infligez avec un coup de poing.'),
+    (18, 'Piedsf', 'Pieds', 'Cette caractéristique indique le nombre de dégâts non létaux que vous infligez avec un coup de poing.'),
     (19, 'Poings', 'Poings', 'Cette caractéristique indique le nombre de dégâts non létaux que vous infligez avec un coup de pied.');
+
+ALTER TABLE caracteristique ALTER COLUMN idCaracteristique RESTART WITH 20;
 
 -- Ajout de Compétences
 INSERT INTO competence (idCompetence, nom, codeCaracteristique, description, descriptionBase10, descriptionBase13, descriptionBase16, descriptionBase20) VALUES
@@ -28,6 +30,8 @@ INSERT INTO competence (idCompetence, nom, codeCaracteristique, description, des
     (3, 'Déduction', 'INT', 'La capacité à formuler des conclusions grâce aux indices dont vous disposez.', 'Vos intuitions vous mettent en général sur la bonne piste.', 'Vos ressentiments sont presque toujours fondés, vous pouvez même les étayer à l’aide de raisonnements logiques.', 'Il vous suffit de quelques indices pour avoir ce qui s’est passé ou ce qui pourrait advenir.', 'Vous ne vous trompez presque jamais dans vos déductions. Vous êtes capables de trouver des réponses même lorsque vous disposez de preuves partielles.' ),
     (4, 'Éducation', 'INT', 'Reflète votre niveau d’instruction.', 'Vos parents vous ont légué des connaissances sommaires sur la marche du monde.', 'Vous avez probablement bénéficié des leçons d’un mentor ou eu la chance de fréquenter l’une des rares écoles ouvertes dans votre région natale.', 'Vous avez acquis un savoir encyclopédique en allant par exemple étudier à Oxenfurt ou dans une autre académie du genre.', 'Vous êtes un érudit capable de rivaliser d’intelligence avec des professeurs d’université et des mages siégeant aux conseils royaux.' ),
     (5, 'Enseignement', 'INT', 'La capacité à dispenser son savoir. Vous n’êtes pas tenu de maîtriser cette capacité pour en enseigner d’autres, mais elle vous facilitera la tâche.', 'Vous savez expliquer du début à la fin un procédé simple à votre élève, mais sans que ce dernier saisisse à coup sûr tous les tenants et aboutissants de votre cheminement.', 'Vous pouvez enseigner les bases d’une compétence à un élève attentif sans rencontrer de problème particulier.', 'Si vous disposez de suffisamment de temps, vous pouvez apprendre des procédés plus complexes à vos étudiants, même s’ils ne sont guère attentifs.', 'Vous êtes un maître pédagogue capable d’intéresser n’importe qui. Puisque vos leçons font toujours mouche du premier coup, vous avez rarement besoin de vous répéter.' );
+
+ALTER TABLE competence ALTER COLUMN idCompetence RESTART WITH 6;
 
 -- Ajout de Professions
 INSERT INTO profession (idProfession, nom, codeCaracteristique, competenceExclusive, description) VALUES
@@ -41,6 +45,8 @@ INSERT INTO profession (idProfession, nom, codeCaracteristique, competenceExclus
     (8, 'Prêtre', 'EMP', 'Initié des dieux', 'Les temples du monde entier sont bien souvent des lieux chaleureux qui aident les fidèles et accueillent les nouveaux convertis. Un prêtre peut réaliser un jet d’initié des dieux dont le SD est fixé par les MJ dans les églises de cette religion pour obtenir un hébergement gratuit, des soins et d’autres services, à la discrétion du MJ. L’initiation des dieux fonctionne aussi auprès des croyants de la même confession, bien qu’ils aient moins à offrir qu’un temple. N’oubliez pas qu’initié des dieux ne fonctionne jamais avec les membres d’une autre religion.'),
     (9, 'Sorceleur', 'INT', 'Formation de soceleur', 'Les sorceleurs passent les premières années de leur vie confinés entre les murs de leur forteresse, où ils étudient d’énormes tomes poussiéreux et suivent un entraînement martial démentiel. De nombreux savants ont démontré que les meilleures armes d’un sorceleur étaient sa connaissance des monstres ainsi que ses capacités d’’adaptation. Il peut donc diminuer les pénalités provoquées par un environnement hostile ou un relief accidenté d’’une valeur égale à la moitié de son score de formation de sorceleur (minimum 1). Vous pouvez également utiliser formation de sorceleur dans les situations requérant l’’usage de la compétence connaissance des monstres.'),
     (10, 'Noble', '', 'Prestige', 'Qu’’il soit noble de naissance ou qu’’il ait acquis ses titres en accomplissant des faits d’’armes, l’’aristocrate affiche son statut privilégié afin que nul ne l’ignore. Les paysans peuvent bien maudire les familles nobles et les ridiculiser à l’abri dans leurs chaumières, mais aucun d’’entre eux n’’oserait les insulter en face. Un noble ajoute son niveau de prestige à son score de réputation lorsqu’’il se trouve sur sa terre natale ou dans un pays allié. Lorsqu’’il se rend dans un territoire ouvertement en guerre avec son pays d’’origine ou qui conserve une position de neutralité, il n’’ajoute que la moitié de son niveau de prestige.');
+
+ALTER TABLE profession ALTER COLUMN idProfession RESTART WITH 11;
 
 -- Ajout de Compétences Spécifique
 INSERT INTO competence_specifique (
@@ -64,3 +70,5 @@ INSERT INTO competence_specifique (
        'Maître artisan',
        'Compagnon',
        1);
+
+ALTER TABLE competence_specifique ALTER COLUMN idCompetenceSpecifique RESTART WITH 4;

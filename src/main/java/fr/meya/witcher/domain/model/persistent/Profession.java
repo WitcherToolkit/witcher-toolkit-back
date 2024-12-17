@@ -37,7 +37,6 @@ public class Profession {
 	private  String codeCaracteristique;
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonManagedReference // Gère la sérialisation vers competenceSpecifique
 	private List<CompetenceSpecifique> competenceSpecifique;
 
 }

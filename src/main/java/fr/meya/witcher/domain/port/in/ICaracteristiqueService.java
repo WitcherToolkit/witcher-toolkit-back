@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ICaracteristiqueService {
 
-	Caracteristique createCaracteristique(Caracteristique caracteristique);
+	Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristique);
 
 	Caracteristique getCaracteristique(Long idCaracteristique);
 
