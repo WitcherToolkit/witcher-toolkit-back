@@ -33,6 +33,12 @@ public class CaracteristiqueController {
 		return iCaracteristiqueService.getCaracteristiqueList();
 	}
 
+	@GetMapping(value = "/list/{id}")
+	public Caracteristique getCaracteristique(@PathVariable Long id) {
+		log.info("consultation caracteristique");
+		return iCaracteristiqueService.getCaracteristique(id);
+	}
+
 	@PostMapping("/create")
 	public ResponseEntity<Caracteristique> createCaracteristique(@RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
 		log.info("Créer une caractéristique");

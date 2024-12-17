@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ICaracteristiqueService {
 
+	boolean isValid(CaracteristiqueVolatile caracteristiqueVolatile);
+
 	Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristique);
 
 	Caracteristique getCaracteristique(Long idCaracteristique);

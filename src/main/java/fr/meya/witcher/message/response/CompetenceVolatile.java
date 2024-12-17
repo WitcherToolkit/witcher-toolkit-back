@@ -1,7 +1,6 @@
 package fr.meya.witcher.message.response;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,16 +8,26 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CaracteristiqueVolatile {
+public class CompetenceVolatile {
 
 	@NotBlank
-	@Size( max = 16)
 	private String nom;
 
 	@NotBlank
-	@Size( max = 6)
-	private String code;
+	private String codeCaracteristique;
 
 	@NotBlank
 	private String description;
+
+	@NotBlank
+	private String descriptionBase10;
+
+	@NotBlank
+	private String descriptionBase13;
+
+	@NotBlank
+	private String descriptionBase16;
+
+	@NotBlank
+	private String descriptionBase20;
 }

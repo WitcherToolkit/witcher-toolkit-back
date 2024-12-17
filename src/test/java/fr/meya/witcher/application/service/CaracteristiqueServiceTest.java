@@ -33,98 +33,17 @@ class CaracteristiqueServiceTest {
 		MockitoAnnotations.openMocks(this);
 	}
 
+	//#region isValid
 	@Test
-	void test_getCaracteristique_nominal() {
-		Caracteristique caracteristique = new Caracteristique();
-		caracteristique.setIdCaracteristique(1L);
-		caracteristique.setNom("Force");
+	void test_isValid_nominalCase() {
+		// Arrange : Création d'un objet valide
+		CaracteristiqueVolatile validCaracteristique = new CaracteristiqueVolatile("Force", "FOR", "Description");
 
-		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(caracteristique));
+		// Action : Appeler la méthode à tester
+		boolean result = caracteristiqueService.isValid(validCaracteristique);
 
-		Caracteristique result = caracteristiqueService.getCaracteristique(1L);
-
-		assertNotNull(result);
-		assertEquals("Force", result.getNom());
-	}
-
-	@Test
-	void test_getCaracteristique_idNull() {
-		Exception exception = assertThrows(WitcherToolkitExeption.class, () -> caracteristiqueService.getCaracteristique(null));
-		assertEquals("L'ID de la caractéristique est null.", exception.getMessage());
-	}
-
-	@Test
-	void test_getCaracteristique_nonExistant() {
-		Mockito.when(caracteristiqueRepository.findById(999L)).thenReturn(Optional.empty());
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class, () -> caracteristiqueService.getCaracteristique(999L));
-		assertEquals("La caractéristique avec l'ID 999 n'existe pas.", exception.getMessage());
-	}
-
-	@Test
-	void test_getCaracteristiqueList_empty() {
-		Mockito.when(caracteristiqueRepository.findAll()).thenReturn(Collections.emptyList());
-
-		List<Caracteristique> result = caracteristiqueService.getCaracteristiqueList();
-
-		assertNotNull(result);
-		assertTrue(result.isEmpty());
-		Mockito.verify(caracteristiqueRepository, Mockito.times(1)).findAll();
-	}
-
-	@Test
-	void test_createCaracteristique_invalidCode() {
-		CaracteristiqueVolatile invalidCaracteristique = new CaracteristiqueVolatile("Force", "TOO_LONG_CODE", "Description");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> caracteristiqueService.createCaracteristique(invalidCaracteristique));
-
-		assertEquals("Le code de la caractéristique ne peut pas dépasser 6 caractères.", exception.getMessage());
-	}
-
-	@Test
-	void test_createCaracteristique_invalidDescription() {
-		CaracteristiqueVolatile invalidCaracteristique = new CaracteristiqueVolatile("Force", "FOR", "");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> caracteristiqueService.createCaracteristique(invalidCaracteristique));
-
-		assertEquals("La description de la caractéristique est obligatoire.", exception.getMessage());
-	}
-
-	@Test
-	void test_updateCaracteristique_partialUpdate() {
-		Caracteristique existingCaracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
-		Caracteristique updatedCaracteristique = new Caracteristique(1L, "Force améliorée", "FOR", "Nouvelle description");
-
-		CaracteristiqueVolatile updateData = new CaracteristiqueVolatile("Force améliorée", null, "Nouvelle description");
-
-		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(existingCaracteristique));
-		Mockito.when(caracteristiqueRepository.save(Mockito.any(Caracteristique.class))).thenReturn(updatedCaracteristique);
-
-		Caracteristique result = caracteristiqueService.updateCaracteristique(1L, updateData);
-
-		assertNotNull(result);
-		assertEquals("Force améliorée", result.getNom());
-		assertEquals("FOR", result.getCode()); // Le code n'est pas modifié.
-		assertEquals("Nouvelle description", result.getDescription());
-	}
-
-	@Test
-	void test_updateCaracteristique_noFieldsUpdated() {
-		Caracteristique existingCaracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
-
-		CaracteristiqueVolatile updateData = new CaracteristiqueVolatile(null, null, null);
-
-		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(existingCaracteristique));
-		Mockito.when(caracteristiqueRepository.save(Mockito.any(Caracteristique.class))).then(invocation -> invocation.getArgument(0));
-
-		Caracteristique result = caracteristiqueService.updateCaracteristique(1L, updateData);
-
-		assertNotNull(result);
-		assertEquals("Force", result.getNom());
-		assertEquals("FOR", result.getCode());
-		assertEquals("Description", result.getDescription()); // Rien n’est modifié.
+		// Assert : Vérifiez que la méthode retourne true
+		assertTrue(result);
 	}
 
 	@Test
@@ -174,56 +93,9 @@ class CaracteristiqueServiceTest {
 
 		assertEquals("Le code de la caractéristique ne peut pas dépasser 6 caractères.", exception.getMessage());
 	}
+	//#endregion isValid
 
-	@Test
-	void test_isValid_nominalCase() {
-		// Arrange : Création d'un objet valide
-		CaracteristiqueVolatile validCaracteristique = new CaracteristiqueVolatile("Force", "FOR", "Description");
-
-		// Action : Appeler la méthode à tester
-		boolean result = caracteristiqueService.isValid(validCaracteristique);
-
-		// Assert : Vérifiez que la méthode retourne true
-		assertTrue(result);
-	}
-
-	@Test
-	void test_deleteCaracteristique_nominal() {
-		// Arrange : Création d'une caractéristique existante
-		Caracteristique caracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
-
-		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(caracteristique));
-
-		// Action : Appel de la méthode à tester
-		Caracteristique result = caracteristiqueService.deleteCaracteristique(1L);
-
-		// Assert : Vérifiez le comportement et le résultat
-		Mockito.verify(caracteristiqueRepository).delete(caracteristique);
-		assertNotNull(result);
-		assertEquals("Force", result.getNom());
-	}
-
-	@Test
-	void test_deleteCaracteristique_idNull() {
-		// Action et Assert : Vérifiez si une exception est levée correctement
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> caracteristiqueService.deleteCaracteristique(null));
-
-		assertEquals("L'ID de la caractéristique est null.", exception.getMessage());
-	}
-
-	@Test
-	void test_deleteCaracteristique_notFound() {
-		// Arrange : Simuler un ID qui n'existe pas dans la base
-		Mockito.when(caracteristiqueRepository.findById(999L)).thenReturn(Optional.empty());
-
-		// Action et Assert : Vérifiez si une exception est levée correctement
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> caracteristiqueService.deleteCaracteristique(999L));
-
-		assertEquals("La caractéristique avec l'ID 999 n'existe pas.", exception.getMessage());
-	}
-
+	//#region createCaracteristique
 	@Test
 	void test_createCaracteristique_nominal() {
 		// Arrange : Création d'un objet valide
@@ -310,6 +182,106 @@ class CaracteristiqueServiceTest {
 	}
 
 	@Test
+	void test_createCaracteristique_invalidCode() {
+		CaracteristiqueVolatile invalidCaracteristique = new CaracteristiqueVolatile("Force", "TOO_LONG_CODE", "Description");
+
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> caracteristiqueService.createCaracteristique(invalidCaracteristique));
+
+		assertEquals("Le code de la caractéristique ne peut pas dépasser 6 caractères.", exception.getMessage());
+	}
+
+	@Test
+	void test_createCaracteristique_invalidDescription() {
+		CaracteristiqueVolatile invalidCaracteristique = new CaracteristiqueVolatile("Force", "FOR", "");
+
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> caracteristiqueService.createCaracteristique(invalidCaracteristique));
+
+		assertEquals("La description de la caractéristique est obligatoire.", exception.getMessage());
+	}
+	//#endregion createCaracteristique
+
+	//#region getCaracteristique
+	@Test
+	void test_getCaracteristique_nominal() {
+		Caracteristique caracteristique = new Caracteristique();
+		caracteristique.setIdCaracteristique(1L);
+		caracteristique.setNom("Force");
+
+		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(caracteristique));
+
+		Caracteristique result = caracteristiqueService.getCaracteristique(1L);
+
+		assertNotNull(result);
+		assertEquals("Force", result.getNom());
+	}
+
+	@Test
+	void test_getCaracteristique_idNull() {
+		Exception exception = assertThrows(WitcherToolkitExeption.class, () -> caracteristiqueService.getCaracteristique(null));
+		assertEquals("L'ID de la caractéristique est null.", exception.getMessage());
+	}
+
+	@Test
+	void test_getCaracteristique_nonExistant() {
+		Mockito.when(caracteristiqueRepository.findById(999L)).thenReturn(Optional.empty());
+
+		Exception exception = assertThrows(WitcherToolkitExeption.class, () -> caracteristiqueService.getCaracteristique(999L));
+		assertEquals("La caractéristique avec l'ID 999 n'existe pas.", exception.getMessage());
+	}
+	//#endregion getCaracteristique
+
+	//#region getCaracteristiqueList
+	@Test
+	void test_getCaracteristiqueList_empty() {
+		Mockito.when(caracteristiqueRepository.findAll()).thenReturn(Collections.emptyList());
+
+		List<Caracteristique> result = caracteristiqueService.getCaracteristiqueList();
+
+		assertNotNull(result);
+		assertTrue(result.isEmpty());
+		Mockito.verify(caracteristiqueRepository, Mockito.times(1)).findAll();
+	}
+	//#endregion getCaracteristiqueList
+
+	//#region updateCaracteristique
+	@Test
+	void test_updateCaracteristique_partialUpdate() {
+		Caracteristique existingCaracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
+		Caracteristique updatedCaracteristique = new Caracteristique(1L, "Force améliorée", "FOR", "Nouvelle description");
+
+		CaracteristiqueVolatile updateData = new CaracteristiqueVolatile("Force améliorée", null, "Nouvelle description");
+
+		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(existingCaracteristique));
+		Mockito.when(caracteristiqueRepository.save(Mockito.any(Caracteristique.class))).thenReturn(updatedCaracteristique);
+
+		Caracteristique result = caracteristiqueService.updateCaracteristique(1L, updateData);
+
+		assertNotNull(result);
+		assertEquals("Force améliorée", result.getNom());
+		assertEquals("FOR", result.getCode()); // Le code n'est pas modifié.
+		assertEquals("Nouvelle description", result.getDescription());
+	}
+
+	@Test
+	void test_updateCaracteristique_noFieldsUpdated() {
+		Caracteristique existingCaracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
+
+		CaracteristiqueVolatile updateData = new CaracteristiqueVolatile(null, null, null);
+
+		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(existingCaracteristique));
+		Mockito.when(caracteristiqueRepository.save(Mockito.any(Caracteristique.class))).then(invocation -> invocation.getArgument(0));
+
+		Caracteristique result = caracteristiqueService.updateCaracteristique(1L, updateData);
+
+		assertNotNull(result);
+		assertEquals("Force", result.getNom());
+		assertEquals("FOR", result.getCode());
+		assertEquals("Description", result.getDescription()); // Rien n’est modifié.
+	}
+
+	@Test
 	void test_updateCaracteristique_nullIdThrowsException() {
 		// Arrange : Préparez des données avec un ID null
 		Long nullId = null;
@@ -354,5 +326,45 @@ class CaracteristiqueServiceTest {
 		assertEquals("Force", updatedCaracteristique.getNom()); // Le nom reste inchangé
 		assertEquals("Description", updatedCaracteristique.getDescription()); // La description reste inchangée
 	}
+	//#endregion updateCaracteristique
 
+	//#region deleteCaracteristique
+	@Test
+	void test_deleteCaracteristique_nominal() {
+		// Arrange : Création d'une caractéristique existante
+		Caracteristique caracteristique = new Caracteristique(1L, "Force", "FOR", "Description");
+
+		Mockito.when(caracteristiqueRepository.findById(1L)).thenReturn(Optional.of(caracteristique));
+
+		// Action : Appel de la méthode à tester
+		Caracteristique result = caracteristiqueService.deleteCaracteristique(1L);
+
+		// Assert : Vérifiez le comportement et le résultat
+		Mockito.verify(caracteristiqueRepository).delete(caracteristique);
+		assertNotNull(result);
+		assertEquals("Force", result.getNom());
+	}
+
+	@Test
+	void test_deleteCaracteristique_idNull() {
+		// Action et Assert : Vérifiez si une exception est levée correctement
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> caracteristiqueService.deleteCaracteristique(null));
+
+		assertEquals("L'ID de la caractéristique est null.", exception.getMessage());
+	}
+
+	@Test
+	void test_deleteCaracteristique_notFound() {
+		// Arrange : Simuler un ID qui n'existe pas dans la base
+		Mockito.when(caracteristiqueRepository.findById(999L)).thenReturn(Optional.empty());
+
+		// Action et Assert : Vérifiez si une exception est levée correctement
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> caracteristiqueService.deleteCaracteristique(999L));
+
+		assertEquals("La caractéristique avec l'ID 999 n'existe pas.", exception.getMessage());
+	}
+	//#endregion deleteCaracteristique
+	
 }

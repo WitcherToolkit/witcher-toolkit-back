@@ -18,6 +18,7 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 		this.caracteristiqueRepository = caracteristiqueRepository;
 	}
 
+	@Override
 	public boolean isValid(CaracteristiqueVolatile caracteristiqueVolatile) {
 		if (caracteristiqueVolatile == null) {
 			throw new WitcherToolkitExeption("Aucune caractéristique fournie.");
