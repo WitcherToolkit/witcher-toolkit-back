@@ -24,36 +24,36 @@ public class ProfessionService implements IProfessionService {
     @Override
     public List<ProfessionVolatile> getListeDesProfessionsVolatiles() {
         // Récupérer les professions avec leurs compétences
-        List<Profession> professions = iProfessionRepository.findAll();
-        //List<Profession> professions = iProfessionRepository.getListeDesProfessionsAvecCompetences();
+        List<Profession> professionList = iProfessionRepository.findAll();
+        //List<Profession> professionList = iProfessionRepository.getListeDesProfessionsAvecCompetences();
 
         // Convertir les entités en DTO
-        return professions.stream().map(profession -> {
+        return professionList.stream().map(profession -> {
             // Mapper la Profession vers ProfessionVolatile
-            ProfessionVolatile pv = new ProfessionVolatile();
-            pv.setIdProfession(profession.getIdProfession());
-            pv.setNom(profession.getNom());
-            pv.setCompetenceExclusive(profession.getCompetenceExclusive());
-            pv.setDescription(profession.getDescription());
-            pv.setCodeCaracteristique(profession.getCodeCaracteristique());
+            ProfessionVolatile professionVolatile = new ProfessionVolatile();
+            professionVolatile.setIdProfession(profession.getIdProfession());
+            professionVolatile.setNom(profession.getNom());
+            professionVolatile.setCompetenceExclusive(profession.getCompetenceExclusive());
+            professionVolatile.setDescription(profession.getDescription());
+            professionVolatile.setCodeCaracteristique(profession.getCodeCaracteristique());
 
             // Mapper les CompetenceSpecifique vers CompetenceSpecifiqueVolatile
             List<CompetenceSpecifiqueVolatile> competences = profession.getCompetenceSpecifique().stream()
                     .sorted(Comparator.comparing(CompetenceSpecifique::getNom))
                     .map(cs -> {
-                        CompetenceSpecifiqueVolatile csv = new CompetenceSpecifiqueVolatile();
-                        csv.setIdCompetenceSpecifique(cs.getIdCompetenceSpecifique());
-                        csv.setNom(cs.getNom());
-                        csv.setDescription(cs.getDescription());
-                        csv.setCodeCaracteristique(cs.getCodeCaracteristique());
-                        csv.setSpecialisation(cs.getSpecialisation());
-                        csv.setPrerequis(cs.getPrerequis());
-                        return csv;
+                        CompetenceSpecifiqueVolatile competenceSpecifiqueVolatile = new CompetenceSpecifiqueVolatile();
+                        competenceSpecifiqueVolatile.setIdCompetenceSpecifique(cs.getIdCompetenceSpecifique());
+                        competenceSpecifiqueVolatile.setNom(cs.getNom());
+                        competenceSpecifiqueVolatile.setDescription(cs.getDescription());
+                        competenceSpecifiqueVolatile.setCodeCaracteristique(cs.getCodeCaracteristique());
+                        competenceSpecifiqueVolatile.setSpecialisation(cs.getSpecialisation());
+                        competenceSpecifiqueVolatile.setPrerequis(cs.getPrerequis());
+                        return competenceSpecifiqueVolatile;
                     }).collect(Collectors.toList());
 
-            pv.setCompetenceSpecifique(competences);
+            professionVolatile.setCompetenceSpecifique(competences);
 
-            return pv;
+            return professionVolatile;
         }).collect(Collectors.toList());
     }
 }

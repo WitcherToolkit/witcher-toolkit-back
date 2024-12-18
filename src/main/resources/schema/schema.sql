@@ -4,10 +4,10 @@ CREATE TABLE magie(
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    portee VARCHAR(10) NOT NULL,
-    duree VARCHAR(10) NOT NULL,
-    elementaire VARCHAR(5) NOT NULL,
-    niveau VARCHAR(20) NOT NULL,
+    portee VARCHAR(15) NOT NULL,
+    duree VARCHAR(13) NOT NULL,
+    elementaire VARCHAR(5),
+    niveau VARCHAR(30) NOT NULL,
     contre VARCHAR(20),
     profession VARCHAR(9) NOT NULL
 );
@@ -59,7 +59,7 @@ CREATE TABLE rituel(
 -- TABLE DE BASE : envoutement
 CREATE TABLE envoutement(
     idEnvoutement BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(60) NOT NULL,
+    nom VARCHAR(30) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
     prerequis TEXT NOT NULL,
