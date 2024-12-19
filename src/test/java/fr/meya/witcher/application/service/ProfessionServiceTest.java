@@ -1,9 +1,9 @@
 package fr.meya.witcher.application.service;
 
-import fr.meya.witcher.infrastructure.adapter.out.IProfessionRepository;
-import fr.meya.witcher.message.response.ProfessionVolatile;
 import fr.meya.witcher.domain.model.persistent.CompetenceSpecifique;
 import fr.meya.witcher.domain.model.persistent.Profession;
+import fr.meya.witcher.infrastructure.adapter.out.IProfessionRepository;
+import fr.meya.witcher.message.response.ProfessionVolatile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class ProfessionServiceTest {
 	private IProfessionRepository professionRepository;
 
 	@InjectMocks
-	private ProfessionService professionService;
+	private ProfessionService testedClasse;
 
 	@BeforeEach
 	public void setup() {
@@ -72,7 +72,7 @@ class ProfessionServiceTest {
 		//Mockito.when(professionRepository.getListeDesProfessionsAvecCompetences()).thenReturn(professionList);
 		Mockito.when(professionRepository.findAll()).thenReturn(professionList);
 
-		List<ProfessionVolatile> result = professionService.getListeDesProfessionsVolatiles();
+		List<ProfessionVolatile> result = testedClasse.getListeDesProfessionsVolatiles();
 
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(2, result.size());

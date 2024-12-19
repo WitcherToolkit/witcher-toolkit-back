@@ -16,10 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CompetenceServiceTest {
 
@@ -27,7 +24,7 @@ class CompetenceServiceTest {
 	private ICompetenceRepository competenceRepository;
 
 	@InjectMocks
-	private CompetenceService competenceService;
+	private CompetenceService testedClasse;
 
 	@BeforeEach
 	public void setup() {
@@ -47,7 +44,7 @@ class CompetenceServiceTest {
 				"DescriptionBase20");
 
 		// Action : Appeler la méthode à tester
-		boolean result = competenceService.isValid(validCompetence);
+		boolean result = testedClasse.isValid(validCompetence);
 
 		// Assert : Vérifier que le résultat est true
 		assertTrue(result);
@@ -57,7 +54,7 @@ class CompetenceServiceTest {
 	void test_isValid_nullObject() {
 		// Action et Assert : Vérifie qu'une exception est levée si l'objet est null
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.isValid(null));
+				() -> testedClasse.isValid(null));
 
 		assertEquals("Aucune competence fournie.", exception.getMessage());
 	}
@@ -73,7 +70,7 @@ class CompetenceServiceTest {
 				"DescriptionBase20");
 
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.isValid(invalidCompetence));
+				() -> testedClasse.isValid(invalidCompetence));
 
 		assertEquals("Le nom de la competence est obligatoire.", exception.getMessage());
 	}
@@ -89,7 +86,7 @@ class CompetenceServiceTest {
 				"DescriptionBase20");
 
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.isValid(invalidCompetence));
+				() -> testedClasse.isValid(invalidCompetence));
 
 		assertEquals("Le code de la caractéristique de la competence est obligatoire.", exception.getMessage());
 	}
@@ -105,7 +102,7 @@ class CompetenceServiceTest {
 				"DescriptionBase20");
 
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.isValid(invalidCompetence));
+				() -> testedClasse.isValid(invalidCompetence));
 
 		assertEquals("Le description de la competence est obligatoire.", exception.getMessage());
 	}
@@ -121,7 +118,7 @@ class CompetenceServiceTest {
 				"");
 
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.isValid(invalidCompetence));
+				() -> testedClasse.isValid(invalidCompetence));
 
 		assertEquals("Le description base 10 de la competence est obligatoire.", exception.getMessage());
 	}
@@ -137,7 +134,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).thenReturn(savedCompetence);
 
 		// Action : Appeler la méthode à tester
-		Competence result = competenceService.createCompetence(competenceVolatile);
+		Competence result = testedClasse.createCompetence(competenceVolatile);
 
 		// Assert : Vérifiez que la méthode retourne une compétence valide
 		assertNotNull(result);
@@ -156,7 +153,7 @@ class CompetenceServiceTest {
 		CompetenceVolatile invalidCompetence = new CompetenceVolatile("", "", "", "", "", "", "");
 
 		// Simuler un retour "false" pour `isValid`
-		CompetenceService serviceMock = Mockito.spy(competenceService);
+		CompetenceService serviceMock = Mockito.spy(testedClasse);
 		Mockito.doReturn(false).when(serviceMock).isValid(invalidCompetence);
 
 		// Action et Assert : Vérifiez que l'exception est bien levée
@@ -174,7 +171,7 @@ class CompetenceServiceTest {
 
 		// Action et Assert : Vérifiez que les validations échouent
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.createCompetence(invalidCompetence));
+				() -> testedClasse.createCompetence(invalidCompetence));
 
 		assertEquals("Le nom de la competence est obligatoire.", exception.getMessage());
 	}
@@ -189,7 +186,7 @@ class CompetenceServiceTest {
 
 		// Action et Assert : Vérifiez qu'une exception est levée
 		Exception exception = assertThrows(RuntimeException.class,
-				() -> competenceService.createCompetence(competenceVolatile));
+				() -> testedClasse.createCompetence(competenceVolatile));
 
 		assertEquals("Erreur de la base de données", exception.getMessage());
 	}
@@ -203,7 +200,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.findById(1L)).thenReturn(Optional.of(competence));
 
 		// Action : Appeler la méthode
-		Competence result = competenceService.getCompetence(1L);
+		Competence result = testedClasse.getCompetence(1L);
 
 		// Assert : Vérifications
 		assertNotNull(result);
@@ -213,7 +210,7 @@ class CompetenceServiceTest {
 	@Test
 	void test_getCompetence_idNull() {
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.getCompetence(null));
+				() -> testedClasse.getCompetence(null));
 
 		assertEquals("L'ID de la competence est null.", exception.getMessage());
 	}
@@ -223,7 +220,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.findById(999L)).thenReturn(Optional.empty());
 
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.getCompetence(999L));
+				() -> testedClasse.getCompetence(999L));
 
 		assertEquals("La competence avec l'ID 999 n'existe pas.", exception.getMessage());
 	}
@@ -242,7 +239,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).thenReturn(updatedCompetence);
 
 		// Action : Appeler la méthode à tester
-		Competence result = competenceService.updateCompetence(1L, updateData);
+		Competence result = testedClasse.updateCompetence(1L, updateData);
 
 		// Assert : Vérifier les champs mis à jour
 		assertNotNull(result);
@@ -265,7 +262,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).then(invocation -> invocation.getArgument(0));
 
 		// Action : Appeler la méthode à tester
-		Competence result = competenceService.updateCompetence(1L, updateData);
+		Competence result = testedClasse.updateCompetence(1L, updateData);
 
 		// Assert : Aucun champ ne doit être modifié
 		assertNotNull(result);
@@ -286,7 +283,7 @@ class CompetenceServiceTest {
 
 		// Action et Assert : Vérifier qu'une exception est jetée
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.updateCompetence(nullId, updateData));
+				() -> testedClasse.updateCompetence(nullId, updateData));
 
 		assertEquals("L'ID de la competence est null.", exception.getMessage());
 	}
@@ -298,7 +295,7 @@ class CompetenceServiceTest {
 
 		// Action et Assert : Vérifier qu'une exception est jetée
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.updateCompetence(id, null));
+				() -> testedClasse.updateCompetence(id, null));
 
 		assertEquals("Les données de mise à jour sont nulles.", exception.getMessage());
 	}
@@ -313,7 +310,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.findById(1L)).thenReturn(Optional.of(existingCompetence));
 
 		// Action : Appeler la méthode à tester
-		Competence result = competenceService.deleteCompetence(1L);
+		Competence result = testedClasse.deleteCompetence(1L);
 
 		// Assert : Vérifications
 		Mockito.verify(competenceRepository).delete(existingCompetence);
@@ -325,7 +322,7 @@ class CompetenceServiceTest {
 	void test_deleteCompetence_idNull() {
 		// Action et Assert : Vérifier qu'une exception est jetée
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.deleteCompetence(null));
+				() -> testedClasse.deleteCompetence(null));
 
 		assertEquals("L'ID de la competence est null.", exception.getMessage());
 	}
@@ -337,7 +334,7 @@ class CompetenceServiceTest {
 
 		// Action et Assert : Vérifier qu'une exception est jetée
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> competenceService.deleteCompetence(999L));
+				() -> testedClasse.deleteCompetence(999L));
 
 		assertEquals("La competence avec l'ID 999 n'existe pas.", exception.getMessage());
 	}
@@ -350,7 +347,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.findAll()).thenReturn(Collections.emptyList());
 
 		// Action : Appeler la méthode à tester
-		List<Competence> result = competenceService.getCompetenceList();
+		List<Competence> result = testedClasse.getCompetenceList();
 
 		// Assert : La liste doit être vide
 		assertNotNull(result);
@@ -368,7 +365,7 @@ class CompetenceServiceTest {
 		Mockito.when(competenceRepository.findAll()).thenReturn(mockList);
 
 		// Action : Appeler la méthode à tester
-		List<Competence> result = competenceService.getCompetenceList();
+		List<Competence> result = testedClasse.getCompetenceList();
 
 		// Assert : La liste doit contenir les éléments simulés
 		assertNotNull(result);

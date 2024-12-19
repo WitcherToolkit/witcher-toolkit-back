@@ -29,7 +29,33 @@ public class EnvoutementService implements IEnvoutementService {
             throw new WitcherToolkitExeption("Le nom de l'envoutement est obligatoire.");
         }
 
-        //TODO continuer la suite
+        if (envoutementVolatile.getNom().length() > 16) {
+            throw new WitcherToolkitExeption("Le nom de l'envoutement doit faire maximum 16 caractères.");
+        }
+
+        if (envoutementVolatile.getCout() == null || envoutementVolatile.getCout().isBlank()) {
+            throw new WitcherToolkitExeption("Le coût de l'envoutement est obligatoire.");
+        }
+
+        if (envoutementVolatile.getCout().length() > 10) {
+            throw new WitcherToolkitExeption("Le coût de l'envoutement doit faire maximum 16 caractères.");
+        }
+
+        if (envoutementVolatile.getEffet() == null || envoutementVolatile.getEffet().isBlank()) {
+            throw new WitcherToolkitExeption("L'effet de l'envoutement est obligatoire.");
+        }
+
+        if (envoutementVolatile.getPrerequis() == null || envoutementVolatile.getPrerequis().isBlank()) {
+            throw new WitcherToolkitExeption("Le pre-requis de l'envoutement est obligatoire.");
+        }
+
+        if (envoutementVolatile.getDanger() == null || envoutementVolatile.getDanger().isBlank()) {
+            throw new WitcherToolkitExeption("Le danger de l'envoutement est obligatoire.");
+        }
+
+        if (envoutementVolatile.getDanger().length() > 10) {
+            throw new WitcherToolkitExeption("Le danger de l'envoutement doit faire maximum 6 caractères.");
+        }
 
         return true;
     }
