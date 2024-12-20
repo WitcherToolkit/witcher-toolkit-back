@@ -4,11 +4,11 @@ CREATE TABLE magie(
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    portee VARCHAR(15) NOT NULL,
-    duree VARCHAR(13) NOT NULL,
-    elementaire VARCHAR(5),
-    niveau VARCHAR(30) NOT NULL,
-    contre VARCHAR(20),
+    portee VARCHAR(15),
+    duree VARCHAR(35) NOT NULL,
+    element VARCHAR(5),
+    niveau VARCHAR(35) NOT NULL,
+    contre VARCHAR(25),
     profession VARCHAR(9) NOT NULL
 );
 

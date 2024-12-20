@@ -15,7 +15,7 @@ public interface IEnvoutementService {
 
     Envoutement deleteEnvoutement(Long idEnvoutement);
 
-    Envoutement updateEnvoutement(Long id, EnvoutementVolatile envoutementVolatile);
+    Envoutement updateEnvoutement(Long idEnvoutement, EnvoutementVolatile envoutementVolatile);
 
     List<EnvoutementVolatile> getEnvoutementList();
 }

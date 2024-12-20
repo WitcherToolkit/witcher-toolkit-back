@@ -65,6 +65,7 @@ public class EnvoutementService implements IEnvoutementService {
         if (!isValid(envoutementVolatile)) {
             throw new WitcherToolkitExeption("Les informations de l'envoûtement ne sont pas valides.");
         }
+
         Envoutement envoutement = new Envoutement();
         envoutement.setNom(envoutementVolatile.getNom());
         envoutement.setCout(envoutementVolatile.getCout());

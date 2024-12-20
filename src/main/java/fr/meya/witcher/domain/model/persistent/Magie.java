@@ -24,28 +24,28 @@ public class Magie {
 	private String nom;
 
 	@NotBlank
-	private String effet;
+	private String cout;
 
 	@NotBlank
+	private String effet;
+
 	private String portee;
 
 	@NotBlank
 	private String duree;
 
-	@NotBlank
 	private String element;
 
 	@NotBlank
 	private String niveau;
 
-	@NotBlank
 	private String contre;
 
 	@NotBlank
 	private String profession;
 
-	@ManyToMany
-	@JoinTable(name = "MAGIEPERSONNAGE",
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Pour éviter que hibernate ne charge inutilement la relation personnageList lors de l'update.
+	@JoinTable(name = "magie_personnage",
 			joinColumns = @JoinColumn(name = "IDMAGIE"),
 			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE"))
 	private List<Personnage> personnageList;
