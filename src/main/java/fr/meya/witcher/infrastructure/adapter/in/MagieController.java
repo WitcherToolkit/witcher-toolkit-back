@@ -25,8 +25,8 @@ public class MagieController {
     @GetMapping(value = "/list")
     public ResponseEntity<List<MagieVolatile>> listMagie() {
         log.info("consultation magie");
-        List<MagieVolatile> resul = iMagieService.getMagieList();
-        return ResponseEntity.ok(resul);
+        List<MagieVolatile> result = iMagieService.getMagieList();
+        return ResponseEntity.ok(result);
     }
 
 

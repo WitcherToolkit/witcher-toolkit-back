@@ -1,5 +1,6 @@
 package fr.meya.witcher.infrastructure.adapter.in;
 
+import fr.meya.witcher.application.mapper.CompetenceMapper;
 import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.domain.port.in.ICompetenceService;
 import fr.meya.witcher.message.response.CompetenceVolatile;
@@ -22,21 +23,18 @@ import java.util.List;
 public class CompetenceController {
 
 	private final ICompetenceService iCompetenceService;
+	private final CompetenceMapper competenceMapper;
 
-	public CompetenceController(ICompetenceService iCompetenceService) {
+	public CompetenceController(ICompetenceService iCompetenceService, CompetenceMapper competenceMapper) {
 		this.iCompetenceService = iCompetenceService;
+		this.competenceMapper = competenceMapper;
 	}
 
 	@GetMapping(value = "/list")
-	public List<Competence> listCompetence() {
+	public ResponseEntity<List<CompetenceVolatile>> listCompetence() {
 		log.info("consultation compétence");
-		return iCompetenceService.getCompetenceList();
-	}
-
-	@GetMapping(value = "/list/{id}")
-	public Competence getCompetence(@PathVariable Long id) {
-		log.info("consultation compétence");
-		return iCompetenceService.getCompetence(id);
+		List<CompetenceVolatile> result = iCompetenceService.getCompetenceList();
+		return ResponseEntity.ok(result);
 	}
 
 	@PostMapping("/create")
@@ -51,18 +49,17 @@ public class CompetenceController {
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<Competence> updateCompetence(@PathVariable Long id, @RequestBody CompetenceVolatile competenceVolatile) {
+	public ResponseEntity<CompetenceVolatile> updateCompetence(@PathVariable Long id, @RequestBody CompetenceVolatile competenceVolatile) {
 		log.info("modifier une compétence");
 		Competence updatedCompetence = iCompetenceService.updateCompetence(id, competenceVolatile);
-		return ResponseEntity.ok(updatedCompetence);
+		return ResponseEntity.ok(competenceMapper.toCompetenceDto(updatedCompetence));
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Competence> deleteCompetence(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCompetence(@PathVariable Long id) {
 		log.info("Supprimer la compétence avec l'ID : {}", id);
-		Competence deletedCompetence = iCompetenceService.deleteCompetence(id);
-		// Retourne la compétence supprimée dans la réponse
-		return ResponseEntity.ok(deletedCompetence);
+		iCompetenceService.deleteCompetence(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 }

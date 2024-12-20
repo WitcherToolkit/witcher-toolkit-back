@@ -53,9 +53,6 @@ public class MagieService implements IMagieService {
 
     @Override
     public List<MagieVolatile> getMagieList() {
-
-        List<Magie> magieList = iMagieRepository.findAll();
-
         return iMagieRepository.findAll().stream().map(magieMapper::toMagieDto).toList();
     }
 

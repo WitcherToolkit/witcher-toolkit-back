@@ -41,3 +41,41 @@ TypedQuery<Personnage> query = entityManager.createQuery("SELECT p FROM Personna
 List<Personnage> personnages = query.getResultList();
 ````
 JOIN FETCH: Ces clauses permettent de charger les données liées (les CaracteristiquePersonnage et les Caracteristique) en une seule requête, évitant ainsi les N+1 problèmes.
+
+Exemple structure hexagonale
+```
+src/main/java/fr/meya/witcher/
+├── appication/
+│   ├── mapper/
+│   │   └── MagieMapper.java
+│   └── service/
+│       └── MagieService.java
+├── common/
+│   ├── utils/
+│   │   ├── ValidationUtils.java
+│   │   ├── ValidationRule.java
+│   │   └── ObjectUtils.java
+├── domain/
+│   ├── model/
+│   │   └── persistent
+│   │   	└── Magie.java
+│   └── port/
+│       └── in
+│       	└── IMagieService.java
+├── exeption/
+│       └── WitcherToolkitExeption.java
+├── infrastructure/
+│   ├── adapter/
+│   │   ├── in
+│   │   │	└── MagieController.java
+│   │   └── out
+│   │    	└── IMagieRepository.java
+│   └── congif
+│       ├── ApplicationConfig.java
+│       └── MessageConfig.java
+└── message/
+│       └── response
+│        	└── MagieVolatile.java
+src/main/resources/
+└── messages.properties
+```

@@ -9,13 +9,13 @@ public interface ICompetenceService {
 
 	boolean isValid(CompetenceVolatile competenceVolatile);
 
-	Competence createCompetence(CompetenceVolatile competenceVolatile);
+	List<CompetenceVolatile> getCompetenceList();
 
 	Competence getCompetence(Long idCompetence);
 
-	Competence deleteCompetence(Long idCompetence);
+	Competence createCompetence(CompetenceVolatile competenceVolatile);
 
-	Competence updateCompetence(Long id, CompetenceVolatile competenceVolatile);
+	Competence updateCompetence(Long idCompetence, CompetenceVolatile competenceVolatile);
 
-	List<Competence> getCompetenceList();
+	void deleteCompetence(Long idCompetence);
 }
