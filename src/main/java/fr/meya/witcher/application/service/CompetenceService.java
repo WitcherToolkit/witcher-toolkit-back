@@ -39,10 +39,10 @@ public class CompetenceService implements ICompetenceService {
 				"nom", new ValidationRule("error.competence.nom.required"),
 				"codeCaracteristique", new ValidationRule("error.competence.codeCaracteristique.required"),
 				"description", new ValidationRule("error.competence.description.required"),
-				"description10", new ValidationRule("error.competence.description10.required"),
-				"description13", new ValidationRule("error.competence.description13.required"),
-				"description16", new ValidationRule("error.competence.description16.required"),
-				"description20", new ValidationRule("error.competence.description20.required")
+				"descriptionBase10", new ValidationRule("error.competence.description10.required"),
+				"descriptionBase13", new ValidationRule("error.competence.description13.required"),
+				"descriptionBase16", new ValidationRule("error.competence.description16.required"),
+				"descriptionBase20", new ValidationRule("error.competence.description20.required")
 		);
 
 		validationUtils.validateWithRules(competenceVolatile, fieldRules);
