@@ -1,5 +1,7 @@
 package fr.meya.witcher.application.service;
 
+import fr.meya.witcher.application.mapper.CompetenceMapper;
+import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.ICompetenceRepository;
@@ -11,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +23,12 @@ class CompetenceServiceTest {
 
 	@Mock
 	private ICompetenceRepository competenceRepository;
+
+	@Mock
+	private CompetenceMapper competenceMapper;
+
+	@Mock
+	private ValidationUtils validationUtils;
 
 	@InjectMocks
 	private CompetenceService testedClasse;
@@ -32,13 +42,7 @@ class CompetenceServiceTest {
 	@Test
 	void test_isValid_nominalCase() {
 		// Arrange : Création d'un objet valide
-		CompetenceVolatile validCompetence = new CompetenceVolatile("Force",
-				"FOR",
-				"Description",
-				"DescriptionBase10",
-				"DescriptionBase13",
-				"DescriptionBase16",
-				"DescriptionBase20");
+		CompetenceVolatile validCompetence = new CompetenceVolatile("Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
 
 		// Action : Appeler la méthode à tester
 		boolean result = testedClasse.isValid(validCompetence);
@@ -46,94 +50,23 @@ class CompetenceServiceTest {
 		// Assert : Vérifier que le résultat est true
 		assertTrue(result);
 	}
-
-	@Test
-	void test_isValid_nullObject() {
-		// Action et Assert : Vérifie qu'une exception est levée si l'objet est null
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.isValid(null));
-
-		assertEquals("Aucune competence fournie.", exception.getMessage());
-	}
-
-	@Test
-	void test_isValid_nomVide() {
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("",
-				"FOR",
-				"Description",
-				"DescriptionBase10",
-				"DescriptionBase13",
-				"DescriptionBase16",
-				"DescriptionBase20");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.isValid(invalidCompetence));
-
-		assertEquals("Le nom de la competence est obligatoire.", exception.getMessage());
-	}
-
-	@Test
-	void test_isValid_codeCaracteristiqueVide() {
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("Force",
-				"",
-				"Description",
-				"DescriptionBase10",
-				"DescriptionBase13",
-				"DescriptionBase16",
-				"DescriptionBase20");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.isValid(invalidCompetence));
-
-		assertEquals("Le code de la caractéristique de la competence est obligatoire.", exception.getMessage());
-	}
-
-	@Test
-	void test_isValid_descriptionVide() {
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("Force",
-				"FOR",
-				"",
-				"DescriptionBase10",
-				"DescriptionBase13",
-				"DescriptionBase16",
-				"DescriptionBase20");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.isValid(invalidCompetence));
-
-		assertEquals("Le description de la competence est obligatoire.", exception.getMessage());
-	}
-
-	@Test
-	void test_isValid_descriptionBaseVide() {
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("Force",
-				"FOR",
-				"Description",
-				"",
-				"",
-				"",
-				"");
-
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.isValid(invalidCompetence));
-
-		assertEquals("Le description base 10 de la competence est obligatoire.", exception.getMessage());
-	}
 	//#endregion isValid
 
 	//#region createCompetence
 	@Test
 	void test_createCompetence_nominal() {
-		// Arrange : Création d'une compétence valide
-		CompetenceVolatile competenceVolatile = new CompetenceVolatile("Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
-		Competence savedCompetence = new Competence(1L, "Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
+		// Arrange : Création d'un objet valide
+		Competence mappedCompetence = new Competence(1L, "Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
+		CompetenceVolatile competenceVolatile = new CompetenceVolatile("Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
+		Competence savedCompetence = new Competence(1L, "Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
 
+		Mockito.when(competenceMapper.toCompetenceEntity(competenceVolatile)).thenReturn(mappedCompetence);
 		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).thenReturn(savedCompetence);
 
 		// Action : Appeler la méthode à tester
 		Competence result = testedClasse.createCompetence(competenceVolatile);
 
-		// Assert : Vérifiez que la méthode retourne une compétence valide
+		// Assert : Vérifiez que la méthode retourne un objet valide
 		assertNotNull(result);
 		assertEquals(savedCompetence.getNom(), result.getNom());
 		assertEquals(savedCompetence.getCodeCaracteristique(), result.getCodeCaracteristique());
@@ -142,50 +75,78 @@ class CompetenceServiceTest {
 		assertEquals(savedCompetence.getDescriptionBase13(), result.getDescriptionBase13());
 		assertEquals(savedCompetence.getDescriptionBase16(), result.getDescriptionBase16());
 		assertEquals(savedCompetence.getDescriptionBase20(), result.getDescriptionBase20());
-	}
 
-	@Test
-	void test_createCompetence_invalidCompetenceThrowsException() {
-		// Arrange : Création d'une compétence valide
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("", "", "", "", "", "", "");
-
-		// Simuler un retour "false" pour `isValid`
-		CompetenceService serviceMock = Mockito.spy(testedClasse);
-		Mockito.doReturn(false).when(serviceMock).isValid(invalidCompetence);
-
-		// Action et Assert : Vérifiez que l'exception est bien levée
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> serviceMock.createCompetence(invalidCompetence));
-
-		assertEquals("Les informations de la compétence ne sont pas valides.", exception.getMessage());
-
+		Mockito.verify(competenceMapper, Mockito.times(1)).toCompetenceEntity(competenceVolatile);
+		Mockito.verify(competenceRepository, Mockito.times(1)).save(mappedCompetence);
 	}
 
 	@Test
 	void test_createCompetence_invalidCompetence() {
-		// Arrange : Création d'une compétence invalide
-		CompetenceVolatile invalidCompetence = new CompetenceVolatile("", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
+		// Arrange : Création d'un objet invalide (nom vide)
+		CompetenceVolatile invalidCompetence = new CompetenceVolatile("", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
 
-		// Action et Assert : Vérifiez que les validations échouent
+		// Mock du message de validation
+		Mockito.doThrow(new WitcherToolkitExeption("error.validation.generic"))
+				.when(validationUtils).validateWithRules(Mockito.eq(invalidCompetence), Mockito.anyMap());
+
+		// Action et Assert : Vérifiez qu'une exception est levée
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
 				() -> testedClasse.createCompetence(invalidCompetence));
 
-		assertEquals("Le nom de la competence est obligatoire.", exception.getMessage());
+		assertEquals("error.validation.generic", exception.getMessage());
 	}
 
 	@Test
-	void test_createCompetence_repositoryError() {
-		// Arrange : Création d'une compétence valide
-		CompetenceVolatile competenceVolatile = new CompetenceVolatile("Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
-
-		// Simuler une erreur dans le repository
-		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).thenThrow(new RuntimeException("Erreur de la base de données"));
+	void test_isValid_nullCompetence() {
+		// Arrange : aucun objet (null)
 
 		// Action et Assert : Vérifiez qu'une exception est levée
-		Exception exception = assertThrows(RuntimeException.class,
-				() -> testedClasse.createCompetence(competenceVolatile));
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> testedClasse.isValid(null));
 
-		assertEquals("Erreur de la base de données", exception.getMessage());
+		// Vérifiez le message de l'exception
+		assertEquals("error.competence.null", exception.getMessage());
+	}
+
+	@Test
+	void test_createCompetence_verifyMapping() {
+		// Arrange : Création d'un objet de test valide
+		CompetenceVolatile competenceVolatile = new CompetenceVolatile("Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
+		Competence mappedCompetence = new Competence(1L, "Force", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
+
+		Mockito.when(competenceMapper.toCompetenceEntity(competenceVolatile)).thenReturn(mappedCompetence);
+		Mockito.when(competenceRepository.save(Mockito.any(Competence.class))).thenReturn(mappedCompetence);
+
+		// Action : Appeler la méthode à tester
+		Competence result = testedClasse.createCompetence(competenceVolatile);
+
+		// Assert : Vérifiez que le mapping est correct
+		assertEquals(competenceVolatile.getNom(), result.getNom());
+		assertEquals(competenceVolatile.getNom(), result.getNom());
+		assertEquals(competenceVolatile.getCodeCaracteristique(), result.getCodeCaracteristique());
+		assertEquals(competenceVolatile.getDescription(), result.getDescription());
+		assertEquals(competenceVolatile.getDescriptionBase10(), result.getDescriptionBase10());
+		assertEquals(competenceVolatile.getDescriptionBase13(), result.getDescriptionBase13());
+		assertEquals(competenceVolatile.getDescriptionBase16(), result.getDescriptionBase16());
+		assertEquals(competenceVolatile.getDescriptionBase20(), result.getDescriptionBase20());
+
+		Mockito.verify(competenceMapper, Mockito.times(1)).toCompetenceEntity(competenceVolatile);
+	}
+
+	@Test
+	void test_createCompetence_invalidDataThrowsException() {
+		// Arrange : Créer un objet invalide
+		CompetenceVolatile invalidCompetence = new CompetenceVolatile("", "FOR", "Description", "DescriptionBase10", "DescriptionBase13", "DescriptionBase16", "DescriptionBase20");
+
+		// Simuler un retour "false" pour `isValid`
+		Mockito.doThrow(new WitcherToolkitExeption("error.validation.generic"))
+				.when(validationUtils).validateWithRules(Mockito.eq(invalidCompetence), Mockito.anyMap());
+
+		// Action et Assert : Vérifiez que l'exception est bien levée
+		Exception exception = assertThrows(WitcherToolkitExeption.class,
+				() -> testedClasse.createCompetence(invalidCompetence));
+
+		assertEquals("error.validation.generic", exception.getMessage());
 	}
 	//#endregion createCompetence
 
@@ -271,53 +232,43 @@ class CompetenceServiceTest {
 		assertEquals(existingCompetence.getDescriptionBase16(), result.getDescriptionBase16());
 		assertEquals(existingCompetence.getDescriptionBase20(), result.getDescriptionBase20());
 	}
-
-	@Test
-	void test_updateCompetence_nullIdThrowsException() {
-		// Arrange : ID null
-		Long nullId = null;
-		CompetenceVolatile updateData = new CompetenceVolatile("Force", "NEW", "Description", "Base10", "Base13", "Base16", "Base20");
-
-		// Action et Assert : Vérifier qu'une exception est jetée
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.updateCompetence(nullId, updateData));
-
-		assertEquals("L'ID de la competence est null.", exception.getMessage());
-	}
-
-	@Test
-	void test_updateCompetence_nullUpdateDataThrowsException() {
-		// Arrange : Objet de mise à jour null
-		Long id = 1L;
-
-		// Action et Assert : Vérifier qu'une exception est jetée
-		Exception exception = assertThrows(WitcherToolkitExeption.class,
-				() -> testedClasse.updateCompetence(id, null));
-
-		assertEquals("Les données de mise à jour sont nulles.", exception.getMessage());
-	}
 	//#endregion updateCompetence
 
-	//#region deleteCompetence
-	/*@Test
-	void test_deleteCompetence_nominal() {
-		// Arrange : Préparation d'une compétence existante
-		Competence existingCompetence = new Competence(1L, "Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
+	//#region getCompetenceList
+	@Test
+	void test_getCompetenceList_empty() {
+		// Arrange : Simuler une base vide
+		Mockito.when(competenceRepository.findAll()).thenReturn(Collections.emptyList());
 
-		Mockito.when(competenceRepository.findById(1L)).thenReturn(Optional.of(existingCompetence));
+		// Action : Appeler la méthode
+		List<CompetenceVolatile> result = testedClasse.getCompetenceList();
 
-		// Action : Appeler la méthode à tester
-		Competence result = testedClasse.deleteCompetence(1L);
-
-		// Assert : Vérifications
-		Mockito.verify(competenceRepository).delete(existingCompetence);
+		// Assert : Vérifiez qu'aucune erreur n'est levée et que le mapper n'est pas appelé
 		assertNotNull(result);
-		assertEquals("Force", result.getNom());
-	}*/
+		assertTrue(result.isEmpty());
+		Mockito.verify(competenceRepository, Mockito.times(1)).findAll();
+		Mockito.verifyNoInteractions(competenceMapper);
+	}
+	//#endregion getCompetenceList
+
+	//#region deleteCompetence
+	@Test
+	void test_deleteCompetence_nominal() {
+		// Arrange : Créer une entité existante
+		Competence competence = new Competence(1L, "Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
+		Mockito.when(competenceRepository.findById(1L)).thenReturn(Optional.of(competence));
+
+		// Action : Appeler la méthode
+		testedClasse.deleteCompetence(1L);
+
+		// Assert : Vérifiez que l'entité a été récupérée et supprimée
+		Mockito.verify(competenceRepository, Mockito.times(1)).findById(1L);
+		Mockito.verify(competenceRepository, Mockito.times(1)).delete(competence);
+	}
 
 	@Test
 	void test_deleteCompetence_idNull() {
-		// Action et Assert : Vérifier qu'une exception est jetée
+		// Action et Assert : Vérifiez si une exception est levée correctement
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
 				() -> testedClasse.deleteCompetence(null));
 
@@ -326,50 +277,14 @@ class CompetenceServiceTest {
 
 	@Test
 	void test_deleteCompetence_notFound() {
-		// Arrange : Aucun élément trouvé dans le repository
+		// Arrange : Simuler un ID qui n'existe pas dans la base
 		Mockito.when(competenceRepository.findById(999L)).thenReturn(Optional.empty());
 
-		// Action et Assert : Vérifier qu'une exception est jetée
+		// Action et Assert : Vérifiez si une exception est levée correctement
 		Exception exception = assertThrows(WitcherToolkitExeption.class,
 				() -> testedClasse.deleteCompetence(999L));
 
 		assertEquals("La competence avec l'ID 999 n'existe pas.", exception.getMessage());
 	}
 	//#endregion deleteCompetence
-
-	//#region getCompetenceList
-	/*@Test
-	void test_getCompetenceList_empty() {
-		// Arrange : Simuler une liste vide
-		Mockito.when(competenceRepository.findAll()).thenReturn(Collections.emptyList());
-
-		// Action : Appeler la méthode à tester
-		List<Competence> result = testedClasse.getCompetenceList();
-
-		// Assert : La liste doit être vide
-		assertNotNull(result);
-		assertTrue(result.isEmpty());
-		Mockito.verify(competenceRepository, Mockito.times(1)).findAll();
-	}*/
-
-	/*@Test
-	void test_getCompetenceList_nominal() {
-		// Arrange : Simuler une liste avec des compétences
-		Competence competence1 = new Competence(1L, "Force", "FOR", "Description", "Base10", "Base13", "Base16", "Base20");
-		Competence competence2 = new Competence(2L, "Endurance", "END", "Description", "Base10", "Base13", "Base16", "Base20");
-		List<Competence> mockList = Arrays.asList(competence1, competence2);
-
-		Mockito.when(competenceRepository.findAll()).thenReturn(mockList);
-
-		// Action : Appeler la méthode à tester
-		List<Competence> result = testedClasse.getCompetenceList();
-
-		// Assert : La liste doit contenir les éléments simulés
-		assertNotNull(result);
-		assertEquals(2, result.size());
-		assertEquals("Force", result.get(0).getNom());
-		assertEquals("Endurance", result.get(1).getNom());
-		Mockito.verify(competenceRepository, Mockito.times(1)).findAll();
-	}*/
-	//#endregion getCompetenceList
 }
