@@ -9,13 +9,13 @@ public interface IEnvoutementService {
 
     boolean isValid(EnvoutementVolatile envoutementVolatile);
 
-    Envoutement createEnvoutement(EnvoutementVolatile envoutementVolatile);
+    List<EnvoutementVolatile> getEnvoutementList();
 
     Envoutement getEnvoutement(Long idEnvoutement);
 
-    Envoutement deleteEnvoutement(Long idEnvoutement);
+    Envoutement createEnvoutement(EnvoutementVolatile envoutementVolatile);
 
     Envoutement updateEnvoutement(Long idEnvoutement, EnvoutementVolatile envoutementVolatile);
 
-    List<EnvoutementVolatile> getEnvoutementList();
+    void deleteEnvoutement(Long idEnvoutement);
 }

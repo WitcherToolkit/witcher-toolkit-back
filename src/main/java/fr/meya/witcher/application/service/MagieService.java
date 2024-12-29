@@ -73,7 +73,6 @@ public class MagieService implements IMagieService {
 
         Magie magie = magieMapper.toMagieEntity(magieVolatile);
         return iMagieRepository.save(magie);
-
     }
 
     @Override

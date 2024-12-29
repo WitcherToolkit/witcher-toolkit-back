@@ -1,5 +1,6 @@
 package fr.meya.witcher.infrastructure.adapter.in;
 
+import fr.meya.witcher.application.mapper.EnvoutementMapper;
 import fr.meya.witcher.domain.model.persistent.Envoutement;
 import fr.meya.witcher.domain.port.in.IEnvoutementService;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
@@ -13,11 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/envoutement")
 public class EnvoutementController {
-
     private final IEnvoutementService iEnvoutementService;
+    private final EnvoutementMapper envoutementMapper;
 
-    public EnvoutementController(IEnvoutementService iEnvoutementService) {
+    public EnvoutementController(IEnvoutementService iEnvoutementService, EnvoutementMapper envoutementMapper) {
         this.iEnvoutementService = iEnvoutementService;
+        this.envoutementMapper = envoutementMapper;
     }
 
     @GetMapping(value = "/list")
@@ -25,12 +27,6 @@ public class EnvoutementController {
         log.info("consultation envoutement");
         List<EnvoutementVolatile> resul = iEnvoutementService.getEnvoutementList();
         return ResponseEntity.ok(resul);
-    }
-
-    @GetMapping(value = "/list/{id}")
-    public Envoutement getEnvoutement(@PathVariable Long id) {
-        log.info("consultation envoutement");
-        return iEnvoutementService.getEnvoutement(id);
     }
 
     @PostMapping("/create")
@@ -52,11 +48,11 @@ public class EnvoutementController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Envoutement> deleteEnvoutement(@PathVariable Long id) {
-        log.info("Supprimer l'envoutement avec l'ID : {}", id);
-        Envoutement deletedEnvoutement = iEnvoutementService.deleteEnvoutement(id);
-        // Retourne l'envoutement supprimé dans la réponse
-        return ResponseEntity.ok(deletedEnvoutement);
+    public ResponseEntity<Void> deleteEnvoutement(@PathVariable Long id) {
+        log.info("Supprimer l'envoûtement avec l'ID : {}", id);
+
+        iEnvoutementService.deleteEnvoutement(id);
+        return ResponseEntity.noContent().build();
     }
     
 }

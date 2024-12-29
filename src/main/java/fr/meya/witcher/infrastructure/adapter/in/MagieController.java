@@ -51,10 +51,9 @@ public class MagieController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteMagie(@PathVariable Long id) {
         log.info("Supprimer la magie avec l'ID : {}", id);
+
         iMagieService.deleteMagie(id);
-
         return ResponseEntity.noContent().build();
-
     }
 
 }
