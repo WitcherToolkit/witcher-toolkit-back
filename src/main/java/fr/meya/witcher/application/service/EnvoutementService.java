@@ -86,6 +86,4 @@ public class EnvoutementService implements IEnvoutementService {
         envoutementRepository.delete(envoutementExistant);
     }
 
-
-
 }

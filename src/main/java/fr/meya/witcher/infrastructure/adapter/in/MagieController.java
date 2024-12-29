@@ -29,7 +29,6 @@ public class MagieController {
         return ResponseEntity.ok(result);
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<Magie> createMagie(@RequestBody MagieVolatile magieVolatile) {
         log.info("Ajout d'une magie");
