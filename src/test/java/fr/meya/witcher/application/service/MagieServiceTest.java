@@ -39,7 +39,6 @@ public class MagieServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     //#region isValid
     @Test
     void test_isValid_nominalCase() {
@@ -51,6 +50,18 @@ public class MagieServiceTest {
 
         // Assert : Vérifiez que la méthode retourne true
         assertTrue(result);
+    }
+
+    @Test
+    void test_isValid_nullMagie() {
+        // Arrange : aucun objet (null)
+
+        // Action et Assert : Vérifiez qu'une exception est levée
+        Exception exception = assertThrows(WitcherToolkitExeption.class,
+                () -> testedClasse.isValid(null));
+
+        // Vérifiez le message de l'exception
+        assertEquals("error.magie.null", exception.getMessage());
     }
     //#endregion isValid
 
@@ -90,18 +101,6 @@ public class MagieServiceTest {
                 () -> testedClasse.createMagie(invalidMagie));
 
         assertEquals("error.validation.generic", exception.getMessage());
-    }
-
-    @Test
-    void test_isValid_nullMagie() {
-        // Arrange : aucun objet (null)
-
-        // Action et Assert : Vérifiez qu'une exception est levée
-        Exception exception = assertThrows(WitcherToolkitExeption.class,
-                () -> testedClasse.isValid(null));
-
-        // Vérifiez le message de l'exception
-        assertEquals("error.magie.null", exception.getMessage());
     }
 
     @Test
@@ -259,6 +258,5 @@ public class MagieServiceTest {
         assertEquals("La magie avec l'ID 999 n'existe pas.", exception.getMessage());
     }
     //#endregion deleteMagie
-
 
 }
