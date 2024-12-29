@@ -41,10 +41,8 @@ public class CompetenceController {
 	public ResponseEntity<Competence> createCompetence(@RequestBody CompetenceVolatile competenceVolatile) {
 		log.info("Créer une compétence");
 
-		// Appel direct au service avec l'objet reçu
 		Competence createdCompetence = iCompetenceService.createCompetence(competenceVolatile);
 
-		// Retourner la réponse
 		return ResponseEntity.ok(createdCompetence);
 	}
 

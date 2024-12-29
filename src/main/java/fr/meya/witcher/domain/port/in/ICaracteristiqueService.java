@@ -9,14 +9,14 @@ public interface ICaracteristiqueService {
 
 	boolean isValid(CaracteristiqueVolatile caracteristiqueVolatile);
 
-	Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristique);
+	List<CaracteristiqueVolatile> getCaracteristiqueList();
 
 	Caracteristique getCaracteristique(Long idCaracteristique);
 
+	Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristique);
+
 	Caracteristique updateCaracteristique(Long idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile);
 
-	Caracteristique deleteCaracteristique(Long idCaracteristique);
-
-	List<Caracteristique> getCaracteristiqueList();
+	void deleteCaracteristique(Long idCaracteristique);
 
 }
