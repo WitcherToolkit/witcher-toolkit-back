@@ -49,9 +49,9 @@ CREATE TABLE rituel(
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    TempsPreparation INT NOT NULL,
+    tempsPreparation VARCHAR(10) NOT NULL,
     sd VARCHAR(7) NOT NULL,
-    duree VARCHAR(10) NOT NULL,
+    duree VARCHAR(15) NOT NULL,
     composant TEXT NOT NULL,
     niveau VARCHAR(20) NOT NULL
 );

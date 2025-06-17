@@ -27,6 +27,7 @@ public class Rituel {
 	private String effet;
 
 	@NotBlank
+	@Column(name = "TEMPSPREPARATION")
 	private String tempsPreparation;
 
 	@NotBlank
@@ -41,6 +42,7 @@ public class Rituel {
 	@NotBlank
 	private String niveau;
 
+	//----------------------------------------------------------------------------------------------------------------//
 	@ManyToMany
 	@JoinTable(
 			name = "personnageRituel",
