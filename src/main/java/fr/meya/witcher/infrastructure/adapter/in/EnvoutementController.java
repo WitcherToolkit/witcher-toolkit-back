@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/envoutement")
+@RequestMapping("/envoutements")
 public class EnvoutementController {
     private final IEnvoutementService iEnvoutementService;
     private final EnvoutementMapper envoutementMapper;
