@@ -38,15 +38,14 @@ public class Magie {
 	@NotBlank
 	private String duree;
 
-	private String element;
+	private String nature;
+
+	private String type;
 
 	@NotBlank
 	private String niveau;
 
 	private String contre;
-
-	@NotBlank
-	private String profession;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Pour éviter que hibernate ne charge inutilement la relation personnageList lors de l'update.
 	@JoinTable(name = "magie_personnage",

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/magie")
+@RequestMapping("/magies")
 public class MagieController {
     private final IMagieService iMagieService;
     private final MagieMapper magieMapper;

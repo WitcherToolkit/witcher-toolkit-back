@@ -6,10 +6,10 @@ CREATE TABLE magie(
     effet TEXT NOT NULL,
     portee VARCHAR(15),
     duree VARCHAR(35) NOT NULL,
-    element VARCHAR(5),
+    nature VARCHAR(5),
     niveau VARCHAR(35) NOT NULL,
     contre VARCHAR(25),
-    profession VARCHAR(9) NOT NULL
+    type VARCHAR(9) NOT NULL
 );
 
 -- TABLE DE BASE : competence

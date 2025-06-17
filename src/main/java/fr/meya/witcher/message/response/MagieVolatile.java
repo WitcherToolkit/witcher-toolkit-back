@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 public class MagieVolatile {
 
     @NotBlank
+    private long idMagie;
+
+    @NotBlank
     private String nom;
 
     @NotBlank
@@ -24,14 +27,14 @@ public class MagieVolatile {
     @NotBlank
     private String duree;
 
-    private String element;
+    private String nature;
+
+    //Si c'est un sort, une invocation, ou un signe
+    private String type;
 
     @NotBlank
     private String niveau;
 
     private String contre;
-
-    @NotBlank
-    private String profession;
 
 }
