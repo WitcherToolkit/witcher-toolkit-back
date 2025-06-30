@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/caracteristique")
+@RequestMapping("/caracteristiques")
 public class CaracteristiqueController {
 
 	private final ICaracteristiqueService iCaracteristiqueService;

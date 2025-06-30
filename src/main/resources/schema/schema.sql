@@ -9,7 +9,7 @@ CREATE TABLE magie(
     nature VARCHAR(5),
     niveau VARCHAR(35) NOT NULL,
     contre VARCHAR(25),
-    type VARCHAR(9) NOT NULL
+    type VARCHAR(10) NOT NULL
 );
 
 -- TABLE DE BASE : competence
