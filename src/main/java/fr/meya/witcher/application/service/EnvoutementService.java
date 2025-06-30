@@ -51,7 +51,8 @@ public class EnvoutementService implements IEnvoutementService {
 
     @Override
     public List<EnvoutementVolatile> getEnvoutementList() {
-        return envoutementRepository.findAll().stream().map(envoutementMapper::toEnvoutementDto).collect(Collectors.toList());
+        return envoutementRepository.findAll().stream()
+                .map(envoutementMapper::toEnvoutementDto).collect(Collectors.toList());
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,10 @@ public class MagieService implements IMagieService {
 
     @Override
     public List<MagieVolatile> getMagieList() {
-        return iMagieRepository.findAll().stream().map(magieMapper::toMagieDto).toList();
+        return iMagieRepository.findAll().stream()
+                .map(magieMapper::toMagieDto)
+                .sorted(Comparator.comparing(MagieVolatile::getNom, String.CASE_INSENSITIVE_ORDER))
+                .toList();
     }
 
     @Override

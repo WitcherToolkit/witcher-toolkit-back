@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,10 @@ public class RituelService implements IRituelService {
 
     @Override
     public List<RituelVolatile> getRituelList() {
-        return iRituelRepository.findAll().stream().map(rituelMapper::toRituelDto).toList();
+        return iRituelRepository.findAll().stream()
+                .map(rituelMapper::toRituelDto)
+                .sorted(Comparator.comparing(RituelVolatile::getNom, String.CASE_INSENSITIVE_ORDER)) // Tri par nom
+                .toList();
     }
 
     @Override
