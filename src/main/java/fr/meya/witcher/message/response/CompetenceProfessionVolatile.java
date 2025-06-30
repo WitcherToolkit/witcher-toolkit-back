@@ -4,17 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessionVolatile {
+public class CompetenceProfessionVolatile {
+    private long idCompetenceProfession;
 
-    private String nom;
+    private CompetenceVolatile competence;
 
-    private String description;
-
-    private List<CompetenceProfessionVolatile> competenceList;
+    private ProfessionVolatile profession;
 
 }

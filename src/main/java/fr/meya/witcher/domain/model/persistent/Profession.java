@@ -25,16 +25,9 @@ public class Profession {
 	private String nom;
 
 	@NotBlank
-	@Column(name = "COMPETENCEEXCLUSIVE")
-	private String competenceExclusive;
-
-	@NotBlank
 	private String description;
 
-	@Column(name = "CODECARACTERISTIQUE")
-	private  String codeCaracteristique;
-
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetenceSpecifique> competenceSpecifique;
+	private List<CompetenceProfession> competenceProfession;
 
 }

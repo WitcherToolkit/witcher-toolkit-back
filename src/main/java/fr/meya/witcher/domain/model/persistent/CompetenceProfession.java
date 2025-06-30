@@ -14,31 +14,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CompetenceSpecifique {
+public class CompetenceProfession {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IDCOMPETENCESPECIFIQUE")
-	private long idCompetenceSpecifique;
-
-	@NotBlank
-	private String nom;
-
-	@NotBlank
-	private String description;
-
-	@NotBlank
-	@Column(name = "CODECARACTERISTIQUE")
-	private String codeCaracteristique;
-
-	@NotBlank
-	private String specialisation;
-
-	@NotBlank
-	private String prerequis;
+	@Column(name = "IDCOMPETENCEPROFESSION")
+	private long idCompetenceProfession;
 
 	@ManyToOne
 	@JoinColumn(name = "IDPROFESSION", nullable = false)
 	private Profession profession;
+
+	@ManyToOne
+	@JoinColumn(name = "IDCOMPETENCE", nullable = false)
+	private Competence competence;
 
 }

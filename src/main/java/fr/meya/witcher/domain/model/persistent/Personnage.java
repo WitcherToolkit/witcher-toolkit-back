@@ -38,10 +38,6 @@ public class Personnage {
 	private boolean isBestiaire;
 
 	@ManyToOne
-	@JoinColumn(name = "IDPREFESSIONPERSONNAGE")
-	private ProfessionPersonnage professionPersonnage;
-
-	@ManyToOne
 	@JoinColumn(name = "IDRACE", nullable = false)
 	private Race race;
 
@@ -54,9 +50,6 @@ public class Personnage {
 	private ProfilUtilisateur profilUtilisateur;
 
 	//----------------------------------------------------------------------------------------------------------------//
-
-	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetenceSpecifiquePersonnage> competenceSpecifiquePersonnageList;
 
 	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList;

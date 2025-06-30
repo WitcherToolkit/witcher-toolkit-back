@@ -1,119 +1,129 @@
--- TABLE DE BASE : magie
 CREATE TABLE magie(
-    idMagie BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idMagie INT,
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    portee VARCHAR(15),
+    portee VARCHAR(15) NOT NULL,
     duree VARCHAR(35) NOT NULL,
-    nature VARCHAR(5),
+    nature VARCHAR(5) NOT NULL,
     niveau VARCHAR(35) NOT NULL,
     contre VARCHAR(25),
-    type VARCHAR(10) NOT NULL
+    type VARCHAR(10) NOT NULL,
+    PRIMARY KEY(idMagie)
 );
 
--- TABLE DE BASE : competence
-CREATE TABLE competence(
-    idCompetence BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    codeCaracteristique VARCHAR(4) NOT NULL,
-    description TEXT NOT NULL,
-    descriptionBase10 TEXT NOT NULL,
-    descriptionBase13 TEXT NOT NULL,
-    descriptionBase16 TEXT NOT NULL,
-    descriptionBase20 TEXT NOT NULL
-);
-
--- TABLE DE BASE : caracteristique
 CREATE TABLE caracteristique(
-    idCaracteristique BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idCaracteristique INT,
     nom VARCHAR(16) NOT NULL,
     code VARCHAR(6) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    PRIMARY KEY(idCaracteristique)
 );
 
--- TABLE DE BASE : profil_itilisateur
-CREATE TABLE profil_utilisateur(
-    idProfilUtilisateur BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE profilUtilisateur(
+    idUser INT,
     pseudo VARCHAR(64) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    isAdmin BOOLEAN default false,
+    isAdmin BOOLEAN NOT NULL default false,
+    PRIMARY KEY(idUser),
     UNIQUE(pseudo),
     UNIQUE(email)
 );
 
--- TABLE DE BASE : rituel
 CREATE TABLE rituel(
-    idRituel BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idRituel INT,
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    tempsPreparation VARCHAR(10) NOT NULL,
+    TempsPreparation VARCHAR(10) NOT NULL,
     sd VARCHAR(7) NOT NULL,
     duree VARCHAR(15) NOT NULL,
     composant TEXT NOT NULL,
-    niveau VARCHAR(20) NOT NULL
+    niveau VARCHAR(20) NOT NULL,
+    PRIMARY KEY(idRituel)
 );
 
--- TABLE DE BASE : envoutement
 CREATE TABLE envoutement(
-    idEnvoutement BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(30) NOT NULL,
+    idEnvoutement INT,
+    nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
     prerequis TEXT NOT NULL,
-    danger VARCHAR(6) NOT NULL
+    danger VARCHAR(6) NOT NULL,
+    PRIMARY KEY(idEnvoutement)
 );
 
--- TABLE DE BASE : profession
+CREATE TABLE competence(
+    idCompetence INT,
+    nom VARCHAR(50) NOT NULL,
+    codeCaracteristique VARCHAR(6) NOT NULL,
+    description TEXT NOT NULL,
+    descriptionBase10 TEXT NOT NULL,
+    descriptionBase13 TEXT NOT NULL,
+    descriptionBase16 TEXT NOT NULL,
+    descriptionBase20 TEXT NOT NULL,
+    specialisation VARCHAR(20),
+    prerequis VARCHAR(20),
+    isExclusive BOOLEAN NOT NULL,
+    idCaracteristique INT NOT NULL,
+    PRIMARY KEY(idCompetence),
+    FOREIGN KEY(idCaracteristique) REFERENCES caracteristique(idCaracteristique)
+);
+
 CREATE TABLE profession(
-    idProfession BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    codeCaracteristique VARCHAR(4),
-    competenceExclusive VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL
-);
-
--- TABLE DE BASE : race
-CREATE TABLE race(
-    idRace BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    categorie VARCHAR(50) NOT NULL
-);
-
--- TABLE DE BASE : profession_personnage
-CREATE TABLE profession_personnage(
-    idProfessionPersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    valeurActuelle INT NOT NULL,
-    valeurMax INT NOT NULL,
-    idProfession INT NOT NULL,
-    FOREIGN KEY(idProfession) REFERENCES profession(idProfession)
-);
-
--- TABLE DE BASE : campagne
-CREATE TABLE campagne(
-    idCampagne BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    idProfilUtilisateur INT NOT NULL,
-    FOREIGN KEY(idProfilUtilisateur) REFERENCES profil_utilisateur(idProfilUtilisateur)
-);
-
--- TABLE DE BASE : competence_specifique
-CREATE TABLE competence_specifique(
-    idCompetenceSpecifique BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idProfession INT,
     nom VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
-    codeCaracteristique VARCHAR(4) NOT NULL,
-    specialisation VARCHAR(20) NOT NULL,
-    prerequis VARCHAR(20) NOT NULL,
-    idProfession INT NOT NULL,
-    FOREIGN KEY(idProfession) REFERENCES profession(idProfession)
+    PRIMARY KEY(idProfession)
 );
 
--- TABLE DE BASE : personnage
+CREATE TABLE race(
+                     idRace INT,
+                     nom VARCHAR(50) NOT NULL,
+                     PRIMARY KEY(idRace)
+);
+
+CREATE TABLE reputationWiki(
+    idReputation INT,
+    territoire VARCHAR(20) NOT NULL,
+    valeur VARCHAR(20) NOT NULL,
+    idRace INT NOT NULL,
+    PRIMARY KEY(idReputation),
+    FOREIGN KEY(idRace) REFERENCES race(idRace)
+);
+
+CREATE TABLE particularite(
+    idParticularite INT,
+    nom VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
+    idRace INT NOT NULL,
+    PRIMARY KEY(idParticularite),
+    FOREIGN KEY(idRace) REFERENCES race(idRace)
+);
+
+CREATE TABLE competenceProfession(
+    idComptetenceProfession INT,
+    idProfession INT,
+    idCompetence INT NOT NULL,
+    PRIMARY KEY(idComptetenceProfession, idProfession),
+    FOREIGN KEY(idProfession) REFERENCES profession(idProfession),
+    FOREIGN KEY(idCompetence) REFERENCES competence(idCompetence)
+);
+
+CREATE TABLE campagne(
+    idCampagne INT,
+    nom VARCHAR(50) NOT NULL,
+    uId TEXT NOT NULL,
+    password TEXT,
+    idUser INT NOT NULL,
+    PRIMARY KEY(idCampagne),
+    UNIQUE(uId),
+    FOREIGN KEY(idUser) REFERENCES profilUtilisateur(idUser)
+);
+
 CREATE TABLE personnage(
-    idPersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idPersonnage INT,
     nomPersonnage VARCHAR(50),
     nomJoueur VARCHAR(50),
     nomImage VARCHAR(100),
@@ -123,74 +133,83 @@ CREATE TABLE personnage(
     xp INT,
     age INT,
     bestiaire BOOLEAN default false,
-    idProfessionPersonnage INT NOT NULL,
-    idRace BIGINT NOT NULL,
-    idCampagne BIGINT,
-    idProfilUtilisateur BIGINT,
-    UNIQUE(idProfessionPersonnage),
-    FOREIGN KEY(idProfessionPersonnage) REFERENCES profession_personnage(idProfessionPersonnage),
+    historique TEXT,
+    poings VARCHAR(10),
+    pieds VARCHAR(10),
+    vigueur INT,
+    idProfession INT NOT NULL,
+    idRace INT NOT NULL,
+    idCampagne INT,
+    idUser INT,
+    PRIMARY KEY(idPersonnage),
+    FOREIGN KEY(idProfession) REFERENCES profession(idProfession),
     FOREIGN KEY(idRace) REFERENCES race(idRace),
     FOREIGN KEY(idCampagne) REFERENCES campagne(idCampagne),
-    FOREIGN KEY(idProfilUtilisateur) REFERENCES profil_utilisateur(idProfilUtilisateur)
+    FOREIGN KEY(idUser) REFERENCES profilUtilisateur(idUser)
 );
 
--- TABLE DE BASE : profession_specifique_personnage
-CREATE TABLE caracteristique_personnage(
-    idCaracteristiquePersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idPersonnage BIGINT,
-    idCaracteristique BIGINT,
+CREATE TABLE inventaire(
+    idEnvoutement INT,
+    nom VARCHAR(60) NOT NULL,
+    type VARCHAR(10),
+    effet TEXT,
+    quantite INT,
+    idPersonnage INT NOT NULL,
+    PRIMARY KEY(idEnvoutement),
+    FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage)
+);
+
+CREATE TABLE caracteristiquePersonnage(
+    idCaracteristiquePersonnage INT,
     valeurActuelle INT NOT NULL,
     valeurMax INT NOT NULL,
+    idPersonnage INT NOT NULL,
+    idCaracteristique INT NOT NULL,
+    PRIMARY KEY(idCaracteristiquePersonnage),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
     FOREIGN KEY(idCaracteristique) REFERENCES caracteristique(idCaracteristique)
 );
 
--- TABLE DE BASE : caracteristique_personnage
-CREATE TABLE profession_specifique_personnage(
-    idProfessionSpecifiquePersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    valeurActuelle INT NOT NULL,
-    valeurMax INT NOT NULL,
-    idProfession BIGINT NOT NULL,
-    idCompetenceSpecifique BIGINT NOT NULL,
-    idPersonnage BIGINT NOT NULL,
-    FOREIGN KEY(idProfession) REFERENCES profession(idProfession),
-    FOREIGN KEY(idCompetenceSpecifique) REFERENCES competence_specifique(idCompetenceSpecifique),
+CREATE TABLE reputationPersonnalisee(
+    idReputation INT,
+    territoire VARCHAR(20) NOT NULL,
+    valeur VARCHAR(20) NOT NULL,
+    idPersonnage INT NOT NULL,
+    PRIMARY KEY(idReputation),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage)
 );
 
--- TABLE DE BASE : competence_personnage
-CREATE TABLE competence_personnage(
-    idCompetencePersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idPersonnage BIGINT,
-    idCompetence BIGINT,
+CREATE TABLE competencePersonnage(
+    idCaracteristiquePersonnage INT,
     valeurActuelle INT NOT NULL,
     valeurMax INT NOT NULL,
+    idPersonnage INT NOT NULL,
+    idCompetence INT NOT NULL,
+    PRIMARY KEY(idCaracteristiquePersonnage),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
     FOREIGN KEY(idCompetence) REFERENCES competence(idCompetence)
 );
 
-CREATE TABLE magie_personnage(
-    idMagiePersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idPersonnage BIGINT,
-    idMagie BIGINT,
+CREATE TABLE magiePersonnage(
+    idPersonnage INT,
+    idMagie INT,
+    PRIMARY KEY(idPersonnage, idMagie),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
     FOREIGN KEY(idMagie) REFERENCES magie(idMagie)
 );
 
--- TABLE DE BASE : rituel_personnage
-CREATE TABLE rituel_personnage(
-    idRituelPersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idPersonnage BIGINT,
-    idRituel BIGINT,
+CREATE TABLE rituelPersonnage(
+    idPersonnage INT,
+    idRituel INT,
+    PRIMARY KEY(idPersonnage, idRituel),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
     FOREIGN KEY(idRituel) REFERENCES rituel(idRituel)
 );
 
--- TABLE DE BASE : envoutement_personnage
-CREATE TABLE envoutement_personnage(
-    idEnvoutementPersonnage BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idPersonnage BIGINT,
-    idEnvoutement BIGINT,
+CREATE TABLE envoutementPersonnage(
+    idPersonnage INT,
+    idEnvoutement INT,
+    PRIMARY KEY(idPersonnage, idEnvoutement),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
     FOREIGN KEY(idEnvoutement) REFERENCES envoutement(idEnvoutement)
 );

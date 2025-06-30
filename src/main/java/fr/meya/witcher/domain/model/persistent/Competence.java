@@ -1,15 +1,14 @@
 package fr.meya.witcher.domain.model.persistent;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import fr.meya.witcher.domain.model.persistent.Caracteristique;
+
+import java.util.List;
 
 /**
  * Classe représentant les compétences d'un personnage (connaissance de la rue, arbalète, etc...).
@@ -26,30 +25,36 @@ public class Competence {
 	@Column(name = "IDCOMPETENCE")
 	private long idCompetence;
 
-	@NotBlank
 	private String nom;
 
-	@NotBlank
 	@Column(name = "CODECARACTERISTIQUE")
 	private String codeCaracteristique;
 
-	@NotBlank
 	private String description;
 
-	@NotBlank
 	@Column(name = "DESCRIPTIONBASE10")
 	private String descriptionBase10;
 
-	@NotBlank
 	@Column(name = "DESCRIPTIONBASE13")
 	private String descriptionBase13;
 
-	@NotBlank
 	@Column(name = "DESCRIPTIONBASE16")
 	private String descriptionBase16;
 
-	@NotBlank
 	@Column(name = "DESCRIPTIONBASE20")
 	private String descriptionBase20;
+
+	@Column(name = "SPECIALISATION")
+	private String specialisation;
+
+	@Column(name = "ISEXCLUSIVE")
+	private boolean isExclusive;
+
+    @ManyToOne
+    @JoinColumn(name = "IDCARACTERISTIQUE", referencedColumnName = "IDCARACTERISTIQUE")
+    private Caracteristique caracteristique;
+
+	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CompetenceProfession> professionList;
 
 }
