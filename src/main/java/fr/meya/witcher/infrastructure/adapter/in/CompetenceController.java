@@ -19,7 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/competence")
+@RequestMapping("/competences")
 public class CompetenceController {
 
 	private final ICompetenceService iCompetenceService;
