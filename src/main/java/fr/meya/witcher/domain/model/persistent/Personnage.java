@@ -63,5 +63,4 @@ public class Personnage {
 	@ManyToMany(mappedBy = "personnageList")
 	private List<Envoutement> envoutementList;
 
-
 }

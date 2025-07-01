@@ -36,10 +36,10 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 		}
 
 		Map<String, ValidationRule> fieldRules = Map.of(
-				"nom", new ValidationRule("error.caracteristique.nom.required"),
-				"code", new ValidationRule("error.caracteristique.code.required"),
-				"description", new ValidationRule("error.caracteristique.description.required")
-				);
+		"nom", new ValidationRule("error.caracteristique.nom.required"),
+		"code", new ValidationRule("error.caracteristique.code.required"),
+		"description", new ValidationRule("error.caracteristique.description.required")
+		);
 
 		validationUtils.validateWithRules(caracteristiqueVolatile, fieldRules);
 

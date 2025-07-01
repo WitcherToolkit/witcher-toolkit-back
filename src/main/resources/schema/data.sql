@@ -149,3 +149,71 @@ INSERT INTO rituel (idRituel, nom, cout, effet, tempsPreparation, sd, duree, com
    (10, 'Eau et Air', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité d''eau et d''air ou un bol d''eau et d''air, 1 éclar de lune, 1 goutte de sang', 'Maître');
 
 ALTER TABLE rituel ALTER COLUMN idRituel RESTART WITH 11;
+
+-- Ajout des Races
+INSERT INTO race (idRace, nom) VALUES
+    (1, 'Humain'),
+    (2, 'Nain'),
+    (3, 'Elfe'),
+    (4, 'Halfelin'),
+    (5, 'Sorceleur');
+
+ALTER TABLE race ALTER COLUMN idRace RESTART WITH 6;
+
+-- Ajout des particularités
+INSERT INTO particularite (idParticularite, nom, description, idRace) VALUES
+(1, 'Sens accrus', 'Les sorceleurs ont des sens plus développés que la moyenne des humains.', 5),
+(2, 'Mutation durable', 'Les sorceleurs ont subi des mutations qui les rendent différents des autres humains.', 5),
+(3, 'Sensibilité émoussée', 'Les sorceleurs ont une sensibilité émoussée par rapport aux autres humains.', 5),
+(4, 'Réflexes hors du commun', 'Les sorceleurs ont des réflexes hors du commun.', 5),
+
+(5, 'Esthète', 'Les elfes sont des êtres sensibles à la création artistique.', 3),
+(6, 'Oeil d''aigle', 'Les elfes ont une vue perçante.', 3),
+(7, 'Harmonie avec la nature', 'Les elfes ont une affinité particulière avec la nature.', 3),
+
+(8, 'Tanné comme le cuir', 'Les nains sont réputés pour leur résistance physique.', 2),
+(9, 'Coriace', 'Les nains sont coriace.', 2),
+(10, 'Oeil de l''expert', 'Les nains repèrent facilement les petits détails.', 2),
+
+(11, 'Digne de confiance', 'Les humains sont réputés pour leur confiance.', 1),
+(12, 'Ingénieux', 'Les humains sont ingénieux.', 1),
+(13, 'Têtu comme une mule', 'Les humains sont têtu comme des mules.', 1),
+
+(14, 'Agile', 'Les halfelins sont agiles.', 4),
+(15, 'Peuple agreste', 'Les halfelins sont des peuples agrestes.', 4),
+(16, 'Résilience à la magie', 'Les halfelins sont résilients à la magie.', 4);
+
+ALTER TABLE particularite ALTER COLUMN idParticularite RESTART WITH 17;
+
+-- Ajout des réputations
+INSERT INTO reputationWiki (IDREPUTATIONWIKI, territoire, valeur, idRace) VALUES
+(1, 'Nord', 'Craint et haïs', 5),
+(2, 'Nilfgaard', 'Craint et haïs', 5),
+(3, 'Skellige', 'Toléré', 5),
+(4, 'Dol Blathana', 'Toléré', 5),
+(5, 'Mahakam', 'Toléré', 5),
+
+(6, 'Nord', 'Haïs', 3),
+(7, 'Nilfgaard', 'Neutre', 3),
+(8, 'Skellige', 'Neutre', 3),
+(9, 'Dol Blathana', 'Neutre', 3),
+(10, 'Mahakam', 'Neutre', 3),
+
+(11, 'Nord', 'Toléré', 2),
+(12, 'Nilfgaard', 'Neutre', 2),
+(13, 'Skellige', 'Neutre', 2),
+(14, 'Dol Blathana', 'Neutre', 2),
+(15, 'Mahakam', 'Neutre', 2),
+
+(17, 'Nilfgaard', 'Neutre', 1),
+(18, 'Skellige', 'Neutre', 1),
+(19, 'Dol Blathana', 'Haïs', 1),
+(20, 'Mahakam', 'Tolérés', 1),
+
+(21, 'Nord', 'Toléré', 4),
+(22, 'Nilfgaard', 'Neutre', 4),
+(23, 'Skellige', 'Neutre', 4),
+(24, 'Dol Blathana', 'Neutre', 4),
+(25, 'Mahakam', 'Neutre', 4);
+
+ALTER TABLE particularite ALTER COLUMN idParticularite RESTART WITH 26;

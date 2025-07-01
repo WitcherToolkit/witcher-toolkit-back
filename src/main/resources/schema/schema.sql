@@ -75,17 +75,17 @@ CREATE TABLE profession(
 );
 
 CREATE TABLE race(
-                     idRace INT,
-                     nom VARCHAR(50) NOT NULL,
-                     PRIMARY KEY(idRace)
+    idRace INT,
+    nom VARCHAR(50) NOT NULL,
+    PRIMARY KEY(idRace)
 );
 
 CREATE TABLE reputationWiki(
-    idReputation INT,
+    idReputationWiki INT,
     territoire VARCHAR(20) NOT NULL,
     valeur VARCHAR(20) NOT NULL,
     idRace INT NOT NULL,
-    PRIMARY KEY(idReputation),
+    PRIMARY KEY(idReputationWiki),
     FOREIGN KEY(idRace) REFERENCES race(idRace)
 );
 
