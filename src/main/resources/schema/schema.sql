@@ -57,12 +57,8 @@ CREATE TABLE envoutement(
 CREATE TABLE competence(
     idCompetence INT,
     nom VARCHAR(50) NOT NULL,
-    codeCaracteristique VARCHAR(6) NOT NULL,
+    tags VARCHAR(50),
     description TEXT NOT NULL,
-    descriptionBase10 TEXT NOT NULL,
-    descriptionBase13 TEXT NOT NULL,
-    descriptionBase16 TEXT NOT NULL,
-    descriptionBase20 TEXT NOT NULL,
     specialisation VARCHAR(20),
     prerequis VARCHAR(20),
     isExclusive BOOLEAN NOT NULL,

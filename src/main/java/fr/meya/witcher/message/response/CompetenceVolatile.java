@@ -15,20 +15,9 @@ public class CompetenceVolatile {
 
 	private String nom;
 
-	private String codeCaracteristique;
-
-
 	private String description;
 
-	private String descriptionBase10;
-
-
-	private String descriptionBase13;
-
-	private String descriptionBase16;
-
-
-	private String descriptionBase20;
+	private String prerequis;
 
 	private String specialisation;
 
@@ -36,7 +25,8 @@ public class CompetenceVolatile {
 
 	private CaracteristiqueVolatile caracteristique;
 
-	private List<CompetenceProfessionVolatile> ProfessionList;
+	private String tags;
 
+	private List<CompetenceProfessionVolatile> ProfessionList;
 
 }

@@ -27,22 +27,9 @@ public class Competence {
 
 	private String nom;
 
-	@Column(name = "CODECARACTERISTIQUE")
-	private String codeCaracteristique;
-
 	private String description;
 
-	@Column(name = "DESCRIPTIONBASE10")
-	private String descriptionBase10;
-
-	@Column(name = "DESCRIPTIONBASE13")
-	private String descriptionBase13;
-
-	@Column(name = "DESCRIPTIONBASE16")
-	private String descriptionBase16;
-
-	@Column(name = "DESCRIPTIONBASE20")
-	private String descriptionBase20;
+	private String prerequis;
 
 	@Column(name = "SPECIALISATION")
 	private String specialisation;
@@ -50,9 +37,11 @@ public class Competence {
 	@Column(name = "ISEXCLUSIVE")
 	private boolean isExclusive;
 
-    @ManyToOne
-    @JoinColumn(name = "IDCARACTERISTIQUE", referencedColumnName = "IDCARACTERISTIQUE")
-    private Caracteristique caracteristique;
+	@ManyToOne
+	@JoinColumn(name = "IDCARACTERISTIQUE", referencedColumnName = "IDCARACTERISTIQUE")
+	private Caracteristique caracteristique;
+
+	private String tags;
 
 	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceProfession> professionList;
