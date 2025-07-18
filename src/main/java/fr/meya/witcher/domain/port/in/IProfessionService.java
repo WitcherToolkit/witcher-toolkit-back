@@ -13,6 +13,8 @@ public interface IProfessionService {
 
     Profession getProfession(Long idProfession);
 
+    ProfessionVolatile getProfessionWithCompetences(Long idProfession);
+
     Profession createProfession(ProfessionVolatile professionVolatile);
 
     Profession updateProfession(Long idProfession, ProfessionVolatile professionVolatile);

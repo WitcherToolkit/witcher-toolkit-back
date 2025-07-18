@@ -41,6 +41,13 @@ public class ProfessionController {
         return ResponseEntity.ok(createdProfession);
     }
 
+    @GetMapping(value = "/detail/{id}") // Chemin mis à jour
+    public ResponseEntity<ProfessionVolatile> getProfessionCompetences(@PathVariable Long id) {
+        log.info("Consultation des détails et compétences pour la profession avec l'ID : {}", id);
+        ProfessionVolatile professionWithCompetences = iProfessionService.getProfessionWithCompetences(id);
+        return ResponseEntity.ok(professionWithCompetences);
+    }
+
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<ProfessionVolatile> updateProfession(@PathVariable Long id, @RequestBody ProfessionVolatile professionVolatile) {
         log.info("modifier une profession");

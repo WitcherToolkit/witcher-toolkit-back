@@ -53,6 +53,40 @@ INSERT INTO profession (idProfession, nom, description) VALUES
 
 ALTER TABLE profession ALTER COLUMN idProfession RESTART WITH 11;
 
+INSERT INTO competenceProfession(idComptetenceProfession, idProfession, idCompetence) VALUES
+    (1,1,1),
+    (2,1,2),
+    (3,1,3),
+    (4,2,4),
+    (5,2,5),
+    (6,2,6),
+    (7,3,7),
+    (8,3,8),
+    (9,3,9),
+    (10,4,10),
+    (11,4,1),
+    (12,4,2),
+    (13,5,3),
+    (14,5,4),
+    (15,5,5),
+    (16,6,6),
+    (17,6,7),
+    (18,6,8),
+    (19,7,9),
+    (20,7,10),
+    (21,7,1),
+    (22,8,2),
+    (23,8,3),
+    (24,8,4),
+    (25,9,5),
+    (26,9,6),
+    (27,9,7),
+    (28,10,8),
+    (29,10,9),
+    (30,10,10);
+
+ALTER TABLE competenceProfession ALTER COLUMN idComptetenceProfession RESTART WITH 30;
+
 -- Ajout d'envoûtement
 INSERT INTO envoutement (idEnvoutement, nom, cout, effet, prerequis, danger)
 VALUES

@@ -66,6 +66,18 @@ public class ProfessionService implements IProfessionService {
     }
 
     @Override
+    public ProfessionVolatile getProfessionWithCompetences(Long idProfession) {
+        if (idProfession == null) {
+            throw new WitcherToolkitExeption("L'ID de la profession est null.");
+        }
+        Profession profession = iProfessionRepository.findById(idProfession)
+                .orElseThrow(() -> new WitcherToolkitExeption("La profession avec l'ID " + idProfession + " n'existe pas."));
+
+        // Mapper l'entité Profession (avec ses compétences chargées) vers le DTO ProfessionVolatile
+        return professionMapper.toProfessionDto(profession);
+    }
+
+    @Override
     public Profession createProfession(ProfessionVolatile professionVolatile) {
         isValid(professionVolatile);
 
