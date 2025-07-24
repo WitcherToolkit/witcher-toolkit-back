@@ -20,6 +20,7 @@ public class ProfessionMapper {
     // Convertir l'entité persistante en DTO
     public ProfessionVolatile toProfessionDto(Profession profession) {
         ProfessionVolatile dto = new ProfessionVolatile(
+                profession.getIdProfession(),
                 profession.getNom(),
                 profession.getDescription(),
                 new ArrayList<>() // Initialisation de la liste des compétences

@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ProfessionVolatile {
 
+    private Long idProfession;
+
     private String nom;
 
     private String description;
