@@ -3,7 +3,7 @@ CREATE TABLE magie(
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
-    portee VARCHAR(15) NOT NULL,
+    portee VARCHAR(15),
     duree VARCHAR(35) NOT NULL,
     nature VARCHAR(5) NOT NULL,
     niveau VARCHAR(35) NOT NULL,
