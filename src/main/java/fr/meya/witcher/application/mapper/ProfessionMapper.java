@@ -2,6 +2,7 @@ package fr.meya.witcher.application.mapper;
 
 import fr.meya.witcher.domain.model.persistent.Profession;
 import fr.meya.witcher.message.response.CompetenceProfessionVolatile;
+import fr.meya.witcher.message.response.InventaireWikiVolatile;
 import fr.meya.witcher.message.response.ProfessionVolatile;
 import org.springframework.stereotype.Component;
 
@@ -23,11 +24,32 @@ public class ProfessionMapper {
                 profession.getIdProfession(),
                 profession.getNom(),
                 profession.getDescription(),
-                new ArrayList<>() // Initialisation de la liste des compétences
+                profession.getVigueur(),
+                profession.getMaxSort(),
+                profession.getMaxRituel(),
+                profession.getMaxEnvoutement(),
+                profession.getMaxInvocation(),
+                new ArrayList<>(), // Initialisation de la liste des compétences
+                new ArrayList<>()
         );
 
-        if (profession.getCompetenceProfession() != null) {
-            List<CompetenceProfessionVolatile> competenceProfessionVolatiles = profession.getCompetenceProfession().stream()
+        // Gestion des inventaires wiki
+        if (profession.getInventaireWikiList() != null) {
+            List<InventaireWikiVolatile> inventaireWikiVolatiles = profession.getInventaireWikiList().stream()
+                    .map(iw -> new InventaireWikiVolatile(
+                            iw.getIdInventaireWiki(),
+                            iw.getNom(),
+                            iw.getType(),
+                            iw.getEffet(),
+                            iw.isSpecial()
+                    ))
+                    .toList();
+            dto.setInventaireWikiList(inventaireWikiVolatiles);
+        }
+
+        // Gestion des compétences
+        if (profession.getCompetenceProfessionList() != null) {
+            List<CompetenceProfessionVolatile> competenceProfessionVolatiles = profession.getCompetenceProfessionList().stream()
                     .map(cp -> new CompetenceProfessionVolatile(
                             cp.getIdCompetenceProfession(),
                             competenceMapper.toCompetenceDto(cp.getCompetence()), // Utilisation du CompetenceMapper
@@ -44,6 +66,7 @@ public class ProfessionMapper {
         Profession profession = new Profession();
         profession.setNom(dto.getNom());
         profession.setDescription(dto.getDescription());
+        profession.setVigueur(dto.getVigueur());
         return profession;
     }
 }

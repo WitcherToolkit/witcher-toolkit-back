@@ -17,6 +17,18 @@ public class ProfessionVolatile {
 
     private String description;
 
+    private int vigueur;
+
+    private int maxSort;
+
+    private int maxRituel;
+
+    private int maxEnvoutement;
+
+    private int maxInvocation;
+
+    private List<InventaireWikiVolatile> inventaireWikiList;
+
     private List<CompetenceProfessionVolatile> competenceList;
 
 }

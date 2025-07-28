@@ -71,7 +71,25 @@ CREATE TABLE profession(
     idProfession INT,
     nom VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
+    vigueur INT,
+    maxSort INT NOT NULL DEFAULT 0,
+    maxRituel INT NOT NULL DEFAULT 0,
+    maxEnvoutement INT NOT NULL DEFAULT 0,
+    maxInvocation INT NOT NULL DEFAULT 0,
+
     PRIMARY KEY(idProfession)
+);
+
+CREATE TABLE inventaireWiki(
+    idInventaireWiki INT,
+    quantite INT NOT NULL DEFAULT 1,
+    nom VARCHAR(50) NOT NULL,
+    type VARCHAR(10),
+    effet TEXT,
+    isSpecial BOOLEAN NOT NULL DEFAULT FALSE,
+    idProfession INT NOT NULL,
+    PRIMARY KEY(idInventaireWiki),
+    FOREIGN KEY(idProfession) REFERENCES profession(idProfession)
 );
 
 CREATE TABLE race(
@@ -132,7 +150,6 @@ CREATE TABLE personnage(
     historique TEXT,
     poings VARCHAR(10),
     pieds VARCHAR(10),
-    vigueur INT,
     idProfession INT NOT NULL,
     idRace INT NOT NULL,
     idCampagne INT,

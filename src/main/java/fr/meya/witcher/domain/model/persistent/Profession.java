@@ -27,7 +27,24 @@ public class Profession {
 	@NotBlank
 	private String description;
 
+	private int vigueur;
+
+	@Column(name = "MAXSORT")
+	private int maxSort;
+
+	@Column(name = "MAXRITUEL")
+	private int maxRituel;
+
+	@Column(name = "MAXENVOUTEMENT")
+	private int maxEnvoutement;
+
+	@Column(name = "MAXINVOCATION")
+	private int maxInvocation;
+
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetenceProfession> competenceProfession;
+	private List<InventaireWiki> inventaireWikiList;
+
+	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CompetenceProfession> competenceProfessionList;
 
 }
