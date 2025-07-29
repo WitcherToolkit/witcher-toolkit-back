@@ -11,6 +11,8 @@ public class InventaireWikiVolatile {
 
     private Long idInventaireWiki;
 
+    private int quantite;
+
     private String nom;
 
     private String type;

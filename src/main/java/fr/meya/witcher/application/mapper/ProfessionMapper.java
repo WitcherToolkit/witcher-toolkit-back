@@ -38,6 +38,7 @@ public class ProfessionMapper {
             List<InventaireWikiVolatile> inventaireWikiVolatiles = profession.getInventaireWikiList().stream()
                     .map(iw -> new InventaireWikiVolatile(
                             iw.getIdInventaireWiki(),
+                            iw.getQuantite(),
                             iw.getNom(),
                             iw.getType(),
                             iw.getEffet(),
