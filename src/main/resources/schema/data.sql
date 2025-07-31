@@ -55,7 +55,7 @@ ALTER TABLE profession ALTER COLUMN idProfession RESTART WITH 11;
 
 -- Ajout de l'inventaire wiki
 INSERT INTO inventaireWiki (idInventaireWiki, quantite, nom, type, effet, isSpecial, idProfession) VALUES
-    ( 1, '1', '50 couronnes de composants', '', '', FALSE, 1),
+    ( 1, '50', 'couronnes de composants', '', '', FALSE, 1),
     ( 2, '1', 'ensemble d''alchimie', '', '', FALSE, 1),
     ( 3, '1', 'épée longue de fer', 'arme', '', FALSE, 1),
     ( 4, '1', 'forge portable', '', '', FALSE, 1),
@@ -104,7 +104,7 @@ INSERT INTO inventaireWiki (idInventaireWiki, quantite, nom, type, effet, isSpec
     ( 48, '1', 'lance', 'lance', '', FALSE, 5),
     ( 49, '1', 'pantalon renforcé', 'armure', '', FALSE, 5),
     ( 50, '1', 'sacoche', '', '', FALSE, 5),
-    ( 51, '1', '100 couronnes de composants', '', '', FALSE, 6),
+    ( 51, '100', 'couronnes de composants', '', '', FALSE, 6),
     ( 52, '1', 'bâton', 'arme', '', FALSE, 6),
     ( 53, '1', 'bourse', '', '', FALSE, 6),
     ( 54, '1', 'dague', 'arme', '', FALSE, 6),
@@ -120,7 +120,7 @@ INSERT INTO inventaireWiki (idInventaireWiki, quantite, nom, type, effet, isSpec
     ( 64, '1', 'journal', '', '', FALSE, 7),
     ( 65, '1', 'nécessaire d''écriture', '', '', FALSE, 7),
     ( 66, '1', 'outils de marchand', '', '', FALSE, 7),
-    ( 67, '1', '100 couronnes de composants', '', '', FALSE, 8),
+    ( 67, '100', 'couronnes de composants', '', '', FALSE, 8),
     ( 68, '1', 'bâton', 'arme', '', FALSE, 8),
     ( 69, '1', 'dague', 'arme', '', FALSE, 8),
     ( 70, '1', 'ensemble d''alchimie', '', '', FALSE, 8),
