@@ -1,6 +1,7 @@
 package fr.meya.witcher.message.response;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,20 +12,35 @@ import lombok.NoArgsConstructor;
 public class RituelVolatile {
     @NotBlank
     private long idRituel;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.nom.required")
+    @Size( max = 60)
     private String nom;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.cout.required")
+    @Size( max = 10)
     private String cout;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.effet.required")
     private String effet;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.tempsPreparation.required")
+    @Size( max = 10)
     private String tempsPreparation;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.sd.required")
+    @Size( max = 7)
     private String sd;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.duree.required")
+    @Size( max = 15)
     private String duree;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.composant.required")
     private String composant;
-    @NotBlank
+
+    @NotBlank(message = "error.rituel.niveau.required")
+    @Size( max = 20)
     private String niveau;
+
 }

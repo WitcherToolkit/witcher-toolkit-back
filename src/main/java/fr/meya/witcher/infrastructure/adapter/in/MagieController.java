@@ -30,6 +30,14 @@ public class MagieController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable Long id, @Valid @RequestBody MagieVolatile magieVolatile) {
+        log.info("Modification de la magie - ID : {} - Données : {}", id, magieVolatile);
+        Magie updatedMagie = iMagieService.updateMagie(id, magieVolatile);
+
+        return ResponseEntity.ok(magieMapper.toMagieDto(updatedMagie));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Magie> createMagie(@RequestBody MagieVolatile magieVolatile) {
         log.info("Ajout d'une magie");
@@ -39,14 +47,6 @@ public class MagieController {
 
         // Retourner la réponse
         return ResponseEntity.ok(createdMagie);
-    }
-
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable Long id, @Valid @RequestBody MagieVolatile magieVolatile
-    ) {
-        log.info("Modification de la magie - ID : {} - Données : {}", id, magieVolatile);
-        Magie updatedMagie = iMagieService.updateMagie(id, magieVolatile);
-        return ResponseEntity.ok(magieMapper.toMagieDto(updatedMagie));
     }
 
     @DeleteMapping("/delete/{id}")

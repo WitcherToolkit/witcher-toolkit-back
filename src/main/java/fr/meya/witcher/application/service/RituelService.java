@@ -36,21 +36,6 @@ public class RituelService implements IRituelService {
             throw new WitcherToolkitExeption("error.rituel.null");
         }
 
-        // Définir les règles avec clés de messages externalisées
-        Map<String, ValidationRule> fieldRules = Map.of(
-                "nom", new ValidationRule("error.rituel.nom.required"),
-                "cout", new ValidationRule("error.rituel.cout.required"),
-                "effet", new ValidationRule("error.rituel.effet.required"),
-                "tempPreparation", new ValidationRule("error.rituel.tempPreparation.required"),
-                "sd", new ValidationRule("error.rituel.sd.required"),
-                "duree", new ValidationRule("error.rituel.duree.required"),
-                "composant", new ValidationRule("error.rituel.composant.required"),
-                "niveau", new ValidationRule("error.rituel.niveau.required")
-        );
-
-        // Valider avec ValidationUtils
-        validationUtils.validateWithRules(rituelVolatile, fieldRules);
-
         return true;
     }
 

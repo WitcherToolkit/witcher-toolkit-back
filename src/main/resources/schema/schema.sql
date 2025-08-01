@@ -12,6 +12,19 @@ CREATE TABLE magie(
     PRIMARY KEY(idMagie)
 );
 
+CREATE TABLE rituel(
+    idRituel INT,
+    nom VARCHAR(60) NOT NULL,
+    cout VARCHAR(10) NOT NULL,
+    effet TEXT NOT NULL,
+    TempsPreparation VARCHAR(10) NOT NULL,
+    sd VARCHAR(7) NOT NULL,
+    duree VARCHAR(15) NOT NULL,
+    composant TEXT NOT NULL,
+    niveau VARCHAR(20) NOT NULL,
+    PRIMARY KEY(idRituel)
+);
+
 CREATE TABLE caracteristique(
     idCaracteristique INT,
     nom VARCHAR(16) NOT NULL,
@@ -29,19 +42,6 @@ CREATE TABLE profilUtilisateur(
     PRIMARY KEY(idUser),
     UNIQUE(pseudo),
     UNIQUE(email)
-);
-
-CREATE TABLE rituel(
-    idRituel INT,
-    nom VARCHAR(60) NOT NULL,
-    cout VARCHAR(10) NOT NULL,
-    effet TEXT NOT NULL,
-    TempsPreparation VARCHAR(10) NOT NULL,
-    sd VARCHAR(7) NOT NULL,
-    duree VARCHAR(15) NOT NULL,
-    composant TEXT NOT NULL,
-    niveau VARCHAR(20) NOT NULL,
-    PRIMARY KEY(idRituel)
 );
 
 CREATE TABLE envoutement(

@@ -29,6 +29,14 @@ public class RituelController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<RituelVolatile> updateRituel(@PathVariable Long id, @RequestBody RituelVolatile rituelVolatile) {
+        log.info("Modification de la magie - ID : {} - Données : {}", id, rituelVolatile);
+        Rituel updatedRituel = iRituelService.updateRituel(id, rituelVolatile);
+
+        return ResponseEntity.ok(rituelMapper.toRituelDto(updatedRituel));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Rituel> createRituel(@RequestBody RituelVolatile rituelVolatile) {
         log.info("Ajout d'un rituel");
@@ -38,13 +46,6 @@ public class RituelController {
 
         // Retourner la réponse
         return ResponseEntity.ok(createdRituel);
-    }
-
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<RituelVolatile> updateRituel(@PathVariable Long id, @RequestBody RituelVolatile rituelVolatile) {
-        log.info("modifier un rituel");
-        Rituel updatedRituel = iRituelService.updateRituel(id, rituelVolatile);
-        return ResponseEntity.ok(rituelMapper.toRituelDto(updatedRituel));
     }
 
     @DeleteMapping("/delete/{id}")
