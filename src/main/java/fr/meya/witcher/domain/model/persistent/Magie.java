@@ -5,6 +5,7 @@ import fr.meya.witcher.domain.model.enums.TypeMagieEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,17 +29,21 @@ public class Magie {
 	private long idMagie;
 
 	@NotBlank
+	@Size(max = 60)
 	private String nom;
 
 	@NotBlank
+	@Size(max = 10)
 	private String cout;
 
+	@NotBlank
 	private String effet;
 
-	@NotBlank
+	@Size(max = 15)
 	private String portee;
 
 	@NotBlank
+	@Size(max = 35)
 	private String duree;
 
 	@NotNull
@@ -50,8 +55,10 @@ public class Magie {
 	private TypeMagieEnum type;
 
 	@NotBlank
+	@Size(max = 35)
 	private String niveau;
 
+	@Size(max = 25)
 	private String contre;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Pour éviter que hibernate ne charge inutilement la relation personnageList lors de l'update.
