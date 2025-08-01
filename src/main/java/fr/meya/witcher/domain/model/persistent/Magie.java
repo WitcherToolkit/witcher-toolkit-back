@@ -1,7 +1,10 @@
 package fr.meya.witcher.domain.model.persistent;
 
+import fr.meya.witcher.domain.model.enums.NatureMagieEnum;
+import fr.meya.witcher.domain.model.enums.TypeMagieEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,17 +33,21 @@ public class Magie {
 	@NotBlank
 	private String cout;
 
-	@NotBlank
 	private String effet;
 
+	@NotBlank
 	private String portee;
 
 	@NotBlank
 	private String duree;
 
-	private String nature;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private NatureMagieEnum nature;
 
-	private String type;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TypeMagieEnum type;
 
 	@NotBlank
 	private String niveau;

@@ -4,6 +4,7 @@ import fr.meya.witcher.application.mapper.MagieMapper;
 import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.IMagieService;
 import fr.meya.witcher.message.response.MagieVolatile;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,9 @@ public class MagieController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable Long id, @RequestBody MagieVolatile magieVolatile) {
-        log.info("modifier une magie");
+    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable Long id, @Valid @RequestBody MagieVolatile magieVolatile
+    ) {
+        log.info("Modification de la magie - ID : {} - Données : {}", id, magieVolatile);
         Magie updatedMagie = iMagieService.updateMagie(id, magieVolatile);
         return ResponseEntity.ok(magieMapper.toMagieDto(updatedMagie));
     }

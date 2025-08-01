@@ -1,6 +1,10 @@
 package fr.meya.witcher.message.response;
 
+import fr.meya.witcher.domain.model.enums.NatureMagieEnum;
+import fr.meya.witcher.domain.model.enums.TypeMagieEnum;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,31 +14,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MagieVolatile {
 
-    @NotBlank
+    @NotNull
     private long idMagie;
 
-    @NotBlank
+    @NotBlank(message = "error.magie.nom.required")
+    @Size(max = 60, message = "{error.max.size}") //Mise en paramètre de la taille max pour le message d'erreur
     private String nom;
 
-    @NotBlank
+    @NotBlank(message = "error.magie.cout.required")
+    @Size(max = 10, message = "{error.max.size}")
     private String cout;
 
-    @NotBlank
+    @NotBlank(message = "error.magie.effet.required")
     private String effet;
 
+    @Size(max = 15, message = "{error.max.size}")
     private String portee;
 
-    @NotBlank
+    @NotBlank(message = "error.magie.duree.required")
+    @Size(max = 35, message = "{error.max.size}")
     private String duree;
 
-    private String nature;
+    @NotNull(message = "error.magie.nature.required")
+    private NatureMagieEnum nature;
 
-    //Si c'est un sort, une invocation, ou un signe
-    private String type;
+    private TypeMagieEnum type;
 
-    @NotBlank
+    @NotBlank(message = "error.magie.niveau.required")
+    @Size(max = 35, message = "{error.max.size}")
     private String niveau;
 
+    @Size(max = 25, message = "{error.max.size}")
     private String contre;
 
 }

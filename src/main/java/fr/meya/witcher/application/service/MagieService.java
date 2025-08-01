@@ -9,6 +9,7 @@ import fr.meya.witcher.domain.port.in.IMagieService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.IMagieRepository;
 import fr.meya.witcher.message.response.MagieVolatile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class MagieService implements IMagieService {
 
@@ -35,19 +37,6 @@ public class MagieService implements IMagieService {
         if (magieVolatile == null) {
             throw new WitcherToolkitExeption("error.magie.null");
         }
-
-        // Définir les règles avec clés de messages externalisées
-        Map<String, ValidationRule> fieldRules = Map.of(
-                "nom", new ValidationRule("error.magie.nom.required"),
-                "cout", new ValidationRule("error.magie.cout.required"),
-                "effet", new ValidationRule("error.magie.effet.required"),
-                "duree", new ValidationRule("error.magie.duree.required"),
-                "niveau", new ValidationRule("error.magie.niveau.required"),
-                "profession", new ValidationRule("error.magie.profession.required")
-        );
-
-        // Valider avec ValidationUtils
-        validationUtils.validateWithRules(magieVolatile, fieldRules);
 
         return true;
     }
@@ -81,17 +70,41 @@ public class MagieService implements IMagieService {
 
     @Override
     public Magie updateMagie(Long idMagie, MagieVolatile magieVolatile) {
+        log.info("Début de la méthode updateMagie - ID : {} - Données reçues : {}", idMagie, magieVolatile);
+
+        isValid(magieVolatile);
+        log.info("Validation des données réussie");
 
         Magie magieExistant = iMagieRepository.findById(idMagie)
                 .orElseThrow(() -> new WitcherToolkitExeption("Magie non trouvée"));
+        log.info("Magie existante trouvée - Nom: {}, Nature: {}, Type: {}, Effet: {}",
+                magieExistant.getNom(),
+                magieExistant.getNature(),
+                magieExistant.getType(),
+                magieExistant.getEffet());
+
+        log.info("Avant copyProperties - Nom: {}, Nature: {}, Type: {}",
+                magieExistant.getNom(),
+                magieExistant.getNature(),
+                magieExistant.getType());
 
         BeanUtils.copyProperties(magieVolatile, magieExistant, ObjectUtils.getNullPropertyNames(magieVolatile));
 
-        return iMagieRepository.save(magieExistant);
+        log.info("Après copyProperties - Nom: {}, Nature: {}, Type: {}",
+                magieExistant.getNom(),
+                magieExistant.getNature(),
+                magieExistant.getType());
 
+        Magie magieSauvegardee = iMagieRepository.save(magieExistant);
+        log.info("Après sauvegarde - Nom: {}, Nature: {}, Type: {}",
+                magieSauvegardee.getNom(),
+                magieSauvegardee.getNature(),
+                magieSauvegardee.getType());
+
+        return magieSauvegardee;
     }
 
-    @Override
+        @Override
     public void deleteMagie(Long idMagie) {
         Magie magieExistant = getMagie(idMagie);
         iMagieRepository.delete(magieExistant);

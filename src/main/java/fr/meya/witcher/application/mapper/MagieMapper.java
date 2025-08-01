@@ -1,5 +1,7 @@
 package fr.meya.witcher.application.mapper;
 
+import fr.meya.witcher.domain.model.enums.NatureMagieEnum;
+import fr.meya.witcher.domain.model.enums.TypeMagieEnum;
 import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.message.response.MagieVolatile;
 import org.springframework.stereotype.Component;
