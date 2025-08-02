@@ -1,6 +1,10 @@
 package fr.meya.witcher.message.response;
 
+import fr.meya.witcher.domain.model.enums.DangerEnum;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,22 +15,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnvoutementVolatile {
 
-    @NotBlank
-    @Size( max = 30)
+    @NotNull
+    private long idEnvoutement;
+
+    @NotBlank(message = "error.envoutement.nom.required")
+    @Size( max = 60)
     private String nom;
 
-    @NotBlank
+    @NotBlank(message = "error.envoutement.cout.required")
     @Size( max = 10)
     private String cout;
 
-    @NotBlank
+    @NotBlank(message = "error.envoutement.effet.required")
     private String effet;
 
-    @NotBlank
+    @NotBlank(message = "error.envoutement.prerequis.required")
     private String prerequis;
 
-    @NotBlank
-    @Size( max = 6)
-    private String danger;
+    @NotNull(message = "error.envoutement.danger.required")
+    private DangerEnum danger;
 
 }

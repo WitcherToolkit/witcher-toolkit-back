@@ -2,8 +2,11 @@ package fr.meya.witcher.infrastructure.adapter.in;
 
 import fr.meya.witcher.application.mapper.EnvoutementMapper;
 import fr.meya.witcher.domain.model.persistent.Envoutement;
+import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.IEnvoutementService;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
+import fr.meya.witcher.message.response.MagieVolatile;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,14 @@ public class EnvoutementController {
         return ResponseEntity.ok(resul);
     }
 
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<EnvoutementVolatile> updateEnvoutement(@PathVariable Long id, @Valid @RequestBody EnvoutementVolatile envoutementVolatile) {
+        log.info("Modification de l'envoutement - ID : {} - Données : {}", id, envoutementVolatile);
+        Envoutement updatedEnvoutement = iEnvoutementService.updateEnvoutement(id, envoutementVolatile);
+
+        return ResponseEntity.ok(envoutementMapper.toEnvoutementDto(updatedEnvoutement));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Envoutement> createEnvoutement(@RequestBody EnvoutementVolatile envoutementVolatile) {
         log.info("Créer une envoutement");
@@ -38,13 +49,6 @@ public class EnvoutementController {
 
         // Retourner la réponse
         return ResponseEntity.ok(createdEnvoutement);
-    }
-
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Envoutement> updateEnvoutement(@PathVariable Long id, @RequestBody EnvoutementVolatile envoutementVolatile) {
-        log.info("modifier une envoutement");
-        Envoutement updatedEnvoutement = iEnvoutementService.updateEnvoutement(id, envoutementVolatile);
-        return ResponseEntity.ok(updatedEnvoutement);
     }
 
     @DeleteMapping("/delete/{id}")

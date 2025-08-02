@@ -25,6 +25,16 @@ CREATE TABLE rituel(
     PRIMARY KEY(idRituel)
 );
 
+CREATE TABLE envoutement(
+    idEnvoutement INT,
+    nom VARCHAR(60) NOT NULL,
+    cout VARCHAR(10) NOT NULL,
+    effet TEXT NOT NULL,
+    prerequis TEXT NOT NULL,
+    danger VARCHAR(6) NOT NULL,
+    PRIMARY KEY(idEnvoutement)
+);
+
 CREATE TABLE caracteristique(
     idCaracteristique INT,
     nom VARCHAR(16) NOT NULL,
@@ -42,16 +52,6 @@ CREATE TABLE profilUtilisateur(
     PRIMARY KEY(idUser),
     UNIQUE(pseudo),
     UNIQUE(email)
-);
-
-CREATE TABLE envoutement(
-    idEnvoutement INT,
-    nom VARCHAR(60) NOT NULL,
-    cout VARCHAR(10) NOT NULL,
-    effet TEXT NOT NULL,
-    prerequis TEXT NOT NULL,
-    danger VARCHAR(6) NOT NULL,
-    PRIMARY KEY(idEnvoutement)
 );
 
 CREATE TABLE competence(
