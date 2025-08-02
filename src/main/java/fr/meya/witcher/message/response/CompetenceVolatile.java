@@ -2,9 +2,11 @@ package fr.meya.witcher.message.response;
 
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
 
@@ -13,20 +15,26 @@ import java.util.List;
 @NoArgsConstructor
 public class CompetenceVolatile {
 
+	@NotBlank
+	private long idCompetence;
+
+	@NotBlank(message = "error.competence.nom.required")
+	@Size( max = 50)
 	private String nom;
 
+	@NotBlank(message = "error.competence.description.required")
 	private String description;
 
+	@NotBlank(message = "error.competence.exclusive.required")
+    private boolean isExclusive;
+
+	@Size( max = 20)
 	private String prerequis;
 
+	@Size( max = 20)
 	private String specialisation;
 
-	private boolean isExclusive;
-
+	@NotBlank(message = "error.competence.nom.required")
 	private CaracteristiqueVolatile caracteristique;
-
-	private String tags;
-
-	private List<CompetenceProfessionVolatile> ProfessionList;
 
 }

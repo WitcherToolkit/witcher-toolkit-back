@@ -2,6 +2,7 @@ package fr.meya.witcher.domain.model.persistent;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,23 +26,24 @@ public class Competence {
 	@Column(name = "IDCOMPETENCE")
 	private long idCompetence;
 
+	@Size(max = 50)
 	private String nom;
 
+	@NotBlank
 	private String description;
-
-	private String prerequis;
-
-	@Column(name = "SPECIALISATION")
-	private String specialisation;
 
 	@Column(name = "ISEXCLUSIVE")
 	private boolean isExclusive;
 
+	@Size( max = 20)
+	private String prerequis;
+
+	@Size( max = 20)
+	private String specialisation;
+
 	@ManyToOne
 	@JoinColumn(name = "IDCARACTERISTIQUE", referencedColumnName = "IDCARACTERISTIQUE")
 	private Caracteristique caracteristique;
-
-	private String tags;
 
 	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetenceProfession> professionList;

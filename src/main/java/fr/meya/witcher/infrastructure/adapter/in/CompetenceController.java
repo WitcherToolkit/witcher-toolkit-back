@@ -37,6 +37,14 @@ public class CompetenceController {
 		return ResponseEntity.ok(result);
 	}
 
+	@PutMapping(value = "/update/{id}")
+	public ResponseEntity<CompetenceVolatile> updateCompetence(@PathVariable Long id, @RequestBody CompetenceVolatile competenceVolatile) {
+		log.info("Modification de la competence - ID : {} - Données : {}", id, competenceVolatile);
+		Competence updatedCompetence = iCompetenceService.updateCompetence(id, competenceVolatile);
+
+		return ResponseEntity.ok(competenceMapper.toCompetenceDto(updatedCompetence));
+	}
+
 	@PostMapping("/create")
 	public ResponseEntity<Competence> createCompetence(@RequestBody CompetenceVolatile competenceVolatile) {
 		log.info("Créer une compétence");
@@ -44,13 +52,6 @@ public class CompetenceController {
 		Competence createdCompetence = iCompetenceService.createCompetence(competenceVolatile);
 
 		return ResponseEntity.ok(createdCompetence);
-	}
-
-	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<CompetenceVolatile> updateCompetence(@PathVariable Long id, @RequestBody CompetenceVolatile competenceVolatile) {
-		log.info("modifier une compétence");
-		Competence updatedCompetence = iCompetenceService.updateCompetence(id, competenceVolatile);
-		return ResponseEntity.ok(competenceMapper.toCompetenceDto(updatedCompetence));
 	}
 
 	@DeleteMapping("/delete/{id}")

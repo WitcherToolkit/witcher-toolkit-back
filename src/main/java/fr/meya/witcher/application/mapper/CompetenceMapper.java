@@ -19,14 +19,13 @@ public class CompetenceMapper {
     // Convertir l'entité persistante en DTO
     public CompetenceVolatile toCompetenceDto(Competence competence) {
         return new CompetenceVolatile(
+                competence.getIdCompetence(),
                 competence.getNom(),
                 competence.getDescription(),
+                competence.isExclusive(),
                 competence.getPrerequis(),
                 competence.getSpecialisation(),
-                competence.isExclusive(),
-                caracteristiqueMapper.toCaracteristiqueDto(competence.getCaracteristique()),
-                competence.getTags(),
-                new ArrayList<>() // Liste vide pour ProfessionList
+                caracteristiqueMapper.toCaracteristiqueDto(competence.getCaracteristique())
         );
     }
 
@@ -38,7 +37,6 @@ public class CompetenceMapper {
         competence.setPrerequis(dto.getPrerequis());
         competence.setSpecialisation(dto.getSpecialisation());
         competence.setExclusive(dto.isExclusive());
-        competence.setTags(dto.getTags());
         return competence;
     }
 }

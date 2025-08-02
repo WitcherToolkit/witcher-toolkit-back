@@ -43,6 +43,18 @@ CREATE TABLE caracteristique(
     PRIMARY KEY(idCaracteristique)
 );
 
+CREATE TABLE competence(
+    idCompetence INT,
+    nom VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
+    isExclusive BOOLEAN NOT NULL,
+    specialisation VARCHAR(20),
+    prerequis VARCHAR(20),
+    idCaracteristique INT NOT NULL,
+    PRIMARY KEY(idCompetence),
+    FOREIGN KEY(idCaracteristique) REFERENCES caracteristique(idCaracteristique)
+);
+
 CREATE TABLE profilUtilisateur(
     idUser INT,
     pseudo VARCHAR(64) NOT NULL,
@@ -52,19 +64,6 @@ CREATE TABLE profilUtilisateur(
     PRIMARY KEY(idUser),
     UNIQUE(pseudo),
     UNIQUE(email)
-);
-
-CREATE TABLE competence(
-    idCompetence INT,
-    nom VARCHAR(50) NOT NULL,
-    tags VARCHAR(50),
-    description TEXT NOT NULL,
-    specialisation VARCHAR(20),
-    prerequis VARCHAR(20),
-    isExclusive BOOLEAN NOT NULL,
-    idCaracteristique INT NOT NULL,
-    PRIMARY KEY(idCompetence),
-    FOREIGN KEY(idCaracteristique) REFERENCES caracteristique(idCaracteristique)
 );
 
 CREATE TABLE profession(
