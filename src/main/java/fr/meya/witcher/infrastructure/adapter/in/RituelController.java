@@ -31,7 +31,7 @@ public class RituelController {
 
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<RituelVolatile> updateRituel(@PathVariable Long id, @RequestBody RituelVolatile rituelVolatile) {
-        log.info("Modification de la magie - ID : {} - Données : {}", id, rituelVolatile);
+        log.info("Modification du rituel - ID : {} - Données : {}", id, rituelVolatile);
         Rituel updatedRituel = iRituelService.updateRituel(id, rituelVolatile);
 
         return ResponseEntity.ok(rituelMapper.toRituelDto(updatedRituel));

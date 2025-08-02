@@ -12,13 +12,17 @@ import lombok.NoArgsConstructor;
 public class CaracteristiqueVolatile {
 
 	@NotBlank
+	private long idCaracteristique;
+
+	@NotBlank(message = "error.caracteristique.nom.required")
 	@Size( max = 16)
 	private String nom;
 
-	@NotBlank
+	@NotBlank(message = "error.caracteristique.code.required")
 	@Size( max = 6)
 	private String code;
 
-	@NotBlank
+	@NotBlank(message = "error.caracteristique.description.required")
 	private String description;
+
 }

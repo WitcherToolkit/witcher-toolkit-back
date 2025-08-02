@@ -2,6 +2,7 @@ package fr.meya.witcher.domain.model.persistent;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +24,11 @@ public class Caracteristique {
 	private long idCaracteristique;
 
 	@NotBlank
+	@Size( max = 16)
 	private String nom;
 
 	@NotBlank
+	@Size( max = 6)
 	private String code;
 
 	@NotBlank

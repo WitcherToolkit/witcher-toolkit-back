@@ -5,10 +5,13 @@ import fr.meya.witcher.common.utils.ObjectUtils;
 import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
+import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.ICaracteristiqueService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.ICaracteristiqueRepository;
 import fr.meya.witcher.message.response.CaracteristiqueVolatile;
+import fr.meya.witcher.message.response.MagieVolatile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class CaracteristiqueService implements ICaracteristiqueService {
 
@@ -35,15 +39,6 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 			throw new WitcherToolkitExeption("error.caracteristique.null");
 		}
 
-		Map<String, ValidationRule> fieldRules = Map.of(
-		"nom", new ValidationRule("error.caracteristique.nom.required"),
-		"code", new ValidationRule("error.caracteristique.code.required"),
-		"description", new ValidationRule("error.caracteristique.description.required")
-		);
-
-		validationUtils.validateWithRules(caracteristiqueVolatile, fieldRules);
-
-		// Si toutes les vérifications passent
 		return true;
 	}
 
@@ -74,13 +69,37 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 
 	@Override
 	public Caracteristique updateCaracteristique(Long idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile) {
+		log.info("Début de la méthode updateCaracteristique - ID : {} - Données reçues : {}", idCaracteristique, caracteristiqueVolatile);
+
+		isValid(caracteristiqueVolatile);
+		log.info("Validation des données réussie");
 
 		Caracteristique caracteristiqueExistant = caracteristiqueRepository.findById(idCaracteristique)
-				.orElseThrow(() -> new WitcherToolkitExeption("Caractéristique non trouvée"));
+				.orElseThrow(() -> new WitcherToolkitExeption("Caracteristique non trouvée"));
+		log.info("Caracteristique existante trouvée - Nom: {}, Code: {}, Description: {}",
+				caracteristiqueExistant.getNom(),
+				caracteristiqueExistant.getCode(),
+				caracteristiqueExistant.getDescription());
+
+		log.info("Avant copyProperties - Nom: {}, Code: {}, Description: {}",
+				caracteristiqueExistant.getNom(),
+				caracteristiqueExistant.getCode(),
+				caracteristiqueExistant.getDescription());
 
 		BeanUtils.copyProperties(caracteristiqueVolatile, caracteristiqueExistant, ObjectUtils.getNullPropertyNames(caracteristiqueVolatile));
 
-		return caracteristiqueRepository.save(caracteristiqueExistant);
+		log.info("Après copyProperties - Nom: {}, Code: {}, Description: {}",
+				caracteristiqueExistant.getNom(),
+				caracteristiqueExistant.getCode(),
+				caracteristiqueExistant.getDescription());
+
+		Caracteristique caracteristiqueSauvegardee = caracteristiqueRepository.save(caracteristiqueExistant);
+		log.info("Après sauvegarde - Nom: {}, Code: {}, Description: {}",
+				caracteristiqueSauvegardee.getNom(),
+				caracteristiqueSauvegardee.getCode(),
+				caracteristiqueSauvegardee.getDescription());
+
+		return caracteristiqueSauvegardee;
 	}
 
 	@Override

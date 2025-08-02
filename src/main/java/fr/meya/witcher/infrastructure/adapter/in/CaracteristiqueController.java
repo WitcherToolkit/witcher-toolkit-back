@@ -30,20 +30,20 @@ public class CaracteristiqueController {
 		return ResponseEntity.ok(result);
 	}
 
+	@PutMapping(value = "/update/{id}")
+	public ResponseEntity<CaracteristiqueVolatile> updateCaracteristique( @PathVariable Long id, @RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
+		log.info("Modification de la caracteristique - ID : {} - Données : {}", id, caracteristiqueVolatile);
+		Caracteristique updatedCaracteristique = iCaracteristiqueService.updateCaracteristique(id, caracteristiqueVolatile);
+
+		return ResponseEntity.ok(caracteristiqueMapper.toCaracteristiqueDto(updatedCaracteristique));
+	}
+
 	@PostMapping("/create")
 	public ResponseEntity<Caracteristique> createCaracteristique(@RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
 		log.info("Créer une caractéristique");
 
 		Caracteristique createdCaracteristique = iCaracteristiqueService.createCaracteristique(caracteristiqueVolatile);
 		return ResponseEntity.ok(createdCaracteristique);
-	}
-
-	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<CaracteristiqueVolatile> updateCaracteristique( @PathVariable Long id, @RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
-		log.info("modifier une caractéristique");
-
-		Caracteristique updatedCaracteristique = iCaracteristiqueService.updateCaracteristique(id, caracteristiqueVolatile);
-		return ResponseEntity.ok(caracteristiqueMapper.toCaracteristiqueDto(updatedCaracteristique));
 	}
 
 	@DeleteMapping("/delete/{id}")
