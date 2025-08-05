@@ -1,13 +1,12 @@
 package fr.meya.witcher.infrastructure.adapter.in;
 
 import fr.meya.witcher.application.mapper.RaceMapper;
+import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.domain.port.in.IRaceService;
 import fr.meya.witcher.message.response.RaceVolatile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +27,13 @@ public class RaceController {
         log.info("consultation race");
         List<RaceVolatile> result = iRaceService.getRaceList();
         return ResponseEntity.ok(result);
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<RaceVolatile> updateRace(@PathVariable Long id, @RequestBody RaceVolatile raceVolatile) {
+        log.info("Modification de la race - ID : {} - Données : {}", id, raceVolatile);
+        Race updatedRace = iRaceService.updateRace(id, raceVolatile);
+
+        return ResponseEntity.ok(raceMapper.toRaceDto(updatedRace));
     }
 }

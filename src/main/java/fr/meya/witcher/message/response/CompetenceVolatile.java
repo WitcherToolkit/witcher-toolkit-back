@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class CompetenceVolatile {
 
-	@NotBlank
 	private long idCompetence;
 
 	@NotBlank(message = "error.competence.nom.required")

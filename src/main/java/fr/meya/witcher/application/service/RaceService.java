@@ -4,11 +4,16 @@ import fr.meya.witcher.application.mapper.RaceMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
 import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
+import fr.meya.witcher.domain.model.persistent.Particularite;
 import fr.meya.witcher.domain.model.persistent.Race;
+import fr.meya.witcher.domain.model.persistent.ReputationWiki;
 import fr.meya.witcher.domain.port.in.IRaceService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.IRaceRepository;
+import fr.meya.witcher.message.response.ParticulariteVolatile;
 import fr.meya.witcher.message.response.RaceVolatile;
+import fr.meya.witcher.message.response.ReputationWikiVolatile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class RaceService implements IRaceService {
 
@@ -34,11 +40,6 @@ public class RaceService implements IRaceService {
         if (raceVolatile == null) {
             throw new IllegalArgumentException("error.race.null");
         }
-        Map<String, ValidationRule> fieldRules = Map.of(
-        "nom", new ValidationRule("error.race.nom.required")
-        );
-
-        validationUtils.validateWithRules(raceVolatile, fieldRules);
 
         return true;
     }
@@ -68,13 +69,27 @@ public class RaceService implements IRaceService {
 
     @Override
     public Race updateRace(Long idRace, RaceVolatile raceVolatile){
-        Race raceExistant = raceRepository.findById(idRace)
-                .orElseThrow(() -> new WitcherToolkitExeption("Caractéristique non trouvée"));
+        log.info("Début de la méthode updateRace - ID : {} - Données reçues : {}", idRace, raceVolatile);
 
-        BeanUtils.copyProperties(raceVolatile, raceExistant, ObjectUtils.getNullPropertyNames(raceVolatile));
+        isValid(raceVolatile);
+        log.info("Validation des données réussie");
+
+        Race raceExistant = raceRepository.findById(idRace)
+                .orElseThrow(() -> new WitcherToolkitExeption("Race non trouvée"));
+
+        raceMapper.updateRaceFromVolatile(raceExistant, raceVolatile);
+
+        log.info("Objet Race à sauvegarder : Race[id={}, nom={}, nbReputations={}, nbParticularites={}]",
+                raceExistant.getIdRace(),
+                raceExistant.getNom(),
+                raceExistant.getReputationWikiList().size(),
+                raceExistant.getParticulariteList().size());
 
         return raceRepository.save(raceExistant);
     }
+
+
+
 
     @Override
     public void deleteRace(Long idRace) {

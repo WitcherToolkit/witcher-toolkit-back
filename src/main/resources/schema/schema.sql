@@ -1,5 +1,5 @@
 CREATE TABLE magie(
-    idMagie INT,
+    idMagie INT AUTO_INCREMENT,
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE magie(
 );
 
 CREATE TABLE rituel(
-    idRituel INT,
+    idRituel INT AUTO_INCREMENT,
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE rituel(
 );
 
 CREATE TABLE envoutement(
-    idEnvoutement INT,
+    idEnvoutement INT AUTO_INCREMENT,
     nom VARCHAR(60) NOT NULL,
     cout VARCHAR(10) NOT NULL,
     effet TEXT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE envoutement(
 );
 
 CREATE TABLE caracteristique(
-    idCaracteristique INT,
+    idCaracteristique INT AUTO_INCREMENT,
     nom VARCHAR(16) NOT NULL,
     code VARCHAR(6) NOT NULL,
     description TEXT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE caracteristique(
 );
 
 CREATE TABLE competence(
-    idCompetence INT,
+    idCompetence INT AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
     isExclusive BOOLEAN NOT NULL,
@@ -55,8 +55,32 @@ CREATE TABLE competence(
     FOREIGN KEY(idCaracteristique) REFERENCES caracteristique(idCaracteristique)
 );
 
+CREATE TABLE race(
+     idRace INT AUTO_INCREMENT,
+     nom VARCHAR(50) NOT NULL,
+     PRIMARY KEY(idRace)
+);
+
+CREATE TABLE particularite(
+    idParticularite INT AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
+    idRace INT NOT NULL,
+    PRIMARY KEY(idParticularite),
+    FOREIGN KEY(idRace) REFERENCES race(idRace)
+);
+
+CREATE TABLE reputationWiki(
+    idReputationWiki INT AUTO_INCREMENT,
+    territoire VARCHAR(20) NOT NULL,
+    valeur VARCHAR(20) NOT NULL,
+    idRace INT NOT NULL,
+    PRIMARY KEY(idReputationWiki),
+    FOREIGN KEY(idRace) REFERENCES race(idRace)
+    );
+
 CREATE TABLE profilUtilisateur(
-    idUser INT,
+    idUser INT AUTO_INCREMENT,
     pseudo VARCHAR(64) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -67,7 +91,7 @@ CREATE TABLE profilUtilisateur(
 );
 
 CREATE TABLE profession(
-    idProfession INT,
+    idProfession INT AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
     vigueur INT,
@@ -80,7 +104,7 @@ CREATE TABLE profession(
 );
 
 CREATE TABLE inventaireWiki(
-    idInventaireWiki INT,
+    idInventaireWiki INT AUTO_INCREMENT,
     quantite INT NOT NULL DEFAULT 1,
     nom VARCHAR(50) NOT NULL,
     type VARCHAR(10),
@@ -91,32 +115,8 @@ CREATE TABLE inventaireWiki(
     FOREIGN KEY(idProfession) REFERENCES profession(idProfession)
 );
 
-CREATE TABLE race(
-    idRace INT,
-    nom VARCHAR(50) NOT NULL,
-    PRIMARY KEY(idRace)
-);
-
-CREATE TABLE reputationWiki(
-    idReputationWiki INT,
-    territoire VARCHAR(20) NOT NULL,
-    valeur VARCHAR(20) NOT NULL,
-    idRace INT NOT NULL,
-    PRIMARY KEY(idReputationWiki),
-    FOREIGN KEY(idRace) REFERENCES race(idRace)
-);
-
-CREATE TABLE particularite(
-    idParticularite INT,
-    nom VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL,
-    idRace INT NOT NULL,
-    PRIMARY KEY(idParticularite),
-    FOREIGN KEY(idRace) REFERENCES race(idRace)
-);
-
 CREATE TABLE competenceProfession(
-    idComptetenceProfession INT,
+    idComptetenceProfession INT AUTO_INCREMENT,
     idProfession INT,
     idCompetence INT NOT NULL,
     PRIMARY KEY(idComptetenceProfession, idProfession),
@@ -125,7 +125,7 @@ CREATE TABLE competenceProfession(
 );
 
 CREATE TABLE campagne(
-    idCampagne INT,
+    idCampagne INT AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     uId TEXT NOT NULL,
     password TEXT,
@@ -136,7 +136,7 @@ CREATE TABLE campagne(
 );
 
 CREATE TABLE personnage(
-    idPersonnage INT,
+    idPersonnage INT AUTO_INCREMENT,
     nomPersonnage VARCHAR(50),
     nomJoueur VARCHAR(50),
     nomImage VARCHAR(100),
@@ -161,7 +161,7 @@ CREATE TABLE personnage(
 );
 
 CREATE TABLE inventaire(
-    idEnvoutement INT,
+    idEnvoutement INT AUTO_INCREMENT,
     nom VARCHAR(60) NOT NULL,
     type VARCHAR(10),
     effet TEXT,
@@ -172,7 +172,7 @@ CREATE TABLE inventaire(
 );
 
 CREATE TABLE caracteristiquePersonnage(
-    idCaracteristiquePersonnage INT,
+    idCaracteristiquePersonnage INT AUTO_INCREMENT,
     valeurActuelle INT NOT NULL,
     valeurMax INT NOT NULL,
     idPersonnage INT NOT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE caracteristiquePersonnage(
 );
 
 CREATE TABLE reputationPersonnalisee(
-    idReputation INT,
+    idReputation INT AUTO_INCREMENT,
     territoire VARCHAR(20) NOT NULL,
     valeur VARCHAR(20) NOT NULL,
     idPersonnage INT NOT NULL,
@@ -192,7 +192,7 @@ CREATE TABLE reputationPersonnalisee(
 );
 
 CREATE TABLE competencePersonnage(
-    idCaracteristiquePersonnage INT,
+    idCaracteristiquePersonnage INT AUTO_INCREMENT,
     valeurActuelle INT NOT NULL,
     valeurMax INT NOT NULL,
     idPersonnage INT NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE competencePersonnage(
 );
 
 CREATE TABLE magiePersonnage(
-    idPersonnage INT,
+    idPersonnage INT AUTO_INCREMENT,
     idMagie INT,
     PRIMARY KEY(idPersonnage, idMagie),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
@@ -211,7 +211,7 @@ CREATE TABLE magiePersonnage(
 );
 
 CREATE TABLE rituelPersonnage(
-    idPersonnage INT,
+    idPersonnage INT AUTO_INCREMENT,
     idRituel INT,
     PRIMARY KEY(idPersonnage, idRituel),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),
@@ -219,7 +219,7 @@ CREATE TABLE rituelPersonnage(
 );
 
 CREATE TABLE envoutementPersonnage(
-    idPersonnage INT,
+    idPersonnage INT AUTO_INCREMENT,
     idEnvoutement INT,
     PRIMARY KEY(idPersonnage, idEnvoutement),
     FOREIGN KEY(idPersonnage) REFERENCES personnage(idPersonnage),

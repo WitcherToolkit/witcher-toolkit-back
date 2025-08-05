@@ -17,13 +17,13 @@ public class ReputationWiki {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "IDREPUTATIONWIKI")
-    private long idReputationWiki;
+    private Long idReputationWiki;
 
     private String territoire;
 
     private String valeur;
 
-    @ManyToOne
-    @JoinColumn(name = "IDRACE")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IDRACE", nullable = false)
     private Race race;
 }

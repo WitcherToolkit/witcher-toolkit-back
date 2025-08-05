@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MagieVolatile {
 
-    @NotNull
     private long idMagie;
 
     @NotBlank(message = "error.magie.nom.required")

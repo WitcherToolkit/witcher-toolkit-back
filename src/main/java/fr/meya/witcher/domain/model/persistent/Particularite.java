@@ -16,13 +16,13 @@ public class Particularite {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "IDPARTICULARITE")
-    private long idParticularite;
+    private Long idParticularite;
 
     private String nom;
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IDRACE", nullable = false)
     private Race race;
 

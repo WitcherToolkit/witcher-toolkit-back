@@ -76,22 +76,8 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 
 		Caracteristique caracteristiqueExistant = caracteristiqueRepository.findById(idCaracteristique)
 				.orElseThrow(() -> new WitcherToolkitExeption("Caracteristique non trouvée"));
-		log.info("Caracteristique existante trouvée - Nom: {}, Code: {}, Description: {}",
-				caracteristiqueExistant.getNom(),
-				caracteristiqueExistant.getCode(),
-				caracteristiqueExistant.getDescription());
-
-		log.info("Avant copyProperties - Nom: {}, Code: {}, Description: {}",
-				caracteristiqueExistant.getNom(),
-				caracteristiqueExistant.getCode(),
-				caracteristiqueExistant.getDescription());
 
 		BeanUtils.copyProperties(caracteristiqueVolatile, caracteristiqueExistant, ObjectUtils.getNullPropertyNames(caracteristiqueVolatile));
-
-		log.info("Après copyProperties - Nom: {}, Code: {}, Description: {}",
-				caracteristiqueExistant.getNom(),
-				caracteristiqueExistant.getCode(),
-				caracteristiqueExistant.getDescription());
 
 		Caracteristique caracteristiqueSauvegardee = caracteristiqueRepository.save(caracteristiqueExistant);
 		log.info("Après sauvegarde - Nom: {}, Code: {}, Description: {}",

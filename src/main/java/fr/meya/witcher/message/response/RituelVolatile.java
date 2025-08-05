@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RituelVolatile {
-    @NotBlank
+
     private long idRituel;
 
     @NotBlank(message = "error.rituel.nom.required")
