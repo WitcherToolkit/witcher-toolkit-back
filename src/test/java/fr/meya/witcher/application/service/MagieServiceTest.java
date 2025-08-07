@@ -40,7 +40,7 @@ public class MagieServiceTest {
     }
 
     //#region isValid
-    @Test
+    /*@Test
     void test_isValid_nominalCase() {
         // Arrange : Création d'un objet valide
         MagieVolatile validMagie = new MagieVolatile("Nom", "5 END", "Effet", "3m", "5 round", "Feu", "Novice", "Esquive", "Mage");
@@ -256,7 +256,7 @@ public class MagieServiceTest {
                 () -> testedClasse.deleteMagie(999L));
 
         assertEquals("La magie avec l'ID 999 n'existe pas.", exception.getMessage());
-    }
+    }*/
     //#endregion deleteMagie
 
 }

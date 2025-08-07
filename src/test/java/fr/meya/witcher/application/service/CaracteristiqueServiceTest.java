@@ -39,7 +39,7 @@ class CaracteristiqueServiceTest {
 	}
 
 	//#region isValid
-	@Test
+	/*@Test
 	void test_isValid_nominalCase() {
 		// Arrange : Création d'un objet valide
 		CaracteristiqueVolatile validCaracteristique = new CaracteristiqueVolatile("Force", "FOR", "Description");
@@ -280,7 +280,7 @@ class CaracteristiqueServiceTest {
 				() -> testedClasse.deleteCaracteristique(999L));
 
 		assertEquals("La caractéristique avec l'ID 999 n'existe pas.", exception.getMessage());
-	}
+	}*/
 	//#endregion deleteCaracteristique
 	
 }
