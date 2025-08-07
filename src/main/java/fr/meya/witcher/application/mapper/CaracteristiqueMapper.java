@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CaracteristiqueMapper {
 
-    // Convertir l'entité persistante en DTO
+    // Convertir l'entitÃ© persistante en DTO
     public CaracteristiqueVolatile toCaracteristiqueDto(Caracteristique caracteristique) {
         return new CaracteristiqueVolatile(
                 caracteristique.getIdCaracteristique(),
@@ -17,7 +17,7 @@ public class CaracteristiqueMapper {
         );
     }
 
-    // Convertir un DTO en entité persistante
+    // Convertir un DTO en entitÃ© persistante
     public Caracteristique toCaracteristiqueEntity(CaracteristiqueVolatile dto) {
         Caracteristique caracteristique = new Caracteristique();
         caracteristique.setIdCaracteristique(dto.getIdCaracteristique());

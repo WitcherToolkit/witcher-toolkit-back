@@ -20,7 +20,7 @@ public class Caracteristique {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name = "IDCARACTERISTIQUE")
+	@Column(name = "id_caracteristique")
 	private long idCaracteristique;
 
 	@NotBlank
