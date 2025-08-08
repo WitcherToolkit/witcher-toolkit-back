@@ -5,7 +5,7 @@ import fr.meya.witcher.message.response.ProfessionVolatile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {CompetenceMapper.class, InventaireWikiMapper.class})
+@Mapper(componentModel = "spring", uses = {CompetenceProfessionMapper.class, InventaireWikiMapper.class})
 public interface ProfessionMapper {
 
     @Mapping(target = "competenceList", source = "competenceProfessionList")

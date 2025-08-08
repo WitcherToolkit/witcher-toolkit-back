@@ -12,6 +12,7 @@ public class CompetenceProfessionVolatile {
 
     private CompetenceVolatile competence;
 
-    private ProfessionVolatile profession;
+    // ne pas mettre a créer une dépendence cyclique :
+    // private ProfessionVolatile profession;
 
 }
