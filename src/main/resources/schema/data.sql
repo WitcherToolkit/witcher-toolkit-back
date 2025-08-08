@@ -1,6 +1,6 @@
 
 -- Ajout des Caractéristiques
-INSERT INTO caracteristique (idCaracteristique, nom, code, description) VALUES
+INSERT INTO caracteristique (id_caracteristique, nom, code, description) VALUES
     (1, 'Intelligence', 'INT', 'Permet de résoudre des énigmes, de réaliser des expériences scientifiques, de construire des raisonnements logiques…'),
     (2, 'Réflexes', 'RÉF', 'Sert à combattre, esquiver et effectuer des actions nécessitant des réactions rapides et des gestes précis.'),
     (3, 'Dextérité', 'DEX', 'Pour les attaques à distance et tout ce qui implique de faire appel à l''équilibre et à la coordination œil-main.'),
@@ -21,10 +21,10 @@ INSERT INTO caracteristique (idCaracteristique, nom, code, description) VALUES
     (18, 'Pieds', 'Pieds', 'Cette caractéristique indique le nombre de dégâts non létaux que vous infligez avec un coup de poing.'),
     (19, 'Poings', 'Poings', 'Cette caractéristique indique le nombre de dégâts non létaux que vous infligez avec un coup de pied.');
 
-ALTER TABLE caracteristique ALTER COLUMN idCaracteristique RESTART WITH 20;
+-- ALTER TABLE caracteristique ALTER COLUMN id_caracteristique RESTART WITH 20;
 
 -- Ajout de Compétences
-INSERT INTO competence (idCompetence, nom, description, specialisation, prerequis, isExclusive, idCaracteristique) VALUES
+INSERT INTO competence (id_competence, nom, description, is_exclusive, specialisation, prerequis, id_caracteristique) VALUES
     (1, 'Connaissance de la rue', 'Cette compétence ne concerne pas la géographie urbaine à proprement parler, mais plutôt le fonctionnement de cet environnement. Avec une base de 10 vous en savez suffisamment pour éviter les voyous et vous rendre dans les quartiers les plus sûrs de la ville. Avec une base de 13 vous pouvez en général déterminer quelle faction exerce son influence sur un quartier donné et expliquer la raison de cette domination. Avec une base de 16 vous pouvez récolter une quantité d’informations impressionnantes sur une zone rien qu’en l’observant, mais aussi identifier les personnalités importantes de la ville et leurs relations. Avec une base de 20 vous évaluez la situation en un clin d’œil. Vous en savez assez pour compter parmi les habitants.', '', '', false, 1 ),
     (2, 'Connaissance des monstres', 'La somme d’information que vous possédez à propos des monstres. Avec une base de 10 vous êtes capable de différencier un nekker d’une goule. Avec une base de 13 vous savez classer les monstres au sein des diverses catégories générales. Avec une base de 16 vous êtes au fait des différentes forces et faiblesses que possèdent les créatures les plus communes. Avec une base de 20 il est rare que vous rencontriez des monstres que vous seriez incapable d’analyser en quelques secondes, un exploit dont même un sorceleur serait fier.','Criminel', 'N/A', false, 1),
     (3, 'Déduction', 'La capacité à formuler des conclusions grâce aux indices dont vous disposez. Avec une base de 10 vos intuitions vous mettent en général sur la bonne piste. Avec une base de 13 vos ressentiments sont presque toujours fondés, vous pouvez même les étayer à l’aide de raisonnements logiques. Avec une base de 16 il vous suffit de quelques indices pour avoir ce qui s’est passé ou ce qui pourrait advenir. Avec une base de 20 vous ne vous trompez presque jamais dans vos déductions. Vous êtes capables de trouver des réponses même lorsque vous disposez de preuves partielles.','Criminel', 'Connaissance', false, 1 ),
@@ -36,25 +36,25 @@ INSERT INTO competence (idCompetence, nom, description, specialisation, prerequi
 	(9, 'Survie', 'La capacité à dispenser son savoir. Vous n’êtes pas tenu de maîtriser cette capacité pour en enseigner d’autres, mais elle vous facilitera la tâche. Avec une base de 10 vous savez expliquer du début à la fin un procédé simple à votre élève, mais sans que ce dernier saisisse à coup sûr tous les tenants et aboutissants de votre cheminement. Avec une base de 13 vous pouvez enseigner les bases d’une compétence à un élève attentif sans rencontrer de problème particulier. Avec une base de 16 si vous disposez de suffisamment de temps, vous pouvez apprendre des procédés plus complexes à vos étudiants, même s’ils ne sont guère attentifs. Avec une base de 20 vous êtes un maître pédagogue capable d’intéresser n’importe qui. Puisque vos leçons font toujours mouche du premier coup, vous avez rarement besoin de vous répéter.' , '', '', false, 2),
 	(10, 'Tactique', 'La capacité à dispenser son savoir. Vous n’êtes pas tenu de maîtriser cette capacité pour en enseigner d’autres, mais elle vous facilitera la tâche. Avec une base de 10 vous savez expliquer du début à la fin un procédé simple à votre élève, mais sans que ce dernier saisisse à coup sûr tous les tenants et aboutissants de votre cheminement. Avec une base de 13 vous pouvez enseigner les bases d’une compétence à un élève attentif sans rencontrer de problème particulier. Avec une base de 16 si vous disposez de suffisamment de temps, vous pouvez apprendre des procédés plus complexes à vos étudiants, même s’ils ne sont guère attentifs. Avec une base de 20 vous êtes un maître pédagogue capable d’intéresser n’importe qui. Puisque vos leçons font toujours mouche du premier coup, vous avez rarement besoin de vous répéter.' , '', '', false, 2);
 
-ALTER TABLE competence ALTER COLUMN idCompetence RESTART WITH 11;
+-- ALTER TABLE competence ALTER COLUMN id_competence RESTART WITH 11;
 
 -- Ajout de Professions
-INSERT INTO profession (idProfession, nom, description, vigueur, maxSort, maxRituel, MAXENVOUTEMENT, maxInvocation) VALUES
-    (1, 'Artisan', 'Un artisan talentueux peut effectuer des réparations de fortune sur une armure ou une arme pour qu’elle reste utilisable le temps du combat. Il pourra par exemple nouer deux parties d’une corde d’arc rompue, affûter la lame d’une épée ou clouer une plaque de métal sur un bouclier fendu. L’artisan consacre un tour à cette action. Il effectue alors un jet de rafistolage dont le SD est égal au SD de fabrication de l’objet -3. S’il réussit, l’armure brisée regagne la moitié de son PA total, ou la moitié de sa fiabilité dans le cas d’une épée ou d’un bouclier. Tant qu’elle n’est pas correctement réparée à l’aide d’une forge, une arme n’inflige que la moitié des dégâts normaux.', 0, 0, 0, 0, 0),
-    (2, 'Barde', 'Le barde est un compagnon des plus précieux, surtout quand le groupe commence à manquer d''argent. Il peut réaliser un jet de prestation et se donner en spectacle sur la place de la ville durant une heure. Le résultat du jet correspond au montant qu’il a récolté en se produisant dans la rue. Un échec critique peut diminuer le résultat du jet, et si le total devient négatif, cela signifie que la barde n’a pas réussi à recueillir une seule pièce. Il se fait huer par les habitants pour sa piètre performance et subit un malus de -2 en charisme lorsqu’il interagit avec les citadins jusqu''à la fin de la journée.', 0, 0, 0, 0, 0),
-    (3, 'Criminel', 'Qu''ils soient assassins, voleurs faussaires ou contrebandiers, tous les hors-la-loi ont en commun une paranoïa constante qui leur permet d’éviter les problèmes. Lorsqu’un criminel arrive à moins de 10m d''un piège (ce qui inclut les pièges expérimentaux, les chausses-trappes des hommes d''armes et les embuscades), il effectue immédiatement un jet de paranoïa exercée dont le SD est égal à celui requis pour déceler le piège, au résultat du jet de furtivité du groupe posté en embuscade ou au SD fixé par le MJ. Même s''il n''arrive pas à repérer le piège, il sentira au fond de lui-même que quelque-chose ne va pas.', 0, 0, 0, 0, 0),
-    (4, 'Docteur', 'N’’importe qui est capable d’’appliquer un onguent ou de bander une blessure, mais seul un docteur a reçu la formation nécessaire pour accomplir des actes chirurgicaux d’’une grande complexité. Un docteur avec mains thérapeutiques est le seul personnage capable de soigner une blessure critique. Pour soigner une blessure critique, il doit réussir un nombre de jets de mains thérapeutiques qui dépend de la gravité de cette blessure. Le SD du jet est aussi basé sur ce paramètre. Les mains thérapeutiques peuvent aussi servir lors des actions de premiers soins.', 0, 0, 0, 0, 0),
-    (5, 'Homme d''arme', 'Les véritables hommes d’’armes issus, par exemple, des Stries Bleues témériennes ou de la brigade Imprera de Nilfgaard sont des vétérans endurcis qui n’’abandonnent jamais et ne se rendent pas. Lorsque les points de santé d’’un homme d’’armes tombent à 0 ou moins, il peut effectuer un jet de dur à cuire dont le SD est égal au double de son score de santé négatif. S’’il échoue, il entre en état de mort imminente selon les règles habituelles. S’’il le réussit, il peut continuer à se battre comme s’’il avait atteint son seuil de blessures. Lorsqu’’il subit des dégâts, il réalise un nouveau jet dont le SD est calculé selon son nouveau score de santé.', 0, 0, 0, 0, 0),
-    (6,'Mage','Pour devenir pleinement un mage, une personne sensible à la magie doit apprendre les bases de cet art au sein d’’une académie de magie. Un mage peut réaliser un jet d’exercice de la magie dès qu’il se trouve face à un phénomène magique ou un sort inconnu, ou encore lorsqu’il analyse une théorie de la magie. Le SD du jet est fixé par le MJ. En cas de réussite, le mage apprend tout ce qu’’il y a à savoir sur le phénomène en question. Un jet d’exercice de la magie peut aussi servir à détecter la magie en cours d’utilisation ou les spectres.', 5, 5, 11, 1, 0),
-    (7, 'Marchand', 'Un marchand ordinaire gagne sa vie grâce à son échope qui attire les clients alentours. En revanche, un commerçant itinérant part à la rencontre de ses clients. Il parcourt les routes du monde entier, ce qui lui permet d’’en apprendre beaucoup sur les peuples qu’’il croise. Un marchand peut effectuer un jet de grand voyageur chaque fois qu’’il désire connaître une anecdote concernant un objet, une culture ou une région particulière. Le MJ fixe le SD du jet. Si ce dernier réussit, le marchand se rappelle la réponse à la question posée grâce aux souvenirs datant de son dernier voyage dans le lieu concerné.', 0, 0, 0, 0, 0),
-    (8, 'Prêtre', 'Les temples du monde entier sont bien souvent des lieux chaleureux qui aident les fidèles et accueillent les nouveaux convertis. Un prêtre peut réaliser un jet d’initié des dieux dont le SD est fixé par les MJ dans les églises de cette religion pour obtenir un hébergement gratuit, des soins et d’autres services, à la discrétion du MJ. L’initiation des dieux fonctionne aussi auprès des croyants de la même confession, bien qu’ils aient moins à offrir qu’un temple. N’oubliez pas qu’initié des dieux ne fonctionne jamais avec les membres d’une autre religion.', 2, 0, 2, 2, 2),
-    (9, 'Sorceleur', 'Les sorceleurs passent les premières années de leur vie confinés entre les murs de leur forteresse, où ils étudient d’énormes tomes poussiéreux et suivent un entraînement martial démentiel. De nombreux savants ont démontré que les meilleures armes d’un sorceleur étaient sa connaissance des monstres ainsi que ses capacités d’’adaptation. Il peut donc diminuer les pénalités provoquées par un environnement hostile ou un relief accidenté d’’une valeur égale à la moitié de son score de formation de sorceleur (minimum 1). Vous pouvez également utiliser formation de sorceleur dans les situations requérant l’’usage de la compétence connaissance des monstres.', 2, 0, 0, 0, 0),
-    (10, 'Noble', 'Qu’’il soit noble de naissance ou qu’’il ait acquis ses titres en accomplissant des faits d’’armes, l’’aristocrate affiche son statut privilégié afin que nul ne l’ignore. Les paysans peuvent bien maudire les familles nobles et les ridiculiser à l’abri dans leurs chaumières, mais aucun d’’entre eux n’’oserait les insulter en face. Un noble ajoute son niveau de prestige à son score de réputation lorsqu’’il se trouve sur sa terre natale ou dans un pays allié. Lorsqu’’il se rend dans un territoire ouvertement en guerre avec son pays d’’origine ou qui conserve une position de neutralité, il n’’ajoute que la moitié de son niveau de prestige.', 0, 0, 0, 0, 0);
+INSERT INTO profession (id_profession, nom, description, vigueur, nb_objet, max_sort, max_rituel, max_envoutement, max_invocation) VALUES
+    (1, 'Artisan', 'Un artisan talentueux peut effectuer des réparations de fortune sur une armure ou une arme pour qu’elle reste utilisable le temps du combat. Il pourra par exemple nouer deux parties d’une corde d’arc rompue, affûter la lame d’une épée ou clouer une plaque de métal sur un bouclier fendu. L’artisan consacre un tour à cette action. Il effectue alors un jet de rafistolage dont le SD est égal au SD de fabrication de l’objet -3. S’il réussit, l’armure brisée regagne la moitié de son PA total, ou la moitié de sa fiabilité dans le cas d’une épée ou d’un bouclier. Tant qu’elle n’est pas correctement réparée à l’aide d’une forge, une arme n’inflige que la moitié des dégâts normaux.', 0, 0, 0, 0, 0, 0),
+    (2, 'Barde', 'Le barde est un compagnon des plus précieux, surtout quand le groupe commence à manquer d''argent. Il peut réaliser un jet de prestation et se donner en spectacle sur la place de la ville durant une heure. Le résultat du jet correspond au montant qu’il a récolté en se produisant dans la rue. Un échec critique peut diminuer le résultat du jet, et si le total devient négatif, cela signifie que la barde n’a pas réussi à recueillir une seule pièce. Il se fait huer par les habitants pour sa piètre performance et subit un malus de -2 en charisme lorsqu’il interagit avec les citadins jusqu''à la fin de la journée.', 0, 0, 0, 0, 0, 0),
+    (3, 'Criminel', 'Qu''ils soient assassins, voleurs faussaires ou contrebandiers, tous les hors-la-loi ont en commun une paranoïa constante qui leur permet d’éviter les problèmes. Lorsqu’un criminel arrive à moins de 10m d''un piège (ce qui inclut les pièges expérimentaux, les chausses-trappes des hommes d''armes et les embuscades), il effectue immédiatement un jet de paranoïa exercée dont le SD est égal à celui requis pour déceler le piège, au résultat du jet de furtivité du groupe posté en embuscade ou au SD fixé par le MJ. Même s''il n''arrive pas à repérer le piège, il sentira au fond de lui-même que quelque-chose ne va pas.', 0, 0, 0, 0, 0, 0),
+    (4, 'Docteur', 'N’’importe qui est capable d’’appliquer un onguent ou de bander une blessure, mais seul un docteur a reçu la formation nécessaire pour accomplir des actes chirurgicaux d’’une grande complexité. Un docteur avec mains thérapeutiques est le seul personnage capable de soigner une blessure critique. Pour soigner une blessure critique, il doit réussir un nombre de jets de mains thérapeutiques qui dépend de la gravité de cette blessure. Le SD du jet est aussi basé sur ce paramètre. Les mains thérapeutiques peuvent aussi servir lors des actions de premiers soins.', 0, 0, 0, 0, 0, 0 ),
+    (5, 'Homme d''arme', 'Les véritables hommes d’’armes issus, par exemple, des Stries Bleues témériennes ou de la brigade Imprera de Nilfgaard sont des vétérans endurcis qui n’’abandonnent jamais et ne se rendent pas. Lorsque les points de santé d’’un homme d’’armes tombent à 0 ou moins, il peut effectuer un jet de dur à cuire dont le SD est égal au double de son score de santé négatif. S’’il échoue, il entre en état de mort imminente selon les règles habituelles. S’’il le réussit, il peut continuer à se battre comme s’’il avait atteint son seuil de blessures. Lorsqu’’il subit des dégâts, il réalise un nouveau jet dont le SD est calculé selon son nouveau score de santé.', 0, 0, 0, 0, 0, 0),
+    (6,'Mage','Pour devenir pleinement un mage, une personne sensible à la magie doit apprendre les bases de cet art au sein d’’une académie de magie. Un mage peut réaliser un jet d’exercice de la magie dès qu’il se trouve face à un phénomène magique ou un sort inconnu, ou encore lorsqu’il analyse une théorie de la magie. Le SD du jet est fixé par le MJ. En cas de réussite, le mage apprend tout ce qu’’il y a à savoir sur le phénomène en question. Un jet d’exercice de la magie peut aussi servir à détecter la magie en cours d’utilisation ou les spectres.', 5, 0, 5, 1, 1, 0),
+    (7, 'Marchand', 'Un marchand ordinaire gagne sa vie grâce à son échope qui attire les clients alentours. En revanche, un commerçant itinérant part à la rencontre de ses clients. Il parcourt les routes du monde entier, ce qui lui permet d’’en apprendre beaucoup sur les peuples qu’’il croise. Un marchand peut effectuer un jet de grand voyageur chaque fois qu’’il désire connaître une anecdote concernant un objet, une culture ou une région particulière. Le MJ fixe le SD du jet. Si ce dernier réussit, le marchand se rappelle la réponse à la question posée grâce aux souvenirs datant de son dernier voyage dans le lieu concerné.', 0, 0, 0, 0, 0, 0),
+    (8, 'Prêtre', 'Les temples du monde entier sont bien souvent des lieux chaleureux qui aident les fidèles et accueillent les nouveaux convertis. Un prêtre peut réaliser un jet d’initié des dieux dont le SD est fixé par les MJ dans les églises de cette religion pour obtenir un hébergement gratuit, des soins et d’autres services, à la discrétion du MJ. L’initiation des dieux fonctionne aussi auprès des croyants de la même confession, bien qu’ils aient moins à offrir qu’un temple. N’oubliez pas qu’initié des dieux ne fonctionne jamais avec les membres d’une autre religion.', 2, 0,0,  2, 2, 2),
+    (9, 'Sorceleur', 'Les sorceleurs passent les premières années de leur vie confinés entre les murs de leur forteresse, où ils étudient d’énormes tomes poussiéreux et suivent un entraînement martial démentiel. De nombreux savants ont démontré que les meilleures armes d’un sorceleur étaient sa connaissance des monstres ainsi que ses capacités d’’adaptation. Il peut donc diminuer les pénalités provoquées par un environnement hostile ou un relief accidenté d’’une valeur égale à la moitié de son score de formation de sorceleur (minimum 1). Vous pouvez également utiliser formation de sorceleur dans les situations requérant l’’usage de la compétence connaissance des monstres.', 2, 0, 0, 0, 0, 0),
+    (10, 'Noble', 'Qu’’il soit noble de naissance ou qu’’il ait acquis ses titres en accomplissant des faits d’’armes, l’’aristocrate affiche son statut privilégié afin que nul ne l’ignore. Les paysans peuvent bien maudire les familles nobles et les ridiculiser à l’abri dans leurs chaumières, mais aucun d’’entre eux n’’oserait les insulter en face. Un noble ajoute son niveau de prestige à son score de réputation lorsqu’’il se trouve sur sa terre natale ou dans un pays allié. Lorsqu’’il se rend dans un territoire ouvertement en guerre avec son pays d’’origine ou qui conserve une position de neutralité, il n’’ajoute que la moitié de son niveau de prestige.', 0, 0, 0, 0, 0, 0);
 
-ALTER TABLE profession ALTER COLUMN idProfession RESTART WITH 11;
+-- ALTER TABLE profession ALTER COLUMN idProfession RESTART WITH 11;
 
 -- Ajout de l'inventaire wiki
-INSERT INTO inventaireWiki (idInventaireWiki, quantite, nom, type, effet, isSpecial, idProfession) VALUES
+INSERT INTO inventaire_wiki (id_inventaire_wiki, quantite, nom, type, effet, is_special, id_profession) VALUES
     ( 1, '50', 'couronnes de composants', '', '', FALSE, 1),
     ( 2, '1', 'ensemble d''alchimie', '', '', FALSE, 1),
     ( 3, '1', 'épée longue de fer', 'arme', '', FALSE, 1),
@@ -152,44 +152,42 @@ INSERT INTO inventaireWiki (idInventaireWiki, quantite, nom, type, effet, isSpec
     ( 96, '1', 'trousse de maquillage', '', '', FALSE, 10),
     ( 97, '1', 'vêtements à la mode', '', '', FALSE, 10);
 
-ALTER TABLE inventaireWiki ALTER COLUMN idInventaireWiki RESTART WITH 98;
+-- ALTER TABLE inventaireWiki ALTER COLUMN id_inventaire_wiki RESTART WITH 98;
 
-INSERT INTO competenceProfession(idComptetenceProfession, idProfession, idCompetence) VALUES
-    (1,1,1),
-    (2,1,2),
-    (3,1,3),
-    (4,2,4),
-    (5,2,5),
-    (6,2,6),
-    (7,3,7),
-    (8,3,8),
-    (9,3,9),
-    (10,4,10),
-    (11,4,1),
-    (12,4,2),
-    (13,5,3),
-    (14,5,4),
-    (15,5,5),
-    (16,6,6),
-    (17,6,7),
-    (18,6,8),
-    (19,7,9),
-    (20,7,10),
-    (21,7,1),
-    (22,8,2),
-    (23,8,3),
-    (24,8,4),
-    (25,9,5),
-    (26,9,6),
-    (27,9,7),
-    (28,10,8),
-    (29,10,9),
-    (30,10,10);
-
-ALTER TABLE competenceProfession ALTER COLUMN idComptetenceProfession RESTART WITH 30;
+INSERT INTO competence_profession (id_profession, id_competence) VALUES
+    (1,1),
+    (1,2),
+    (1,3),
+    (2,4),
+    (2,5),
+    (2,6),
+    (3,7),
+    (3,8),
+    (3,9),
+    (4,10),
+    (4,1),
+    (4,2),
+    (5,3),
+    (5,4),
+    (5,5),
+    (6,6),
+    (6,7),
+    (6,8),
+    (7,9),
+    (7,10),
+    (7,1),
+    (8,2),
+    (8,3),
+    (8,4),
+    (9,5),
+    (9,6),
+    (9,7),
+    (10,8),
+    (10,9),
+    (10,10);
 
 -- Ajout d'envoûtement
-INSERT INTO envoutement (idEnvoutement, nom, cout, effet, prerequis, danger)
+INSERT INTO envoutement (id_envoutement, nom, cout, effet, prerequis, danger)
 VALUES
     (1, 'L''envoûtement des Ombres', '4', 'L''envoûtement des ombres crée des murmures dans les ténèbres et des silhouettes dans les coins. Le sujet doit faire des jets de vigilance au hasard avec un SD non spécifié, apercevant toujours quelque chose ou quelqu''un du coin de l’œil. Les jets de vigilance ne sont jamais pour une menace réelle, juste des visions.  Le sujet doit apporter un bol d''eau pure, une branche de myrte blanc et une bouteille d''encre dans une clairière lors d’une lune croissante. Quand la lune est au plus haut, le sujet doit verser l’encre dans l’eau, tremper la branche dans le mélange et asperger des gouttelettes en cercle autour de lui tout en retenant sa respiration.', 'Un bol d''eau pure, une branche de myrte blanc, une bouteille d''encre, une clairière, une lune croissante', 'Faible'),
     (2, 'La démangeaison éternelle', '4', 'La démangeaison éternelle fait pousser des pustules qui grattent et brûlent sur les parties intimes du sujet. La démangeaison n''inflige pas de dégâts, mais dérange constamment, ce qui inflige un malus de -1 à toutes les tâches. En plus du -1, la cible a un malus de -5 en séduction une fois dans "la chambre à coucher".    Le sujet doit rassembler 1 dose de sclérodermie, de petite ciguë et de bryone. Il doit allumer un feu de camp et faire un bouquet avec les herbes. Quand tout est prêt, le sujet doit embraser les herbes et effriter les cendres chaudes sur la zone atteinte tout en récitant une série de mots magiques.', '1 dose de sclérodermie, 1 dose de petite ciguë, 1 dose de bryone, un feu de camp', 'Faible'),
@@ -198,10 +196,10 @@ VALUES
     (5, 'Le baiser de Pesta', '12', 'Le baiser de Pesta ôte au sujet sa capacité de combattre les maladies et sa résistance à la nausée. À chaque fois que le sujet est en contact avec une personne malade, il a 75% de chance d’attraper la maladie. À chaque fois que il sent quelque chose de nauséabond, même légèrement, il doit réussir un jet de résilience avec un SD 16 ou être nauséeux.', '3 doses d''argile alluviale, 1 dose de charbon, 3 doses de résine, 1 dose de poussière imprégnée', 'Élevé'),
     (6, 'L''envoûtement de la bête', '12', 'L''envoûtement de la bête rend la cible répugnante aux yeux des animaux et des bêtes. Dès que la cible s’approche d’un animal à moins de 10m, ce dernier réagira mal au sujet, ce qui lui inflige un malus de -3 en survie en ce qui concerne le dressage des animaux. À chaque fois que le sujet s’approche d’un animal à moins de 10m, il y a 50% de chance pour que l’animal attaque.', 'Un petit animal vivant, 2 doses de gui, une dose de phosphore, 2 doses d''œil de corbeau, 3 doses de racine de mandragore', 'Élevé');
 
-ALTER TABLE envoutement ALTER COLUMN idEnvoutement RESTART WITH 7;
+-- ALTER TABLE envoutement ALTER COLUMN id_envoutement RESTART WITH 7;
 
 -- Ajout de la Magie
-INSERT INTO magie (idMagie, nom, cout, effet, portee, duree, nature, niveau, contre, type) VALUES
+INSERT INTO magie (id_magie, nom, cout, effet, portee, duree, nature, niveau, contre, type) VALUES
     ('1', 'Compas magique', '3 END', 'Le compas magique permet de déterminer instantanément la direction vers un endroit où vous êtes déjà allée auparavant.inon, le sort indique le nord.', 'Personnelle', '1D6 heure', 'Mixte', 'Sorts de novice', '', 'Sort'),
     ('2', 'Dissipation', 'Variable', 'Dissipation met fin à un sort, un rituel ou une malédiction en cours dans sa portée. Ce sort permet d’abbuler une magie qui dure et peut être utilisé comme une action défensive pour bloquer une attaque magique avec ou sans composants. Pour annuler un effet magique, vous devez dépenser la moitié des points de Résilience utilisés par le lanceur et réussir un jet d’Incantation en opposition à son jet pour lancer le sort.', '10 m', 'Instantané', 'Mixte', 'Sorts de novice', 'Incantation', 'Sort'),
     ('3', 'Glamour', '5 END', 'Glamour vous permet de mettre une illusion autour de vous qui vous fait paraître éblouissant. Ce sort vous donne un bonus de +3 en Séduction, Charisme et Commandement.', 'Personnelle', '1D6 heure', 'Mixte', 'Sorts de novice', '', 'Sort'),
@@ -268,10 +266,10 @@ INSERT INTO magie (idMagie, nom, cout, effet, portee, duree, nature, niveau, con
     ('64', 'Séparation des eaux', '25 END', 'Donut gummies chocolate topping brownie apple pie. Chupa chups wafer biscuit marshmallow dessert macaroon chocolate bear claw. Fruitcake jelly-o apple pie bonbon macaroon sweet roll ice cream lemon drops chupa chups.', 'Rayon de 10 m', 'Actif (6 END)', 'Eau', 'Sorts de maître', '', 'Invocation'),
     ('65', 'Tryferi Gaeaf', '22 END', 'Donut gummies chocolate topping brownie apple pie. Chupa chups wafer biscuit marshmallow dessert macaroon chocolate bear claw. Fruitcake jelly-o apple pie bonbon macaroon sweet roll ice cream lemon drops chupa chups.', '20 m', '1D10 rounds', 'Eau', 'Sorts de maître', 'Esquive ou Blocage', 'Invocation');
 
-ALTER TABLE magie ALTER COLUMN idMagie RESTART WITH 66;
+-- ALTER TABLE magie ALTER COLUMN id_magie RESTART WITH 66;
 
 -- Ajout des Rituels
-INSERT INTO rituel (idRituel, nom, cout, effet, tempsPreparation, sd, duree, composant, niveau)VALUES
+INSERT INTO rituel (id_rituel, nom, cout, effet, temps_preparation, sd, duree, composant, niveau)VALUES
    (1, 'Hydromancie', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité d''eau ou un bol d''eau, 1 éclar de lune, 1 goutte de sang', 'novice'),
    (2, 'Pyromancie', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité de feu ou un bol de feu, 1 éclar de lune, 1 goutte de sang', 'novice'),
    (3, 'Terre et Pierre', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité de terre ou un bol de terre, 1 éclar de lune, 1 goutte de sang', 'novice'),
@@ -283,20 +281,20 @@ INSERT INTO rituel (idRituel, nom, cout, effet, tempsPreparation, sd, duree, com
    (9, 'Feu et Air', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité de feu et d''air ou un bol de feu et d''air, 1 éclar de lune, 1 goutte de sang', 'Maître'),
    (10, 'Eau et Air', '5 END', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5 rounds', '15 (18)', 'actif (2END)', 'une petite quantité d''eau et d''air ou un bol d''eau et d''air, 1 éclar de lune, 1 goutte de sang', 'Maître');
 
-ALTER TABLE rituel ALTER COLUMN idRituel RESTART WITH 11;
+-- ALTER TABLE rituel ALTER COLUMN id_rituel RESTART WITH 11;
 
 -- Ajout des Races
-INSERT INTO race (idRace, nom) VALUES
+INSERT INTO race (id_race, nom) VALUES
     (1, 'Humain'),
     (2, 'Nain'),
     (3, 'Elfe'),
     (4, 'Halfelin'),
     (5, 'Sorceleur');
 
-ALTER TABLE race ALTER COLUMN idRace RESTART WITH 6;
+-- ALTER TABLE race ALTER COLUMN id_race RESTART WITH 6;
 
 -- Ajout des particularités
-INSERT INTO particularite (idParticularite, nom, description, idRace) VALUES
+INSERT INTO particularite (id_particularite, nom, description, id_race) VALUES
 (1, 'Sens accrus', 'Les sorceleurs ont des sens plus développés que la moyenne des humains.', 5),
 (2, 'Mutation durable', 'Les sorceleurs ont subi des mutations qui les rendent différents des autres humains.', 5),
 (3, 'Sensibilité émoussée', 'Les sorceleurs ont une sensibilité émoussée par rapport aux autres humains.', 5),
@@ -318,10 +316,10 @@ INSERT INTO particularite (idParticularite, nom, description, idRace) VALUES
 (15, 'Peuple agreste', 'Les halfelins sont des peuples agrestes.', 4),
 (16, 'Résilience à la magie', 'Les halfelins sont résilients à la magie.', 4);
 
-ALTER TABLE particularite ALTER COLUMN idParticularite RESTART WITH 17;
+-- ALTER TABLE particularite ALTER COLUMN id_particularite RESTART WITH 17;
 
 -- Ajout des réputations
-INSERT INTO reputationWiki (IDREPUTATIONWIKI, territoire, valeur, idRace) VALUES
+INSERT INTO reputation_wiki (id_reputation_wiki, territoire, valeur, id_race) VALUES
 (1, 'Nord', 'Craint et haïs', 5),
 (2, 'Nilfgaard', 'Craint et haïs', 5),
 (3, 'Skellige', 'Toléré', 5),
@@ -351,4 +349,4 @@ INSERT INTO reputationWiki (IDREPUTATIONWIKI, territoire, valeur, idRace) VALUES
 (24, 'Dol Blathana', 'Neutre', 4),
 (25, 'Mahakam', 'Neutre', 4);
 
-ALTER TABLE particularite ALTER COLUMN idParticularite RESTART WITH 26;
+-- ALTER TABLE particularite ALTER COLUMN id_reputation_wiki RESTART WITH 26;

@@ -26,10 +26,10 @@ public class ProfilUtilisateur {
 	@Column(name = "is_admin")
 	private Boolean isAdmin;
 
-	@OneToMany(mappedBy = "profil_utilisateur")
+	@OneToMany(mappedBy = "profilUtilisateur")
 	private List<Personnage> personnageList;
 
-	@OneToMany(mappedBy = "profil_utilisateur")
+	@OneToMany(mappedBy = "profilUtilisateur")
 	private List<Campagne> campagneList;
 
 }

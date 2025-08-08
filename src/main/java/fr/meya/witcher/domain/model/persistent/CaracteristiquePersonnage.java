@@ -1,6 +1,6 @@
 package fr.meya.witcher.domain.model.persistent;
 
-import fr.meya.witcher.domain.model.key.CompetenceProfessionId;
+import fr.meya.witcher.domain.model.key.CaracteristiquePersonnageId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,20 +15,19 @@ import lombok.Setter;
 public class CaracteristiquePersonnage {
 
 	@EmbeddedId
-	private CompetenceProfessionId id;
+	private CaracteristiquePersonnageId id;
 
 	private int valeurMax;
-
 	private int valeurActuelle;
 
 	@ManyToOne
-	@MapsId("idPersonnage")
+	@MapsId("idPersonnage") // correspond au champ dans l'EmbeddedId
 	@JoinColumn(name = "id_personnage", nullable = false)
-	private Personnage idPersonnage;
+	private Personnage personnage;
 
 	@ManyToOne
-	@MapsId("idCaracteristique")
+	@MapsId("idCaracteristique") // correspond au champ dans l'EmbeddedId
 	@JoinColumn(name = "id_caracteristique", nullable = false)
-	private Caracteristique idCaracteristique;
+	private Caracteristique caracteristique;
 
 }
