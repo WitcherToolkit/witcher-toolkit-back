@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS personnage(
     nom_personnage VARCHAR(50),
     nom_joueur VARCHAR(50),
     nom_image VARCHAR(100),
-    url_umage TEXT,
+    url_image TEXT,
     genre CHAR(1),
     terre_natale VARCHAR(20),
     xp INT,

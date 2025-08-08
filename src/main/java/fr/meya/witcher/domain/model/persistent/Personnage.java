@@ -19,23 +19,34 @@ public class Personnage {
 	@Column(name = "id_personnage")
 	private long idPersonnage;
 
+	@Column(name = "nom_joueur")
 	private String nomJoueur;
 
+	@Column(name = "nom_personnage")
 	private String nomPersonnage;
 
+	@Column(name = "nom_image")
 	private String nomImage;
 
+	@Column(name = "url_image")
 	private String urlImage;
 
 	private String genre;
 
+	@Column(name = "terre_natale")
 	private String terreNatale;
 
 	private String xp;
 
 	private long age;
 
-	private boolean isBestiaire;
+	private boolean bestiaire;
+
+	private String historique;
+
+	private String poings;
+
+	private String pieds;
 
 	@ManyToOne
 	@JoinColumn(name = "id_race", nullable = false)
