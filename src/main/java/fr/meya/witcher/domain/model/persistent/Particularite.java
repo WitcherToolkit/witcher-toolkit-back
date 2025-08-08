@@ -15,7 +15,7 @@ public class Particularite {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    @Column(name = "IDPARTICULARITE")
+    @Column(name = "id_Particularite")
     private Long idParticularite;
 
     private String nom;
@@ -23,7 +23,7 @@ public class Particularite {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IDRACE", nullable = false)
+    @JoinColumn(name = "id_race", nullable = false)
     private Race race;
 
 }

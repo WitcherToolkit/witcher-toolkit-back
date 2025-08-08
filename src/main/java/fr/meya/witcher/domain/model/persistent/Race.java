@@ -21,7 +21,7 @@ public class Race {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    @Column(name = "IDRACE")
+    @Column(name = "id_race")
     private long idRace;
 
     @NotBlank

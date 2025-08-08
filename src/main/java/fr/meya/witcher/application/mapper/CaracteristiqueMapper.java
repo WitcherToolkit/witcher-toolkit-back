@@ -2,29 +2,16 @@ package fr.meya.witcher.application.mapper;
 
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
 import fr.meya.witcher.message.response.CaracteristiqueVolatile;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-@Component
-public class CaracteristiqueMapper {
+@Mapper(componentModel = "spring")
+public interface CaracteristiqueMapper {
 
-    // Convertir l'entitÃ© persistante en DTO
-    public CaracteristiqueVolatile toCaracteristiqueDto(Caracteristique caracteristique) {
-        return new CaracteristiqueVolatile(
-                caracteristique.getIdCaracteristique(),
-                caracteristique.getNom(),
-                caracteristique.getCode(),
-                caracteristique.getDescription()
-        );
-    }
+    // Convertir l'entité persistante en DTO
+    CaracteristiqueVolatile toCaracteristiqueDto(Caracteristique caracteristique);
 
-    // Convertir un DTO en entitÃ© persistante
-    public Caracteristique toCaracteristiqueEntity(CaracteristiqueVolatile dto) {
-        Caracteristique caracteristique = new Caracteristique();
-        caracteristique.setIdCaracteristique(dto.getIdCaracteristique());
-        caracteristique.setNom(dto.getNom());
-        caracteristique.setCode(dto.getCode());
-        caracteristique.setDescription(dto.getDescription());
-        return caracteristique;
-    }
+    // Convertir un DTO en entité persistante
+    Caracteristique toCaracteristiqueEntity(CaracteristiqueVolatile caracteristiqueVolatile);
 
 }

@@ -16,7 +16,7 @@ public class Personnage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IDPERSONNAGE")
+	@Column(name = "id_personnage")
 	private long idPersonnage;
 
 	private String nomJoueur;
@@ -38,15 +38,15 @@ public class Personnage {
 	private boolean isBestiaire;
 
 	@ManyToOne
-	@JoinColumn(name = "IDRACE", nullable = false)
+	@JoinColumn(name = "id_race", nullable = false)
 	private Race race;
 
 	@ManyToOne
-	@JoinColumn(name = "IDCAMPAGNE")
+	@JoinColumn(name = "id_campagne")
 	private Campagne campagne;
 
 	@ManyToOne
-	@JoinColumn(name = "IDPROFILUTILISATEUR")
+	@JoinColumn(name = "id_profil_utilisateur")
 	private ProfilUtilisateur profilUtilisateur;
 
 	//----------------------------------------------------------------------------------------------------------------//

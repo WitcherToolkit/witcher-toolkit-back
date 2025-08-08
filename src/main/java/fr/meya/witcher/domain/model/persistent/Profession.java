@@ -18,7 +18,7 @@ public class Profession {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IDPROFESSION")
+	@Column(name = "id_profession")
 	private long idProfession;
 
 	@NotBlank
@@ -29,16 +29,19 @@ public class Profession {
 
 	private int vigueur;
 
-	@Column(name = "MAXSORT")
+	@Column(name = "nb_objet")
+	private int nbObjet;
+
+	@Column(name = "max_sort")
 	private int maxSort;
 
-	@Column(name = "MAXRITUEL")
+	@Column(name = "max_rituel")
 	private int maxRituel;
 
-	@Column(name = "MAXENVOUTEMENT")
+	@Column(name = "max_envoutement")
 	private int maxEnvoutement;
 
-	@Column(name = "MAXINVOCATION")
+	@Column(name = "max_invocation")
 	private int maxInvocation;
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)

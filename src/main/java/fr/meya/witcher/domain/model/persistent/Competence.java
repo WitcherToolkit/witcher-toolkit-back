@@ -23,7 +23,7 @@ public class Competence {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IDCOMPETENCE")
+	@Column(name = "id_competence")
 	private long idCompetence;
 
 	@Size(max = 50)
@@ -32,7 +32,7 @@ public class Competence {
 	@NotBlank
 	private String description;
 
-	@Column(name = "ISEXCLUSIVE")
+	@Column(name = "is_exclusive")
 	private boolean isExclusive;
 
 	@Size( max = 20)
@@ -42,7 +42,7 @@ public class Competence {
 	private String specialisation;
 
 	@ManyToOne
-	@JoinColumn(name = "IDCARACTERISTIQUE", referencedColumnName = "IDCARACTERISTIQUE")
+	@JoinColumn(name = "id_caracteristique", referencedColumnName = "id_caracteristique")
 	private Caracteristique caracteristique;
 
 	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)

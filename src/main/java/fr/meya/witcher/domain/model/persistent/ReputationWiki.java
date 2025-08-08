@@ -11,12 +11,12 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "REPUTATIONWIKI")
+@Table(name = "reputation_wiki")
 public class ReputationWiki {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    @Column(name = "IDREPUTATIONWIKI")
+    @Column(name = "id_reputation_wiki")
     private Long idReputationWiki;
 
     private String territoire;
@@ -24,6 +24,6 @@ public class ReputationWiki {
     private String valeur;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IDRACE", nullable = false)
+    @JoinColumn(name = "id_race", nullable = false)
     private Race race;
 }

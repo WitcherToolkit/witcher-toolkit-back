@@ -25,7 +25,7 @@ public class Magie {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name = "IDMAGIE")
+	@Column(name = "id_magie")
 	private long idMagie;
 
 	@NotBlank
@@ -63,7 +63,7 @@ public class Magie {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Pour éviter que hibernate ne charge inutilement la relation personnageList lors de l'update.
 	@JoinTable(name = "magie_personnage",
-			joinColumns = @JoinColumn(name = "IDMAGIE"),
-			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE"))
+			joinColumns = @JoinColumn(name = "id_magie"),
+			inverseJoinColumns = @JoinColumn(name = "id_personnage"))
 	private List<Personnage> personnageList;
 }

@@ -11,12 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "INVENTAIREWIKI")
+@Table(name = "inventaire_wiki")
 public class InventaireWiki {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDINVENTAIREWIKI")
+    @Column(name = "id_inventaire_wiki")
     private long idInventaireWiki;
 
     private int quantite;
@@ -27,11 +27,11 @@ public class InventaireWiki {
 
     private String effet;
 
-    @Column(name = "ISSPECIAL")
+    @Column(name = "is_special")
     private  boolean isSpecial;
 
     @ManyToOne
-    @JoinColumn(name = "IDPROFESSION")
+    @JoinColumn(name = "id_profession")
     private Profession profession;
 
 }

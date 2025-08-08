@@ -9,11 +9,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "profil_utilisateur")
 public class ProfilUtilisateur {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	@Column(name = "IDPROFILUTILISATEUR")
+	@Column(name = "id_user")
 	private long idProfilUtilisateur;
 
 	private String pseudo;
@@ -22,11 +23,13 @@ public class ProfilUtilisateur {
 
 	private String password;
 
+	@Column(name = "is_admin")
 	private Boolean isAdmin;
 
-	@OneToMany(mappedBy = "profilUtilisateur")
+	@OneToMany(mappedBy = "profil_utilisateur")
 	private List<Personnage> personnageList;
 
-	@OneToMany(mappedBy = "profilUtilisateur")
+	@OneToMany(mappedBy = "profil_utilisateur")
 	private List<Campagne> campagneList;
+
 }

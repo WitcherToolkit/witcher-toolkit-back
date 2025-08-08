@@ -21,7 +21,7 @@ public class Envoutement {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name = "IDENVOUTEMENT")
+	@Column(name = "id_envoutement")
 	private long idEnvoutement;
 
 	@NotBlank
@@ -44,9 +44,9 @@ public class Envoutement {
 
 	@ManyToMany
 	@JoinTable(
-			name = "envoutementPersonnage", // Nom de la table de jointure
-			joinColumns = @JoinColumn(name = "IDENVOUTEMENT"), // Colonne représentant l'entité Envoutement
-			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE") // Colonne représentant l'entité Personnage
+			name = "envoutement_personnage", // Nom de la table de jointure
+			joinColumns = @JoinColumn(name = "id_envoutement"), // Colonne représentant l'entité Envoutement
+			inverseJoinColumns = @JoinColumn(name = "id_personnage") // Colonne représentant l'entité Personnage
 	)
 	private List<Personnage> personnageList;
 

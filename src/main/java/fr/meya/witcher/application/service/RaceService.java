@@ -77,7 +77,7 @@ public class RaceService implements IRaceService {
         Race raceExistant = raceRepository.findById(idRace)
                 .orElseThrow(() -> new WitcherToolkitExeption("Race non trouvée"));
 
-        raceMapper.updateRaceFromVolatile(raceExistant, raceVolatile);
+        raceMapper.updateRaceFromVolatile(raceVolatile, raceExistant);
 
         log.info("Objet Race à sauvegarder : Race[id={}, nom={}, nbReputations={}, nbParticularites={}]",
                 raceExistant.getIdRace(),

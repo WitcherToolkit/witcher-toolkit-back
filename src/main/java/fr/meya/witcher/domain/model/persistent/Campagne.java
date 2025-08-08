@@ -15,14 +15,14 @@ public class Campagne {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name = "IDCAMPAGNE")
+	@Column(name = "id_campagne")
 	private long idCampagne;
 
 	@NotBlank
 	private String nom;
 
 	@ManyToOne
-	@JoinColumn(name = "IDPROFILEUTILISATEUR", nullable = false)
+	@JoinColumn(name = "id_user", nullable = false)
 	private ProfilUtilisateur profilUtilisateur;
 
 }

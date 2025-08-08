@@ -14,7 +14,7 @@ public class Rituel {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	@Column(name = "IDRITUEL")
+	@Column(name = "id_rituel")
 	private long idRituel;
 
 	@NotBlank
@@ -27,7 +27,7 @@ public class Rituel {
 	private String effet;
 
 	@NotBlank
-	@Column(name = "TEMPSPREPARATION")
+	@Column(name = "temps_preparation")
 	private String tempsPreparation;
 
 	@NotBlank
@@ -46,8 +46,9 @@ public class Rituel {
 	@ManyToMany
 	@JoinTable(
 			name = "personnageRituel",
-			joinColumns = @JoinColumn(name = "IDRITUEL"),
-			inverseJoinColumns = @JoinColumn(name = "IDPERSONNAGE"))
+			joinColumns = @JoinColumn(name = "id_rituel"),
+			inverseJoinColumns = @JoinColumn(name = "id_personnage")
+	)
 	private List<Personnage> personnageList;
 
 }
