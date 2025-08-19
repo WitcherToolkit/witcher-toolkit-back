@@ -19,6 +19,8 @@ public class ProfessionVolatile {
 
     private int vigueur;
 
+    private int nbObjet;
+
     private int maxSort;
 
     private int maxRituel;
