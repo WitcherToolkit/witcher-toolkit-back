@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS competence(
     id_competence INT AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
-    is_exclusive BOOLEAN NOT NULL,
+    exclusive BOOLEAN NOT NULL,
     specialisation VARCHAR(20),
     prerequis VARCHAR(20),
     id_caracteristique INT NOT NULL,

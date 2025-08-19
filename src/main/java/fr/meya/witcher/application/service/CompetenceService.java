@@ -77,26 +77,26 @@ public class CompetenceService implements ICompetenceService {
 
 		Competence competenceExistant = competenceRepository.findById(idCompetence)
 				.orElseThrow(() -> new WitcherToolkitExeption("Competence non trouvée"));
-		log.info("Competence existante trouvée - Nom: {}, Description: {}, isExclusive: {}",
+		log.info("Competence existante trouvée - Nom: {}, Description: {}, exclusive: {}",
 				competenceExistant.getNom(),
 				competenceExistant.getDescription(),
 				competenceExistant.isExclusive());
 		;
 
-		log.info("Avant copyProperties - Nom: {}, Description: {}, isExclusive: {}",
+		log.info("Avant copyProperties - Nom: {}, Description: {}, exclusive: {}",
 				competenceExistant.getNom(),
 				competenceExistant.getDescription(),
 				competenceExistant.isExclusive());
 
 		BeanUtils.copyProperties(competenceVolatile, competenceExistant, ObjectUtils.getNullPropertyNames(competenceVolatile));
 
-		log.info("Après copyProperties - Nom: {}, Description: {}, isExclusive: {}",
+		log.info("Après copyProperties - Nom: {}, Description: {}, exclusive: {}",
 				competenceExistant.getNom(),
 				competenceExistant.getDescription(),
 				competenceExistant.isExclusive());
 
 		Competence competenceSauvegardee = competenceRepository.save(competenceExistant);
-		log.info("Après sauvegarde - Nom: {}, Description: {}, isExclusive: {}",
+		log.info("Après sauvegarde - Nom: {}, Description: {}, exclusive: {}",
 				competenceSauvegardee.getNom(),
 				competenceSauvegardee.getDescription(),
 				competenceSauvegardee.isExclusive());

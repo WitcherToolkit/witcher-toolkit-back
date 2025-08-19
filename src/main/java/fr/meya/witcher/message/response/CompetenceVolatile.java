@@ -25,7 +25,7 @@ public class CompetenceVolatile {
 	private String description;
 
 	@NotBlank(message = "error.competence.exclusive.required")
-    private boolean isExclusive;
+    private boolean exclusive;
 
 	@Size( max = 20)
 	private String prerequis;

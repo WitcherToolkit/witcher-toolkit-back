@@ -32,8 +32,8 @@ public class Competence {
 	@NotBlank
 	private String description;
 
-	@Column(name = "is_exclusive")
-	private boolean isExclusive;
+	@Column(name = "exclusive")
+	private boolean exclusive;
 
 	@Size( max = 20)
 	private String prerequis;
