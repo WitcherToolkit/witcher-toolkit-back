@@ -15,7 +15,7 @@ public class ReputationWikiVolatile {
 
     private Long idReputationWiki;
 
-    @NotBlank(message = "error.reputation.wiki.nom.required")
+    @NotBlank(message = "error.reputation.wiki.territoire.required")
     @Size( max = 20)
     private String territoire;
 

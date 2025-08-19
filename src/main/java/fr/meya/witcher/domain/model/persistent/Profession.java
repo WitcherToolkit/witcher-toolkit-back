@@ -2,6 +2,7 @@ package fr.meya.witcher.domain.model.persistent;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Profession {
 	private long idProfession;
 
 	@NotBlank
+	@Size(max = 50)
 	private String nom;
 
 	@NotBlank

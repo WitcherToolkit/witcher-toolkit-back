@@ -1,6 +1,8 @@
 package fr.meya.witcher.domain.model.persistent;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +21,12 @@ public class ReputationWiki {
     @Column(name = "id_reputation_wiki")
     private Long idReputationWiki;
 
+    @NotBlank
+    @Size(max = 20)
     private String territoire;
 
+    @NotBlank
+    @Size(max = 20)
     private String valeur;
 
     @ManyToOne(fetch = FetchType.LAZY)
