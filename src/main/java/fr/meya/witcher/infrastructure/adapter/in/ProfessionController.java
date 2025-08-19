@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/profession")
+@RequestMapping("/professions")
 public class ProfessionController {
 
     private final IProfessionService iProfessionService;
@@ -50,8 +50,9 @@ public class ProfessionController {
 
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<ProfessionVolatile> updateProfession(@PathVariable Long id, @RequestBody ProfessionVolatile professionVolatile) {
-        log.info("modifier une profession");
+        log.info("Modification de la profession' - ID : {} - Données : {}", id, professionVolatile);
         Profession updatedProfession = iProfessionService.updateProfession(id, professionVolatile);
+
         return ResponseEntity.ok(professionMapper.toProfessionDto(updatedProfession));
     }
 

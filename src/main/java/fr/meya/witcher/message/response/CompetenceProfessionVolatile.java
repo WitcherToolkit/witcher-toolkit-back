@@ -10,9 +10,13 @@ import lombok.NoArgsConstructor;
 public class CompetenceProfessionVolatile {
     private long idCompetenceProfession;
 
+    private Long idProfession;
+
+    private Long idCompetence;
+
     private CompetenceVolatile competence;
 
-    // ne pas mettre a créer une dépendence cyclique :
+    // ne pas mettre car créer une dépendence cyclique :
     // private ProfessionVolatile profession;
 
 }

@@ -4,18 +4,23 @@ import fr.meya.witcher.application.mapper.ProfessionMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
 import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
+import fr.meya.witcher.domain.model.persistent.CompetenceProfession;
+import fr.meya.witcher.domain.model.persistent.InventaireWiki;
 import fr.meya.witcher.domain.model.persistent.Profession;
 import fr.meya.witcher.domain.port.in.IProfessionService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.IProfessionRepository;
 import fr.meya.witcher.message.response.ProfessionVolatile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ProfessionService implements IProfessionService {
 
@@ -34,18 +39,6 @@ public class ProfessionService implements IProfessionService {
         if (professionVolatile == null) {
             throw new WitcherToolkitExeption("error.profession.null");
         }
-
-        // Définir les règles avec clés de messages externalisées
-        Map<String, ValidationRule> fieldRules = Map.of(
-                "nom", new ValidationRule("error.profession.nom.required"),
-                "competenceExclusive", new ValidationRule("error.profession.competenceExclusive.required"),
-                "description", new ValidationRule("error.profession.description.required"),
-                "codeCaracteristique", new ValidationRule("error.profession.codeCaracteristique.required")
-        );
-
-        // Valider avec ValidationUtils
-        validationUtils.validateWithRules(professionVolatile, fieldRules);
-
         return true;
     }
 
@@ -88,16 +81,49 @@ public class ProfessionService implements IProfessionService {
     @Override
     public Profession updateProfession(Long idProfession, ProfessionVolatile professionVolatile) {
 
+        log.info("Début de la méthode updateProfession - ID : {}, nom : {}, compétences reçues : {}",
+                idProfession,
+                professionVolatile.getNom(),
+                professionVolatile.getCompetenceList() != null
+                        ? professionVolatile.getCompetenceList().stream()
+                        .map(cp -> String.format("%s (id=%d)", cp.getCompetence().getNom(), cp.getCompetence().getIdCompetence()))
+                        .collect(Collectors.joining(", "))
+                        : "Aucune"
+        );
+
+        isValid(professionVolatile);
+        log.info("Validation des données réussie");
+
         Profession professionExistant = iProfessionRepository.findById(idProfession)
                 .orElseThrow(() -> new WitcherToolkitExeption("Profession non trouvée"));
 
-        BeanUtils.copyProperties(professionVolatile, professionExistant, ObjectUtils.getNullPropertyNames(professionVolatile));
+        professionMapper.updateProfessionFromVolatile(professionVolatile, professionExistant);
+
+        // Rattache chaque inventaire à la profession existante
+        if (professionExistant.getInventaireWikiList() != null) {
+            for (InventaireWiki inv : professionExistant.getInventaireWikiList()) {
+                inv.setProfession(professionExistant);
+            }
+        }
+
+        for (CompetenceProfession cp : professionExistant.getCompetenceProfessionList()) {
+            cp.setProfession(professionExistant);
+        }
+
+        log.info("Objet Profession à sauvegarder : Profession[id={}, nom={}, compétences={}]",
+                professionExistant.getIdProfession(),
+                professionExistant.getNom(),
+                professionExistant.getCompetenceProfessionList() != null
+                        ? professionExistant.getCompetenceProfessionList().stream()
+                        .map(cp -> String.format("%s (id=%d)", cp.getCompetence().getNom(), cp.getCompetence().getIdCompetence()))
+                        .collect(Collectors.joining(", "))
+                        : "Aucune"
+        );
 
         return iProfessionRepository.save(professionExistant);
-
     }
 
-    @Override
+        @Override
     public void deleteProfession(Long idProfession) {
         Profession professionExistant = getProfession(idProfession);
         iProfessionRepository.delete(professionExistant);
