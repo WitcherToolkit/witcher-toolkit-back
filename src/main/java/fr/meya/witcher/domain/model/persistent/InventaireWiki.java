@@ -1,5 +1,6 @@
 package fr.meya.witcher.domain.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class InventaireWiki {
     private  boolean isSpecial;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_profession")
     private Profession profession;
 

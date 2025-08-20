@@ -1,5 +1,6 @@
 package fr.meya.witcher.domain.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.meya.witcher.domain.model.key.CompetenceProfessionId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,7 @@ public class CompetenceProfession {
 	 * @MapsId("idProfession") pour synchroniser avec le champ de la clé composite.
 	 */
 	@ManyToOne
+	@JsonIgnore
 	@MapsId("idProfession")
 	@JoinColumn(name = "id_profession", nullable = false)
 	private Profession profession;

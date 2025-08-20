@@ -75,6 +75,19 @@ public class ProfessionService implements IProfessionService {
         isValid(professionVolatile);
 
         Profession profession = professionMapper.toProfessionEntity(professionVolatile);
+
+        // Lier chaque enfant à la profession parente pour le cascade persist
+        if (profession.getInventaireWikiList() != null) {
+            for (InventaireWiki inv : profession.getInventaireWikiList()) {
+                inv.setProfession(profession);
+            }
+        }
+        if (profession.getCompetenceProfessionList() != null) {
+            for (CompetenceProfession cp : profession.getCompetenceProfessionList()) {
+                cp.setProfession(profession);
+            }
+        }
+
         return iProfessionRepository.save(profession);
     }
 
