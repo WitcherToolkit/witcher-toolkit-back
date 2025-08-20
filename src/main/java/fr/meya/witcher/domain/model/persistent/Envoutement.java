@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -42,12 +43,8 @@ public class Envoutement {
 	@Enumerated(EnumType.STRING)
 	private DangerEnum danger;
 
-	@ManyToMany
-	@JoinTable(
-			name = "envoutement_personnage", // Nom de la table de jointure
-			joinColumns = @JoinColumn(name = "id_envoutement"), // Colonne représentant l'entité Envoutement
-			inverseJoinColumns = @JoinColumn(name = "id_personnage") // Colonne représentant l'entité Personnage
-	)
-	private List<Personnage> personnageList;
+	//----------------------------------------------------------------------------------------------------------------//
+	@OneToMany(mappedBy = "envoutement")
+	private List<EnvoutementPersonnage> envoutementPersonnageList = new ArrayList<>();
 
 }

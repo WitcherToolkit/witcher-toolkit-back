@@ -62,16 +62,16 @@ public class Personnage {
 	@JoinColumn(name = "id_profil_utilisateur")
 	private ProfilUtilisateur profilUtilisateur;
 
-	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "personnage")
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "personnage")
 	private List<CompetencePersonnage> competencePersonnageList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "personnage")
 	private List<RituelPersonnage> rituelPersonnageList = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "personnageList")
-	private List<Envoutement> envoutementList = new ArrayList<>();
+	@OneToMany(mappedBy = "personnage")
+	private List<EnvoutementPersonnage> envoutementPersonnageList = new ArrayList<>();
 
 }
