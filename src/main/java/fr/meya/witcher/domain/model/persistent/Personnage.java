@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +48,7 @@ public class Personnage {
 	private String poings;
 
 	private String pieds;
+	//----------------------------------------------------------------------------------------------------------------//
 
 	@ManyToOne
 	@JoinColumn(name = "id_race", nullable = false)
@@ -60,18 +62,16 @@ public class Personnage {
 	@JoinColumn(name = "id_profil_utilisateur")
 	private ProfilUtilisateur profilUtilisateur;
 
-	//----------------------------------------------------------------------------------------------------------------//
+	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CaracteristiquePersonnage> caracteristiquePersonnageList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "personnage")
+	private List<CompetencePersonnage> competencePersonnageList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CaracteristiquePersonnage> caracteristiquePersonnageList;
-
-	@OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetencePersonnage> competencePersonnageList;
+	private List<RituelPersonnage> rituelPersonnageList = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "personnageList")
-	private List<Rituel> rituelList;
-
-	@ManyToMany(mappedBy = "personnageList")
-	private List<Envoutement> envoutementList;
+	private List<Envoutement> envoutementList = new ArrayList<>();
 
 }

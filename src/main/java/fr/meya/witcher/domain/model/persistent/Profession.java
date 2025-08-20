@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -46,10 +47,12 @@ public class Profession {
 	@Column(name = "max_invocation")
 	private int maxInvocation;
 
+	//----------------------------------------------------------------------------------------------------------------//
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InventaireWiki> inventaireWikiList;
+	private List<InventaireWiki> inventaireWikiList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompetenceProfession> competenceProfessionList;
+	private List<CompetenceProfession> competenceProfessionList = new ArrayList<>();
+	// new ArrayList<>() est optionnel mais limite les risques de NPE lors d'ajout ou de supression d'élement
 
 }

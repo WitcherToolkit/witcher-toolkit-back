@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -43,12 +44,7 @@ public class Rituel {
 	private String niveau;
 
 	//----------------------------------------------------------------------------------------------------------------//
-	@ManyToMany
-	@JoinTable(
-			name = "personnageRituel",
-			joinColumns = @JoinColumn(name = "id_rituel"),
-			inverseJoinColumns = @JoinColumn(name = "id_personnage")
-	)
-	private List<Personnage> personnageList;
+	@OneToMany(mappedBy = "rituel")
+	private List<RituelPersonnage> rituelPersonnageList = new ArrayList<>();
 
 }
