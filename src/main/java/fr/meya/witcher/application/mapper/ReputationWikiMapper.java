@@ -5,7 +5,6 @@ import fr.meya.witcher.domain.model.persistent.ReputationWiki;
 import fr.meya.witcher.message.response.ReputationWikiVolatile;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
@@ -16,12 +15,7 @@ public interface ReputationWikiMapper {
      *
      * @param entity l'entité persistante à convertir
      * @return le DTO correspondant
-     *
-     * @Mapping(target = "race", ignore = true)
-     * On ignore la propriété 'race' dans le DTO pour éviter une boucle infinie
-     * (car Race contient une liste de ReputationWiki qui contient une référence à Race).
      */
-    //@Mapping(target = "race", ignore = true)
     ReputationWikiVolatile toDto(ReputationWiki entity);
 
     /**
@@ -29,12 +23,7 @@ public interface ReputationWikiMapper {
      *
      * @param dto le DTO à convertir
      * @return l'entité correspondante
-     *
-     * @Mapping(target = "race", ignore = true)
-     * On ignore ici la propriété 'race' car elle sera gérée séparément
-     * (souvent on doit fixer manuellement la relation inverse pour éviter les erreurs).
      */
-    //@Mapping(target = "race", ignore = true)
     ReputationWiki toEntity(ReputationWikiVolatile dto);
 
     /**

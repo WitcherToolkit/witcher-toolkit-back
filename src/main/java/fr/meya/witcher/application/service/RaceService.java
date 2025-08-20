@@ -50,7 +50,7 @@ public class RaceService implements IRaceService {
     }
 
     @Override
-    public Race getRace(Long idRace) {
+    public Race getRaceById(Long idRace) {
         if (idRace == null) {
             throw new IllegalArgumentException("L'ID de la race est null.");
         }
@@ -88,12 +88,9 @@ public class RaceService implements IRaceService {
         return raceRepository.save(raceExistant);
     }
 
-
-
-
     @Override
     public void deleteRace(Long idRace) {
-        Race raceExistant = getRace(idRace);
+        Race raceExistant = getRaceById(idRace);
         raceRepository.delete(raceExistant);
     }
 

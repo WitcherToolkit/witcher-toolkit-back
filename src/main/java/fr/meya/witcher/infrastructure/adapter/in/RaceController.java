@@ -24,13 +24,34 @@ public class RaceController {
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<RaceVolatile>> listRace() {
+
         log.info("consultation race");
         List<RaceVolatile> result = iRaceService.getRaceList();
+
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RaceVolatile> getRaceById(@PathVariable Long id) {
+
+        log.info("Consultation de la race avec l'ID : {}", id);
+        Race race = iRaceService.getRaceById(id);
+        RaceVolatile raceDto = raceMapper.toRaceDto(race);
+
+        return ResponseEntity.ok(raceDto);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<RaceVolatile> createRace(@RequestBody RaceVolatile raceVolatile) {
+        log.info("Créer une caractéristique");
+
+        Race createdRace = iRaceService.createRace(raceVolatile);
+        return ResponseEntity.ok(raceMapper.toRaceDto(createdRace));
     }
 
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<RaceVolatile> updateRace(@PathVariable Long id, @RequestBody RaceVolatile raceVolatile) {
+
         log.info("Modification de la race - ID : {} - Données : {}", id, raceVolatile);
         Race updatedRace = iRaceService.updateRace(id, raceVolatile);
 

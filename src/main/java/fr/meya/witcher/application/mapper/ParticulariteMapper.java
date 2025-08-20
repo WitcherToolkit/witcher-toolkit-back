@@ -11,10 +11,8 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface ParticulariteMapper {
 
-    //@Mapping(target = "race", ignore = true)
     ParticulariteVolatile toDto(Particularite entity);
 
-    //@Mapping(target = "race", ignore = true)
     Particularite toEntity(ParticulariteVolatile dto);
 
     @AfterMapping

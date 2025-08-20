@@ -11,7 +11,7 @@ public interface IRaceService {
 
     List<RaceVolatile> getRaceList();
 
-    Race getRace(Long idRace);
+    Race getRaceById(Long idRace);
 
     Race createRace(RaceVolatile raceVolatile);
 
