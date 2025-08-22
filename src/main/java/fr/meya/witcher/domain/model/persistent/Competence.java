@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class Competence {
 	@JoinColumn(name = "id_caracteristique", referencedColumnName = "id_caracteristique")
 	private Caracteristique caracteristique;
 
-	@OneToMany(mappedBy = "competence")
-	private List<CompetenceProfession> professionList;
+	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CompetenceProfession> professionList = new ArrayList<>();
 
 }
