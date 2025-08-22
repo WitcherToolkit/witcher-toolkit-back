@@ -4,11 +4,13 @@ import fr.meya.witcher.application.mapper.ProfessionMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
 import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
+import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.domain.model.persistent.CompetenceProfession;
 import fr.meya.witcher.domain.model.persistent.InventaireWiki;
 import fr.meya.witcher.domain.model.persistent.Profession;
 import fr.meya.witcher.domain.port.in.IProfessionService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
+import fr.meya.witcher.infrastructure.adapter.out.ICompetenceRepository;
 import fr.meya.witcher.infrastructure.adapter.out.IProfessionRepository;
 import fr.meya.witcher.message.response.ProfessionVolatile;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +29,13 @@ public class ProfessionService implements IProfessionService {
     private final IProfessionRepository iProfessionRepository;
     private final ProfessionMapper professionMapper;
     private final ValidationUtils validationUtils;
+    private final ICompetenceRepository iCompetenceRepository;
 
-    public ProfessionService(IProfessionRepository iProfessionRepository, ProfessionMapper professionMapper, MessageSource messageSource) {
+    public ProfessionService(IProfessionRepository iProfessionRepository, ProfessionMapper professionMapper, MessageSource messageSource, ICompetenceRepository iCompetenceRepository) {
         this.iProfessionRepository = iProfessionRepository;
         this.professionMapper = professionMapper;
         this.validationUtils = new ValidationUtils(messageSource); // Injecter le MessageSource
+        this.iCompetenceRepository = iCompetenceRepository;
     }
 
     @Override
@@ -85,7 +89,16 @@ public class ProfessionService implements IProfessionService {
         if (profession.getCompetenceProfessionList() != null) {
             for (CompetenceProfession cp : profession.getCompetenceProfessionList()) {
                 cp.setProfession(profession);
+                // Correction ici :
+                Long idCompetence = cp.getCompetence().getIdCompetence();
+                Competence competence = iCompetenceRepository.findById(idCompetence).orElseThrow();
+                cp.setCompetence(competence);
             }
+        }
+
+        System.out.println("Nb compétences à enregistrer : " + profession.getCompetenceProfessionList().size());
+        for (CompetenceProfession cp : profession.getCompetenceProfessionList()) {
+            System.out.println("Compétence : " + cp.getCompetence().getIdCompetence());
         }
 
         return iProfessionRepository.save(profession);

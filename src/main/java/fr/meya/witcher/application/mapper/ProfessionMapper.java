@@ -17,6 +17,7 @@ public interface ProfessionMapper {
     @Mapping(target = "inventaireWikiList", source = "inventaireWikiList")
     ProfessionVolatile toProfessionDto(Profession profession);
 
+    @Mapping(target = "competenceProfessionList", source = "competenceList")
     Profession toProfessionEntity(ProfessionVolatile dto);
 
     //Méthode pour mise à jour partielle d'une entité existante

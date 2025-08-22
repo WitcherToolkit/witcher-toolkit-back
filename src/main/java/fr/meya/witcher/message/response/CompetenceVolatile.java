@@ -1,14 +1,10 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.Caracteristique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

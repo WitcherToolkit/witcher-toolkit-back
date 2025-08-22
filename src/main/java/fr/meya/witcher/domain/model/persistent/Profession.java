@@ -1,5 +1,6 @@
 package fr.meya.witcher.domain.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -49,9 +50,11 @@ public class Profession {
 
 	//----------------------------------------------------------------------------------------------------------------//
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<InventaireWiki> inventaireWikiList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<CompetenceProfession> competenceProfessionList = new ArrayList<>();
 	// new ArrayList<>() est optionnel mais limite les risques de NPE lors d'ajout ou de supression d'élement
 
