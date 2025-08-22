@@ -45,7 +45,7 @@ public class Competence {
 	@JoinColumn(name = "id_caracteristique", referencedColumnName = "id_caracteristique")
 	private Caracteristique caracteristique;
 
-	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "competence")
 	private List<CompetenceProfession> professionList;
 
 }

@@ -29,7 +29,7 @@ public class RituelVolatile {
     private String tempsPreparation;
 
     @NotBlank(message = "error.rituel.sd.required")
-    @Size( max = 7)
+    @Size( max = 10)
     private String sd;
 
     @NotBlank(message = "error.rituel.duree.required")

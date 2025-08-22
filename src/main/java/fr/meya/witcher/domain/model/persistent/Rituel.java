@@ -2,6 +2,7 @@ package fr.meya.witcher.domain.model.persistent;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,15 +20,18 @@ public class Rituel {
 	private long idRituel;
 
 	@NotBlank
+	@Size(max = 60)
 	private String nom;
 
 	@NotBlank
+	@Size(max = 10)
 	private String cout;
 
 	@NotBlank
 	private String effet;
 
 	@NotBlank
+	@Size(max = 10)
 	@Column(name = "temps_preparation")
 	private String tempsPreparation;
 
@@ -35,12 +39,14 @@ public class Rituel {
 	private String sd;
 
 	@NotBlank
+	@Size(max = 15)
 	private String duree;
 
 	@NotBlank
 	private String composant;
 
 	@NotBlank
+	@Size(max = 20)
 	private String niveau;
 
 	//----------------------------------------------------------------------------------------------------------------//

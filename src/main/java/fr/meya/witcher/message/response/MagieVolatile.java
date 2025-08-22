@@ -27,7 +27,7 @@ public class MagieVolatile {
     @NotBlank(message = "error.magie.effet.required")
     private String effet;
 
-    @Size(max = 15, message = "{error.max.size}")
+    @Size(max = 20, message = "{error.max.size}")
     private String portee;
 
     @NotBlank(message = "error.magie.duree.required")
