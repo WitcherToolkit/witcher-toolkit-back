@@ -57,4 +57,13 @@ public class RaceController {
 
         return ResponseEntity.ok(raceMapper.toRaceDto(updatedRace));
     }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteRace(@PathVariable Long id) {
+        log.info("Supprimer le race avec l'ID : {}", id);
+
+        iRaceService.deleteRace(id);
+        return ResponseEntity.noContent().build();
+    }
 }
