@@ -22,11 +22,11 @@ public class RituelPersonnage {
     @ManyToOne
     @JsonIgnore
     @MapsId("idPersonnage")
-    @JoinColumn(name = "id_personnage", nullable = false)
+    @JoinColumn(name = "id_personnage", nullable = false, foreignKey = @ForeignKey(name = "fk_rituel_personnage_personnage"))
     private Personnage personnage;
 
     @ManyToOne
     @MapsId("idRituel")
-    @JoinColumn(name = "id_rituel", nullable = false)
+    @JoinColumn(name = "id_rituel", nullable = false, foreignKey = @ForeignKey(name = "fk_rituel_personnage_rituel"))
     private Rituel rituel;
 }

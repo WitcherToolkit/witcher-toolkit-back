@@ -21,8 +21,8 @@ public class Campagne {
 	@NotBlank
 	private String nom;
 
-	@ManyToOne
-	@JoinColumn(name = "id_user", nullable = false)
-	private ProfilUtilisateur profilUtilisateur;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_user", nullable = false, foreignKey = @ForeignKey(name = "fk_campagne_user"))
+	private User user;
 
 }

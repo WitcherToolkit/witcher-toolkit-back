@@ -5,7 +5,6 @@ import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.message.response.ParticulariteVolatile;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")

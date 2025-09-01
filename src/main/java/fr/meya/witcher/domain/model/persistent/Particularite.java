@@ -23,7 +23,7 @@ public class Particularite {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_race", nullable = false)
+    @JoinColumn(name = "id_race", nullable = false, foreignKey = @ForeignKey(name = "fk_particularite_race"))
     private Race race;
 
 }

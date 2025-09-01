@@ -40,7 +40,7 @@ public class InventaireWiki {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "id_profession")
+    @JoinColumn(name = "id_profession", foreignKey = @ForeignKey(name = "fk_inventaire_wiki_profession"))
     private Profession profession;
 
 }

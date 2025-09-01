@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS magie(
     id_magie INT AUTO_INCREMENT,
     nom VARCHAR(60) NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS competence(
     prerequis VARCHAR(20),
     id_caracteristique INT NOT NULL,
     PRIMARY KEY(id_competence),
-    FOREIGN KEY(id_caracteristique) REFERENCES caracteristique(id_caracteristique)
+    CONSTRAINT fk_competence_caracteristique FOREIGN KEY(id_caracteristique) REFERENCES caracteristique(id_caracteristique)
 );
 
 CREATE TABLE IF NOT EXISTS race(
@@ -67,7 +68,7 @@ CREATE TABLE IF NOT EXISTS particularite(
     description TEXT NOT NULL,
     id_race INT NOT NULL,
     PRIMARY KEY(id_Particularite),
-    FOREIGN KEY(id_race) REFERENCES race(id_race)
+    CONSTRAINT fk_particularite_race FOREIGN KEY(id_race) REFERENCES race(id_race)
 );
 
 CREATE TABLE IF NOT EXISTS reputation_wiki(
@@ -76,18 +77,22 @@ CREATE TABLE IF NOT EXISTS reputation_wiki(
     valeur VARCHAR(20) NOT NULL,
     id_race INT NOT NULL,
     PRIMARY KEY(id_reputation_wiki),
-    FOREIGN KEY(id_race) REFERENCES race(id_race)
+    CONSTRAINT fk_reputation_wiki_race FOREIGN KEY(id_race) REFERENCES race(id_race)
     );
 
-CREATE TABLE IF NOT EXISTS profil_utilisateur(
+CREATE TABLE IF NOT EXISTS users (
     id_user INT AUTO_INCREMENT,
     pseudo VARCHAR(64) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    is_admin BOOLEAN NOT NULL default false,
-    PRIMARY KEY(id_user),
-    UNIQUE(pseudo),
-    UNIQUE(email)
+    PRIMARY KEY(id_user)
+);
+
+CREATE TABLE IF NOT EXISTS user_roles (
+    id_user INT NOT NULL,
+    role VARCHAR(32) NOT NULL,
+    PRIMARY KEY (id_user, role),
+    CONSTRAINT fk_user_roles_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
 
 CREATE TABLE IF NOT EXISTS profession(
@@ -113,15 +118,15 @@ CREATE TABLE IF NOT EXISTS inventaire_wiki(
     is_special BOOLEAN NOT NULL DEFAULT FALSE,
     id_profession INT NOT NULL,
     PRIMARY KEY(id_inventaire_wiki),
-    FOREIGN KEY(id_profession) REFERENCES profession(id_profession)
+    CONSTRAINT fk_inventaire_wiki_profession FOREIGN KEY(id_profession) REFERENCES profession(id_profession)
 );
 
 CREATE TABLE IF NOT EXISTS competence_profession(
     id_profession INT NOT NULL,
     id_competence INT NOT NULL,
     PRIMARY KEY(id_profession, id_competence),
-    FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
-    FOREIGN KEY(id_competence) REFERENCES competence(id_competence)
+    CONSTRAINT fk_competence_profession_profession FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
+    CONSTRAINT fk_competence_profession_competence FOREIGN KEY(id_competence) REFERENCES competence(id_competence)
 );
 
 CREATE TABLE IF NOT EXISTS campagne(
@@ -129,7 +134,7 @@ CREATE TABLE IF NOT EXISTS campagne(
     nom VARCHAR(50) NOT NULL,
     id_user INT NOT NULL,
     PRIMARY KEY(id_campagne),
-    FOREIGN KEY(id_user) REFERENCES profil_utilisateur(id_user)
+    CONSTRAINT fk_campagne_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
 
 CREATE TABLE IF NOT EXISTS personnage(
@@ -151,10 +156,10 @@ CREATE TABLE IF NOT EXISTS personnage(
     id_campagne INT,
     id_user INT,
     PRIMARY KEY(id_personnage),
-    FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
-    FOREIGN KEY(id_race) REFERENCES race(id_race),
-    FOREIGN KEY(id_campagne) REFERENCES campagne(id_campagne),
-    FOREIGN KEY(id_user) REFERENCES profil_utilisateur(id_user)
+    CONSTRAINT fk_personnage_profession FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
+    CONSTRAINT fk_personnage_race FOREIGN KEY(id_race) REFERENCES race(id_race),
+    CONSTRAINT fk_personnage_campagne FOREIGN KEY(id_campagne) REFERENCES campagne(id_campagne),
+    CONSTRAINT fk_personnage_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
 
 CREATE TABLE IF NOT EXISTS inventaire(
@@ -165,7 +170,7 @@ CREATE TABLE IF NOT EXISTS inventaire(
     quantite INT,
     id_personnage INT NOT NULL,
     PRIMARY KEY(id_inventaire),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
+    CONSTRAINT fk_inventaire_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
 );
 
 CREATE TABLE IF NOT EXISTS caracteristique_personnage(
@@ -174,8 +179,8 @@ CREATE TABLE IF NOT EXISTS caracteristique_personnage(
     valeur_actuelle INT NOT NULL,
     valeur_max INT NOT NULL,
     PRIMARY KEY(id_personnage, id_caracteristique),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
-    FOREIGN KEY(id_caracteristique) REFERENCES caracteristique(id_caracteristique)
+    CONSTRAINT fk_caracteristique_personnage_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
+    CONSTRAINT fk_caracteristique_personnage_caracteristique FOREIGN KEY(id_caracteristique) REFERENCES caracteristique(id_caracteristique)
 );
 
 CREATE TABLE IF NOT EXISTS reputation_personnalisee(
@@ -184,7 +189,7 @@ CREATE TABLE IF NOT EXISTS reputation_personnalisee(
     valeur VARCHAR(20) NOT NULL,
     id_personnage INT NOT NULL,
     PRIMARY KEY(id_reputation),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
+    CONSTRAINT fk_reputation_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
 );
 
 CREATE TABLE IF NOT EXISTS competence_personnage(
@@ -193,29 +198,29 @@ CREATE TABLE IF NOT EXISTS competence_personnage(
     id_personnage INT NOT NULL,
     id_competence INT NOT NULL,
     PRIMARY KEY(id_personnage, id_competence),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
-    FOREIGN KEY(id_competence) REFERENCES competence(id_competence)
+    CONSTRAINT fk_competence_personnage_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
+    CONSTRAINT fk_competence_personnage_competence FOREIGN KEY(id_competence) REFERENCES competence(id_competence)
 );
 
 CREATE TABLE IF NOT EXISTS magie_personnage(
     id_personnage INT,
     id_magie INT,
     PRIMARY KEY(id_magie, id_personnage),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
-    FOREIGN KEY(id_magie) REFERENCES magie(id_magie)
+    CONSTRAINT fk_magie_personnage_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
+    CONSTRAINT fk_magie_personnage_magie FOREIGN KEY(id_magie) REFERENCES magie(id_magie)
 );
 
 CREATE TABLE IF NOT EXISTS rituel_personnage(    id_personnage INT,
     id_rituel INT,
     PRIMARY KEY(id_rituel, id_personnage),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
-    FOREIGN KEY(id_rituel) REFERENCES rituel(id_rituel)
+    CONSTRAINT fk_rituel_personnage_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
+    CONSTRAINT fk_rituel_personnage_rituel FOREIGN KEY(id_rituel) REFERENCES rituel(id_rituel)
 );
 
 CREATE TABLE IF NOT EXISTS envoutement_personnage(
     id_personnage INT,
     id_envoutement INT,
     PRIMARY KEY(id_personnage, id_envoutement),
-    FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
-    FOREIGN KEY(id_envoutement) REFERENCES envoutement(id_envoutement)
+    CONSTRAINT fk_envoutement_personnage_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage),
+    CONSTRAINT fk_envoutement_personnage_envoutement FOREIGN KEY(id_envoutement) REFERENCES envoutement(id_envoutement)
 );

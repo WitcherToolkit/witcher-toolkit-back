@@ -43,7 +43,7 @@ public class CompetenceProfession {
 	@ManyToOne
 	@JsonIgnore
 	@MapsId("idProfession")
-	@JoinColumn(name = "id_profession", nullable = false)
+	@JoinColumn(name = "id_profession", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_profession_profession"))
 	private Profession profession;
 
 	/**
@@ -54,7 +54,7 @@ public class CompetenceProfession {
 	 */
 	@ManyToOne
 	@MapsId("idCompetence")
-	@JoinColumn(name = "id_competence", nullable = false)
+	@JoinColumn(name = "id_competence", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_profession_competence"))
 	private Competence competence;
 
 }

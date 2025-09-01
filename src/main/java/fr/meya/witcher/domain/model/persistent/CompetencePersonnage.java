@@ -20,12 +20,12 @@ public class CompetencePersonnage {
 
 	@ManyToOne
 	@MapsId("idCompetence")
-	@JoinColumn(name = "id_competence", nullable = false)
+	@JoinColumn(name = "id_competence", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_personnage_competence"))
 	private Competence competence;
 
 	@ManyToOne
 	@MapsId("idPersonnage")
-	@JoinColumn(name = "id_personnage", nullable = false)
+	@JoinColumn(name = "id_personnage", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_personnage_personnage"))
 	private Personnage personnage;
 
 	@NotBlank

@@ -50,17 +50,17 @@ public class Personnage {
 	private String pieds;
 	//----------------------------------------------------------------------------------------------------------------//
 
-	@ManyToOne
-	@JoinColumn(name = "id_race", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_race", nullable = false, foreignKey = @ForeignKey(name = "fk_personnage_race"))
 	private Race race;
 
-	@ManyToOne
-	@JoinColumn(name = "id_campagne")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_campagne", foreignKey = @ForeignKey(name = "fk_personnage_campagne"))
 	private Campagne campagne;
 
-	@ManyToOne
-	@JoinColumn(name = "id_profil_utilisateur")
-	private ProfilUtilisateur profilUtilisateur;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_personnage_user"))
+	private User user;
 
 	@OneToMany(mappedBy = "personnage")
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList = new ArrayList<>();

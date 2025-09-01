@@ -30,6 +30,6 @@ public class ReputationWiki {
     private String valeur;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_race", nullable = false)
+    @JoinColumn(name = "id_race", nullable = false, foreignKey = @ForeignKey(name = "fk_reputation_wiki_race"))
     private Race race;
 }

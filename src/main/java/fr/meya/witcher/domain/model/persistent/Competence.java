@@ -42,8 +42,8 @@ public class Competence {
 	@Size( max = 20)
 	private String specialisation;
 
-	@ManyToOne
-	@JoinColumn(name = "id_caracteristique", referencedColumnName = "id_caracteristique")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_caracteristique", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_caracteristique"))
 	private Caracteristique caracteristique;
 
 	@OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
