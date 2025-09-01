@@ -11,8 +11,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserVolatile {
+
     private Long id;
+
     private String email;
+
     private String password;
+
     private Set<RoleEnum> roles;
 }

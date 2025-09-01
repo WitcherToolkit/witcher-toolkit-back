@@ -10,7 +10,6 @@ public interface UserMapper {
     @Mapping(target = "id", source = "iduser")
     UserVolatile toUserDto(User user);
 
-    // Si besoin, ajoute la méthode inverse
     @Mapping(target = "iduser", source = "id")
     User toUserEntity(UserVolatile dto);
 }
