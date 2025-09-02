@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS caracteristique(
     nom VARCHAR(16) NOT NULL,
     code VARCHAR(6) NOT NULL,
     description TEXT NOT NULL,
+    type VARCHAR(11) NOT NULL,
     PRIMARY KEY(id_caracteristique)
 );
 
@@ -139,7 +140,7 @@ CREATE TABLE IF NOT EXISTS campagne(
 
 CREATE TABLE IF NOT EXISTS personnage(
     id_personnage INT AUTO_INCREMENT,
-    nom_personnage VARCHAR(50),
+    nom_personnage VARCHAR(50) NOT NULL,
     nom_joueur VARCHAR(50),
     nom_image VARCHAR(100),
     url_image TEXT,
@@ -152,12 +153,14 @@ CREATE TABLE IF NOT EXISTS personnage(
     poings VARCHAR(10),
     pieds VARCHAR(10),
     id_profession INT NOT NULL,
+    id_inventaire INT,
     id_race INT NOT NULL,
     id_campagne INT,
     id_user INT,
     PRIMARY KEY(id_personnage),
     CONSTRAINT fk_personnage_profession FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
     CONSTRAINT fk_personnage_race FOREIGN KEY(id_race) REFERENCES race(id_race),
+    CONSTRAINT fk_personne_inventaire FOREIGN KEY(id_inventaire) REFERENCES inventaire(id_inventaire),
     CONSTRAINT fk_personnage_campagne FOREIGN KEY(id_campagne) REFERENCES campagne(id_campagne),
     CONSTRAINT fk_personnage_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );

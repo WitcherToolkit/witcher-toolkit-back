@@ -1,6 +1,9 @@
 package fr.meya.witcher.message.response;
 
+import fr.meya.witcher.domain.model.enums.DangerEnum;
+import fr.meya.witcher.domain.model.enums.TypeCaracteristiqueEnum;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +26,8 @@ public class CaracteristiqueVolatile {
 
 	@NotBlank(message = "error.caracteristique.description.required")
 	private String description;
+
+	@NotNull(message = "error.caracteristique.type.required")
+	private TypeCaracteristiqueEnum type;
 
 }
