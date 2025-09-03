@@ -42,6 +42,10 @@ public class Competence {
 	@Size( max = 20)
 	private String specialisation;
 
+	private int step;
+
+	private String type;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_caracteristique", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_caracteristique"))
 	private Caracteristique caracteristique;

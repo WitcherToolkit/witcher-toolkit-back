@@ -44,7 +44,7 @@ public class CompetenceService implements ICompetenceService {
 
 	@Override
 	public List<CompetenceVolatile> getCompetenceList() {
-		return competenceRepository.findAll().stream().map(competenceMapper::toCompetenceDto).toList();
+		return competenceRepository.findAllByOrderByNomAsc().stream().map(competenceMapper::toCompetenceDto).toList();
 	}
 
 	@Override

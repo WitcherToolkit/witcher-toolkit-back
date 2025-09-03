@@ -29,6 +29,10 @@ public class CompetenceVolatile {
 	@Size( max = 20)
 	private String specialisation;
 
+	private int step;
+
+	private String type;
+
 	@NotBlank(message = "error.competence.nom.required")
 	private CaracteristiqueVolatile caracteristique;
 

@@ -44,7 +44,7 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 
 	@Override
 	public List<CaracteristiqueVolatile> getCaracteristiqueList(){
-		return caracteristiqueRepository.findAll().stream().map(caracteristiqueMapper::toCaracteristiqueDto).toList();
+		return caracteristiqueRepository.findAllByOrderByNomAsc().stream().map(caracteristiqueMapper::toCaracteristiqueDto).toList();
 	}
 
 	@Override
