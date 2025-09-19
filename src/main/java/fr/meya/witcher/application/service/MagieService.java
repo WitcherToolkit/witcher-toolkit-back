@@ -42,8 +42,12 @@ public class MagieService implements IMagieService {
     }
 
     @Override
-    public List<MagieVolatile> getMagieList() {
-        return iMagieRepository.findAll().stream()
+    public List<MagieVolatile> getMagieList(String niveau) {
+        List<Magie> magies = (niveau == null)
+                ? iMagieRepository.findAll()
+                : iMagieRepository.findByNiveauIgnoreCase(niveau);
+
+        return magies.stream()
                 .map(magieMapper::toMagieDto)
                 .sorted(Comparator.comparing(MagieVolatile::getNom, String.CASE_INSENSITIVE_ORDER))
                 .toList();

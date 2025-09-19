@@ -24,9 +24,9 @@ public class MagieController {
     }
 
     @GetMapping(value = "/list")
-    public ResponseEntity<List<MagieVolatile>> listMagie() {
-        log.info("consultation magie");
-        List<MagieVolatile> result = iMagieService.getMagieList();
+    public ResponseEntity<List<MagieVolatile>> listMagie(@RequestParam(required = false) String niveau) {
+        log.info("consultation magie" + (niveau != null ? " filtrée par niveau : " + niveau : ""));
+        List<MagieVolatile> result = iMagieService.getMagieList(niveau);
         return ResponseEntity.ok(result);
     }
 

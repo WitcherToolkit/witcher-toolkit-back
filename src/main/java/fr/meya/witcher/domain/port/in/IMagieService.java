@@ -9,7 +9,7 @@ public interface IMagieService {
 
     boolean isValid(MagieVolatile magieVolatile);
 
-    List<MagieVolatile> getMagieList();
+    List<MagieVolatile> getMagieList(String niveau);
 
     Magie getMagie(Long idMagie);
 
