@@ -8,9 +8,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 /**
- * Caracteristiques volatiles
+ * Caracteristiques volatiles commentaire test
  */
 @Data
 @AllArgsConstructor
