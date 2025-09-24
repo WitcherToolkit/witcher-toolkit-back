@@ -1,11 +1,13 @@
 package fr.meya.witcher.infrastructure.adapter.in;
 
+import fr.meya.witcher.application.mapper.PersonnageMapper;
+import fr.meya.witcher.domain.model.persistent.Personnage;
+import fr.meya.witcher.domain.port.in.IPersonnageService;
 import fr.meya.witcher.message.response.CompetencePersonnageVolatile;
+import fr.meya.witcher.message.response.PersonnageVolatile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +24,12 @@ public class PersonnageController {
     }
 
     // Liste des personnages
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     public ResponseEntity<List<CompetencePersonnageVolatile>> listPersonnages() {
         log.info("Consultation des personnages");
         List<PersonnageVolatile> result = iPersonnageService.getPersonnageList();
         return ResponseEntity.ok(result);
-    }
+    }*/
 
     // Consulter un personnage par son ID
     @GetMapping("/{id}")
