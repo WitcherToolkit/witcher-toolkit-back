@@ -1,5 +1,6 @@
 package fr.meya.witcher.domain.model.persistent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,5 +34,11 @@ public class Inventaire {
     private String type;
 
     private String effet;
+
+    @ManyToOne
+    @JsonIgnore
+    @MapsId("idPersonnage")
+    @JoinColumn(name = "id_personnage", nullable = false, foreignKey = @ForeignKey(name = "fk_inventaire_personnage"))
+    private Personnage personnage;
 
 }

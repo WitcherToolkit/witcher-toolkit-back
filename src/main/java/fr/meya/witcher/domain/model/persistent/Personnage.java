@@ -74,4 +74,7 @@ public class Personnage {
 	@OneToMany(mappedBy = "personnage")
 	private List<EnvoutementPersonnage> envoutementPersonnageList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "personnage")
+    private List<Inventaire>  inventaireList = new ArrayList<>();
+
 }

@@ -146,7 +146,8 @@ CREATE TABLE IF NOT EXISTS inventaire(
     type VARCHAR(10),
     effet TEXT,
     quantite INT,
-    PRIMARY KEY(id_inventaire)
+    PRIMARY KEY(id_inventaire),
+    CONSTRAINT fk_inventaire_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
 );
 
 CREATE TABLE IF NOT EXISTS personnage(
@@ -171,7 +172,6 @@ CREATE TABLE IF NOT EXISTS personnage(
     PRIMARY KEY(id_personnage),
     CONSTRAINT fk_personnage_profession FOREIGN KEY(id_profession) REFERENCES profession(id_profession),
     CONSTRAINT fk_personnage_race FOREIGN KEY(id_race) REFERENCES race(id_race),
-    CONSTRAINT fk_personne_inventaire FOREIGN KEY(id_inventaire) REFERENCES inventaire(id_inventaire),
     CONSTRAINT fk_personnage_campagne FOREIGN KEY(id_campagne) REFERENCES campagne(id_campagne),
     CONSTRAINT fk_personnage_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );

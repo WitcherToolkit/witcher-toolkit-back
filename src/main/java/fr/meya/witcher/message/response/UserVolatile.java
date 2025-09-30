@@ -12,9 +12,11 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserVolatile {
 
-    private Long id;
+    private Long iduser;
 
     private String email;
+
+    private String pseudo;
 
     private String password;
 
