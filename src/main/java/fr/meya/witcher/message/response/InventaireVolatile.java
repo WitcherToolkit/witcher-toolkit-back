@@ -20,7 +20,4 @@ public class InventaireVolatile {
 
     private String effet;
 
-    private boolean special;
-
-
 }

@@ -1,12 +1,16 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.CaracteristiquePersonnage;
 import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.domain.model.persistent.User;
-import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PersonnageVolatile {
 
     private long idPersonnage;
@@ -42,8 +46,8 @@ public class PersonnageVolatile {
 
     private List<InventaireVolatile> inventaireList;
 
-    private Race race;
+    private RaceVolatile race;
 
-    private User user;
+    private UserVolatile user;
 
 }

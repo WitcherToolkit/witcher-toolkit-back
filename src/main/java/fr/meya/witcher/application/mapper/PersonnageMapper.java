@@ -4,7 +4,17 @@ import fr.meya.witcher.domain.model.persistent.Personnage;
 import fr.meya.witcher.message.response.PersonnageVolatile;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+
+@Mapper(
+        componentModel = "spring",
+        uses = {
+                UserMapper.class,
+                RaceMapper.class,
+                InventaireMapper.class,
+                CaracteristiquePersonnageMapper.class,
+                CompetencePersonnageMapper.class
+        }
+)
 public interface PersonnageMapper {
 
     // Convertir l'entité persistante en DTO
