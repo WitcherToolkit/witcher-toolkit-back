@@ -1,8 +1,11 @@
 package fr.meya.witcher.message.response;
 
+import fr.meya.witcher.domain.model.persistent.CaracteristiquePersonnage;
 import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.domain.model.persistent.User;
 import jakarta.persistence.Column;
+
+import java.util.List;
 
 public class PersonnageVolatile {
 
@@ -32,6 +35,12 @@ public class PersonnageVolatile {
 
     private String pieds;
     //----------------------------------------------------------------------------------------------------------------//
+
+    private List<CompetencePersonnageVolatile> competencePersonnageList;
+
+    private List<CaracteristiquePersonnageVolatile> caracteristiquePersonnageList;
+
+    private List<InventaireVolatile> inventaireList;
 
     private Race race;
 

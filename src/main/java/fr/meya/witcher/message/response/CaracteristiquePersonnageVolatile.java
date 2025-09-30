@@ -1,7 +1,5 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.Competence;
-import fr.meya.witcher.domain.model.persistent.Personnage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetencePersonnageVolatile {
-    private CompetenceVolatile competence;
+public class CaracteristiquePersonnageVolatile {
+    private CaracteristiqueVolatile caracteristique;
 
     // ne pas mettre car créer une dépendence cyclique :
     //private Personnage personnage;

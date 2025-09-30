@@ -20,7 +20,7 @@ public class CompetenceVolatile {
 	@NotBlank(message = "error.competence.description.required")
 	private String description;
 
-	@NotBlank(message = "error.competence.exclusive.required")
+	//@NotBlank(message = "error.competence.exclusive.required")
     private boolean exclusive;
 
 	@Size( max = 20)
