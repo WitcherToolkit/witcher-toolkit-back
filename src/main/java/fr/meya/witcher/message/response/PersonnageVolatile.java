@@ -1,6 +1,5 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.RituelPersonnage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
