@@ -36,16 +36,16 @@ public class PersonnageService implements IPersonnageService {
     private final ValidationUtils validationUtils;
 
     public PersonnageService(
-             IPersonnageRepository personnageRepository,
-             PersonnageMapper personnageMapper,
-             MessageSource messageSource,
-             IRaceRepository raceRepository,
-             IProfessionRepository professionRepository,
-             ICompetenceRepository competenceRepository,
-             ICaracteristiqueRepository  caracteristiqueRepository,
-             IRituelRepository rituelRepository,
-             IEnvoutementRepository envoutementRepository
-            ) {
+            IPersonnageRepository personnageRepository,
+            PersonnageMapper personnageMapper,
+            MessageSource messageSource,
+            IRaceRepository raceRepository,
+            IProfessionRepository professionRepository,
+            ICompetenceRepository competenceRepository,
+            ICaracteristiqueRepository  caracteristiqueRepository,
+            IRituelRepository rituelRepository,
+            IEnvoutementRepository envoutementRepository
+    ) {
         this.personnageRepository = personnageRepository;
         this.raceRepository = raceRepository;
         this.professionRepository = professionRepository;
@@ -62,7 +62,6 @@ public class PersonnageService implements IPersonnageService {
         if (personnageVolatile == null) {
             throw new WitcherToolkitExeption("error.personnage.null");
         }
-        // Tu peux ajouter d'autres règles ici
         return true;
     }
 
@@ -74,16 +73,21 @@ public class PersonnageService implements IPersonnageService {
     }
 
     @Override
-    public Personnage getPersonnage(Long idPersonnage) {
+    public PersonnageVolatile getPersonnage(Long idPersonnage) {  // ← Changé le type de retour
+        log.info("Récupération du personnage avec l'ID : {}", idPersonnage);
+
         if (idPersonnage == null) {
             throw new WitcherToolkitExeption("L'ID du personnage est null.");
         }
-        return personnageRepository.findById(idPersonnage)
+
+        Personnage personnage = personnageRepository.findById(idPersonnage)
                 .orElseThrow(() -> new WitcherToolkitExeption("Personnage avec l'ID " + idPersonnage + " non trouvé."));
+
+        return personnageMapper.toPersonnageDto(personnage);  // ← Retourne le DTO
     }
 
     @Override
-    public Personnage createPersonnage(PersonnageVolatile personnageVolatile) {
+    public PersonnageVolatile createPersonnage(PersonnageVolatile personnageVolatile) {
         isValid(personnageVolatile);
 
         // 1. Mapper DTO → Entité
@@ -137,12 +141,12 @@ public class PersonnageService implements IPersonnageService {
             }
         }
 
-        // Inventaire (pas de clé composite)
+        // Inventaire
         if (personnage.getInventaireList() != null) {
             personnage.getInventaireList().forEach(inv -> inv.setPersonnage(personnage));
         }
 
-        // RituelPersonnage - Créer les entités de liaison manuellement
+        // RituelPersonnage
         if (personnageVolatile.getRituelList() != null && !personnageVolatile.getRituelList().isEmpty()) {
             List<RituelPersonnage> rituelPersonnages = new ArrayList<>();
 
@@ -154,7 +158,7 @@ public class PersonnageService implements IPersonnageService {
 
                     RituelPersonnageId id = new RituelPersonnageId();
                     id.setIdRituel(dtoRituel.getIdRituel());
-                    id.setIdPersonnage(null); // Sera rempli par @MapsId
+                    id.setIdPersonnage(null);
                     rituelPerso.setIdRituelPersonnage(id);
 
                     rituelPersonnages.add(rituelPerso);
@@ -164,7 +168,7 @@ public class PersonnageService implements IPersonnageService {
             personnage.setRituelPersonnageList(rituelPersonnages);
         }
 
-        // EnvoutementPersonnage - Créer les entités de liaison manuellement
+        // EnvoutementPersonnage
         if (personnageVolatile.getEnvoutementList() != null && !personnageVolatile.getEnvoutementList().isEmpty()) {
             List<EnvoutementPersonnage> envoutementPersonnages = new ArrayList<>();
 
@@ -176,7 +180,7 @@ public class PersonnageService implements IPersonnageService {
 
                     EnvoutementPersonnageId id = new EnvoutementPersonnageId();
                     id.setIdEnvoutement(dtoEnv.getIdEnvoutement());
-                    id.setIdPersonnage(null); // Sera rempli par @MapsId
+                    id.setIdPersonnage(null);
                     envPerso.setId(id);
 
                     envoutementPersonnages.add(envPerso);
@@ -186,25 +190,48 @@ public class PersonnageService implements IPersonnageService {
             personnage.setEnvoutementPersonnageList(envoutementPersonnages);
         }
 
-        return personnageRepository.save(personnage);
+        // 3. Sauvegarder L'ENTITÉ en base de données
+        Personnage saved = personnageRepository.save(personnage);
+
+        // 4. Convertir L'ENTITÉ SAUVEGARDÉE → DTO pour le retour au front
+        return personnageMapper.toPersonnageDto(saved);
     }
 
     @Override
-    public Personnage updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile) {
+    public PersonnageVolatile updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile) {  // ← Changé le type de retour
         log.info("Début de la mise à jour du personnage - ID : {} - Données : {}", idPersonnage, personnageVolatile);
         isValid(personnageVolatile);
 
-        Personnage existing = getPersonnage(idPersonnage);
+        // 1. Récupérer l'entité existante
+        if (idPersonnage == null) {
+            throw new WitcherToolkitExeption("L'ID du personnage est null.");
+        }
+
+        Personnage existing = personnageRepository.findById(idPersonnage)
+                .orElseThrow(() -> new WitcherToolkitExeption("Personnage avec l'ID " + idPersonnage + " non trouvé."));
+
+        // 2. Copier les propriétés non-null du DTO vers l'entité existante
         BeanUtils.copyProperties(personnageVolatile, existing, ObjectUtils.getNullPropertyNames(personnageVolatile));
 
+        // 3. Sauvegarder
         Personnage saved = personnageRepository.save(existing);
+
         log.info("Personnage mis à jour - ID : {}", saved.getIdPersonnage());
-        return saved;
+
+        // 4. Retourner le DTO
+        return personnageMapper.toPersonnageDto(saved);  // ← Retourne le DTO
     }
 
     @Override
     public void deletePersonnage(Long idPersonnage) {
-        Personnage personnage = getPersonnage(idPersonnage);
+        if (idPersonnage == null) {
+            throw new WitcherToolkitExeption("L'ID du personnage est null.");
+        }
+
+        Personnage personnage = personnageRepository.findById(idPersonnage)
+                .orElseThrow(() -> new WitcherToolkitExeption("Personnage avec l'ID " + idPersonnage + " non trouvé."));
+
         personnageRepository.delete(personnage);
+        log.info("Personnage supprimé - ID : {}", idPersonnage);
     }
 }

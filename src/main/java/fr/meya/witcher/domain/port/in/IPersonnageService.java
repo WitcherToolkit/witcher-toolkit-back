@@ -11,11 +11,11 @@ public interface IPersonnageService {
 
     List<PersonnageVolatile> getPersonnageList();
 
-    Personnage getPersonnage(Long idPersonnage);
+    PersonnageVolatile getPersonnage(Long idPersonnage);
 
-    Personnage createPersonnage(PersonnageVolatile personnageVolatile);
+    PersonnageVolatile createPersonnage(PersonnageVolatile personnageVolatile);
 
-    Personnage updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile);
+    PersonnageVolatile updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile);
 
     void deletePersonnage(Long idPersonnage);
 }
