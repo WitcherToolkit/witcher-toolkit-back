@@ -21,7 +21,7 @@ public class Inventaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inventaire")
-    private long idInventaire;
+    private Long idInventaire;
 
     @NotNull
     private int quantite;
@@ -35,10 +35,10 @@ public class Inventaire {
 
     private String effet;
 
-    @ManyToOne
-    @JsonIgnore
-    @MapsId("idPersonnage")
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_personnage", nullable = false, foreignKey = @ForeignKey(name = "fk_inventaire_personnage"))
+    @JsonIgnore
     private Personnage personnage;
 
 }

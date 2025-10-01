@@ -1,8 +1,6 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.domain.model.persistent.RituelPersonnage;
-import fr.meya.witcher.domain.model.persistent.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PersonnageVolatile {
 
-    private long idPersonnage;
+    private Long idPersonnage;
 
     private String nomJoueur;
 
@@ -41,6 +39,8 @@ public class PersonnageVolatile {
     private String pieds;
 
     //----------------------------------------------------------------------------------------------------------------//
+    private ProfessionVolatile profession;
+
     private RaceVolatile race;
 
     private UserVolatile user;
@@ -49,12 +49,10 @@ public class PersonnageVolatile {
 
     private List<CompetencePersonnageVolatile> competencePersonnageList;
 
-    private List<RituelVolatile> rituelPersonnageList;
+    private List<RituelVolatile> rituelList;
 
     private  List<EnvoutementVolatile> envoutementList;
 
     private List<InventaireVolatile> inventaireList;
-
-
 
 }

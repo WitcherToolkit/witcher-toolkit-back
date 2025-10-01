@@ -21,7 +21,7 @@ public class InventaireWiki {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inventaire_wiki")
-    private long idInventaireWiki;
+    private Long idInventaireWiki;
 
     @NotNull
     private int quantite;

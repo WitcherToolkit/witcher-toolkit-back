@@ -26,7 +26,7 @@ public class Magie {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_magie")
-	private long idMagie;
+	private Long idMagie;
 
 	@NotBlank
 	@Size(max = 60)

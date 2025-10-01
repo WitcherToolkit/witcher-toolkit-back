@@ -140,16 +140,6 @@ CREATE TABLE IF NOT EXISTS campagne(
     CONSTRAINT fk_campagne_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
 
-CREATE TABLE IF NOT EXISTS inventaire(
-    id_inventaire INT AUTO_INCREMENT,
-    nom VARCHAR(60) NOT NULL,
-    type VARCHAR(10),
-    effet TEXT,
-    quantite INT,
-    PRIMARY KEY(id_inventaire),
-    CONSTRAINT fk_inventaire_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
-);
-
 CREATE TABLE IF NOT EXISTS personnage(
     id_personnage INT AUTO_INCREMENT,
     nom_personnage VARCHAR(50) NOT NULL,
@@ -175,6 +165,17 @@ CREATE TABLE IF NOT EXISTS personnage(
     CONSTRAINT fk_personnage_campagne FOREIGN KEY(id_campagne) REFERENCES campagne(id_campagne),
     CONSTRAINT fk_personnage_user FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
+
+CREATE TABLE IF NOT EXISTS inventaire(
+    id_inventaire INT AUTO_INCREMENT,
+    nom VARCHAR(60) NOT NULL,
+    type VARCHAR(10),
+    effet TEXT,
+    quantite INT,
+    id_personnage INT,
+    PRIMARY KEY(id_inventaire),
+    CONSTRAINT fk_inventaire_personnage FOREIGN KEY(id_personnage) REFERENCES personnage(id_personnage)
+    );
 
 CREATE TABLE IF NOT EXISTS caracteristique_personnage(
     id_personnage INT NOT NULL,

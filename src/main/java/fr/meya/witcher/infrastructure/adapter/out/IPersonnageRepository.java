@@ -1,4 +1,7 @@
 package fr.meya.witcher.infrastructure.adapter.out;
 
-public interface IPersonnageRepository {
+import fr.meya.witcher.domain.model.persistent.Personnage;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IPersonnageRepository  extends JpaRepository<Personnage, Long> {
 }

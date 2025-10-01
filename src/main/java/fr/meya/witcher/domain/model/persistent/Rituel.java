@@ -17,7 +17,7 @@ public class Rituel {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "id_rituel")
-	private long idRituel;
+	private Long idRituel;
 
 	@NotBlank
 	@Size(max = 60)

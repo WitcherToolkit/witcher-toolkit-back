@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CaracteristiqueVolatile {
 
-	private long idCaracteristique;
+	private Long idCaracteristique;
 
 	@NotBlank(message = "error.caracteristique.nom.required")
 	@Size( max = 16)

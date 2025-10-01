@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompetenceVolatile {
 
-	private long idCompetence;
+	private Long idCompetence;
 
 	@NotBlank(message = "error.competence.nom.required")
 	@Size( max = 50)

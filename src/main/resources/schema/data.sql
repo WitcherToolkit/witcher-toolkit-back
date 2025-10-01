@@ -445,10 +445,10 @@ INSERT INTO reputation_wiki (id_reputation_wiki, territoire, valeur, id_race) VA
 
 -- Ajout des utilisateurs
 INSERT INTO users (id_user, pseudo, email, password) VALUES
-    (1, 'administrateur', 'admin@demo.com', '$2a$10$3ch/84cKbH0k/5sNFuwXRuAlg9k56sIn6RRqR77Pm7fzD1smBfoRS'),
-    (2, 'utilisateur', 'user@demo.com', '$2a$10$3ch/84cKbH0k/5sNFuwXRuAlg9k56sIn6RRqR77Pm7fzD1smBfoRS');
+    (1, 'administrateur', 'admin@demo.com', '$2a$10$lJuSc5EoaqzFJR9wqPigtu6/wW3fqWSX9T0G6ih8tV09MGPbuxwdK'),
+    (2, 'utilisateur', 'user@demo.com', '$2a$10$lJuSc5EoaqzFJR9wqPigtu6/wW3fqWSX9T0G6ih8tV09MGPbuxwdK');
 
 -- Attribution des rôles
 INSERT INTO user_roles (id_user, role) VALUES
-    (1, 'ADMIN'),
-    (2, 'USER');
+    (1, 'ROLE_ADMIN'),
+    (2, 'ROLE_USER');

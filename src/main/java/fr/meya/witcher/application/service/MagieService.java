@@ -2,7 +2,6 @@ package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.MagieMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.IMagieService;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service

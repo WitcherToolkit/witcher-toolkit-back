@@ -24,7 +24,7 @@ public class Caracteristique {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_caracteristique")
-	private long idCaracteristique;
+	private Long idCaracteristique;
 
 	@NotBlank
 	@Size( max = 16)

@@ -1,9 +1,7 @@
 package fr.meya.witcher.domain.model.persistent;
 
-import fr.meya.witcher.domain.model.enums.DangerEnum;
 import fr.meya.witcher.domain.model.enums.RoleEnum;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ public class User {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
-	private long iduser;
+	private Long idUser;
 
 	@Column(unique = true, nullable = false)
 	private String email;
@@ -38,7 +36,7 @@ public class User {
 	@Column(name = "role")
 	private Set<RoleEnum> roles = new HashSet<>();// Initialisation par défaut avec new HashSet<>() pour éviter les NullPointerException.
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // Propage les opérations (persist, delete) sur les campagnes lorsqu’un user est supprimé.
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // Propage les opérations (persist, delete) sur les personnages lorsqu’un user est supprimé.
 	private List<Personnage> personnageList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user")

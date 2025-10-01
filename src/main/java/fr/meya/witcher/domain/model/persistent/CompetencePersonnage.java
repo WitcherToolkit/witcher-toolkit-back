@@ -4,7 +4,10 @@ import fr.meya.witcher.domain.model.key.CompetencePersonnageId;
 import fr.meya.witcher.domain.model.key.CompetenceProfessionId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,7 +15,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "competence_personnage")
 public class CompetencePersonnage {
 
 	@EmbeddedId
@@ -28,10 +34,10 @@ public class CompetencePersonnage {
 	@JoinColumn(name = "id_personnage", nullable = false, foreignKey = @ForeignKey(name = "fk_competence_personnage_personnage"))
 	private Personnage personnage;
 
-	@NotBlank
+	@NotNull
 	private int valeurActuelle;
 
-	@NotBlank
+	@NotNull
 	private int valeurMax;
 
 }

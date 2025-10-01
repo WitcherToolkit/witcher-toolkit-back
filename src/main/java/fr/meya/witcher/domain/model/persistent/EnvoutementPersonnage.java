@@ -16,7 +16,7 @@ import lombok.Setter;
 @Table(name = "envoutement_personnage")
 public class EnvoutementPersonnage {
     @EmbeddedId
-    private EnvoutementPersonnageId idEnvoutementPersonnage;
+    private EnvoutementPersonnageId id;
 
     @ManyToOne
     @JsonIgnore

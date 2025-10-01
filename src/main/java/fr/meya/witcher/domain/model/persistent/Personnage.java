@@ -18,7 +18,7 @@ public class Personnage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_personnage")
-	private long idPersonnage;
+	private Long idPersonnage;
 
 	@Column(name = "nom_joueur")
 	private String nomJoueur;
@@ -48,7 +48,11 @@ public class Personnage {
 	private String poings;
 
 	private String pieds;
+
 	//----------------------------------------------------------------------------------------------------------------//
+    @ManyToOne
+    @JoinColumn(name = "id_profession", nullable = false)
+    private Profession profession;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_race", nullable = false, foreignKey = @ForeignKey(name = "fk_personnage_race"))
@@ -65,16 +69,16 @@ public class Personnage {
 	@OneToMany(mappedBy = "personnage")
 	private List<CaracteristiquePersonnage> caracteristiquePersonnageList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "personnage")
+    @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CompetencePersonnage> competencePersonnageList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "personnage")
+    @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<RituelPersonnage> rituelPersonnageList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "personnage")
+    @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<EnvoutementPersonnage> envoutementPersonnageList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "personnage")
+    @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inventaire>  inventaireList = new ArrayList<>();
 
 }

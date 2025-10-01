@@ -22,7 +22,7 @@ public class Profession {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_profession")
-	private long idProfession;
+	private Long idProfession;
 
 	@NotBlank
 	@Size(max = 50)
@@ -49,7 +49,11 @@ public class Profession {
 	private int maxInvocation;
 
 	//----------------------------------------------------------------------------------------------------------------//
-	@OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "profession")
+    @JsonIgnore
+    private List<Personnage> personnages;
+
+    @OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private List<InventaireWiki> inventaireWikiList = new ArrayList<>();
 

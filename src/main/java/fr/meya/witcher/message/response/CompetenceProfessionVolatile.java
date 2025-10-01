@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompetenceProfessionVolatile {
-    private long idCompetenceProfession;
+    private Long idCompetenceProfession;
 
     private Long idProfession;
 

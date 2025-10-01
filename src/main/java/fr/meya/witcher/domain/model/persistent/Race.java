@@ -22,7 +22,7 @@ public class Race {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id_race")
-    private long idRace;
+    private Long idRace;
 
     @NotBlank
     private String nom;

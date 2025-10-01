@@ -16,7 +16,7 @@ public class Campagne {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_campagne")
-	private long idCampagne;
+	private Long idCampagne;
 
 	@NotBlank
 	private String nom;

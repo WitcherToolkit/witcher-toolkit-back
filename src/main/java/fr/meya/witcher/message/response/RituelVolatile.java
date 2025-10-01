@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RituelVolatile {
 
-    private long idRituel;
+    private Long idRituel;
 
     @NotBlank(message = "error.rituel.nom.required")
     @Size( max = 60)

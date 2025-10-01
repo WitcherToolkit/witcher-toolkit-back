@@ -23,7 +23,7 @@ public class Envoutement {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_envoutement")
-	private long idEnvoutement;
+	private Long idEnvoutement;
 
 	@NotBlank
 	@Size(max = 60)
