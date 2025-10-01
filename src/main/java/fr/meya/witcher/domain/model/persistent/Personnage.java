@@ -79,6 +79,9 @@ public class Personnage {
 	private List<EnvoutementPersonnage> envoutementPersonnageList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MagiePersonnage> magiePersonnageList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inventaire>  inventaireList = new ArrayList<>();
 
 }

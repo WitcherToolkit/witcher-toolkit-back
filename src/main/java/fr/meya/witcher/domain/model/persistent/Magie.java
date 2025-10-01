@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,9 +62,7 @@ public class Magie {
 	@Size(max = 25)
 	private String contre;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Pour éviter que hibernate ne charge inutilement la relation personnageList lors de l'update.
-	@JoinTable(name = "magie_personnage",
-			joinColumns = @JoinColumn(name = "id_magie"),
-			inverseJoinColumns = @JoinColumn(name = "id_personnage"))
-	private List<Personnage> personnageList;
+    //----------------------------------------------------------------------------------------------------------------//
+    @OneToMany(mappedBy = "magie")
+	private List<MagiePersonnage> personnageList = new ArrayList<>();
 }

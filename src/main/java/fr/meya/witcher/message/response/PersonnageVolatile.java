@@ -52,6 +52,8 @@ public class PersonnageVolatile {
 
     private  List<EnvoutementVolatile> envoutementList;
 
+    private  List<MagieVolatile> magieList;
+
     private List<InventaireVolatile> inventaireList;
 
 }

@@ -1,9 +1,11 @@
 package fr.meya.witcher.application.mapper;
 
 import fr.meya.witcher.domain.model.persistent.EnvoutementPersonnage;
+import fr.meya.witcher.domain.model.persistent.MagiePersonnage;
 import fr.meya.witcher.domain.model.persistent.Personnage;
 import fr.meya.witcher.domain.model.persistent.RituelPersonnage;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
+import fr.meya.witcher.message.response.MagieVolatile;
 import fr.meya.witcher.message.response.PersonnageVolatile;
 import fr.meya.witcher.message.response.RituelVolatile;
 import org.mapstruct.Mapper;
@@ -22,19 +24,22 @@ import java.util.stream.Collectors;
                 CaracteristiquePersonnageMapper.class,
                 CompetencePersonnageMapper.class,
                 RituelMapper.class,
-                EnvoutementMapper.class
+                EnvoutementMapper.class,
+                PersonnageMapper.class
         }
 )
 public interface PersonnageMapper {
 
     @Mapping(target = "rituelList", expression = "java(mapRituels(personnage.getRituelPersonnageList()))")
     @Mapping(target = "envoutementList", expression = "java(mapEnvoutements(personnage.getEnvoutementPersonnageList()))")
+    @Mapping(target = "magieList", expression = "java(mapMagies(personnage.getMagiePersonnageList()))")
     PersonnageVolatile toPersonnageDto(Personnage personnage);
 
     @Mapping(target = "race", ignore = true)
     @Mapping(target = "profession", ignore = true)
     @Mapping(target = "rituelPersonnageList", ignore = true)
     @Mapping(target = "envoutementPersonnageList", ignore = true)
+    @Mapping(target = "magiePersonnageList", ignore = true)
     Personnage toPersonnageEntity(PersonnageVolatile dto);
 
     // Mapping des rituels
@@ -58,6 +63,18 @@ public interface PersonnageMapper {
         return envoutementPersonnageList.stream()
                 .filter(ep -> ep.getEnvoutement() != null)
                 .map(ep -> envoutementMapper.toEnvoutementDto(ep.getEnvoutement()))
+                .collect(Collectors.toList());
+    }
+
+    // Mapping des magies
+    default List<MagieVolatile> mapMagies(List<MagiePersonnage> magiePersonnageList) {
+        if (magiePersonnageList == null) {
+            return null;
+        }
+        MagieMapper magieMapper = org.mapstruct.factory.Mappers.getMapper(MagieMapper.class);
+        return magiePersonnageList.stream()
+                .filter(mp -> mp != null && mp.getMagie() != null)
+                .map(mp -> magieMapper.toMagieDto(mp.getMagie()))
                 .collect(Collectors.toList());
     }
 }
