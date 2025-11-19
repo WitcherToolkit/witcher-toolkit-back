@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Profession;
 import fr.meya.witcher.message.response.ProfessionVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IProfessionService {
 
@@ -11,14 +12,14 @@ public interface IProfessionService {
 
     List<ProfessionVolatile> getProfessionList();
 
-    Profession getProfession(Long idProfession);
+    Profession getProfession(UUID idProfession);
 
-    ProfessionVolatile getProfessionWithCompetences(Long idProfession);
+    ProfessionVolatile getProfessionWithCompetences(UUID idProfession);
 
     Profession createProfession(ProfessionVolatile professionVolatile);
 
-    Profession updateProfession(Long idProfession, ProfessionVolatile professionVolatile);
+    Profession updateProfession(UUID idProfession, ProfessionVolatile professionVolatile);
 
-    void deleteProfession(Long idProfession);
+    void deleteProfession(UUID idProfession);
 
 }

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -73,7 +74,7 @@ public class PersonnageService implements IPersonnageService {
     }
 
     @Override
-    public PersonnageVolatile getPersonnage(Long idPersonnage) {  // ← Changé le type de retour
+    public PersonnageVolatile getPersonnage(UUID idPersonnage) {  // ← Changé le type de retour
         log.info("Récupération du personnage avec l'ID : {}", idPersonnage);
 
         if (idPersonnage == null) {
@@ -110,7 +111,7 @@ public class PersonnageService implements IPersonnageService {
                 CompetencePersonnageVolatile dtoComp = personnageVolatile.getCompetencePersonnageList().get(i);
 
                 if (dtoComp.getCompetence() != null && dtoComp.getCompetence().getIdCompetence() != null) {
-                    Long idComp = dtoComp.getCompetence().getIdCompetence();
+                    UUID idComp = dtoComp.getCompetence().getIdCompetence();
                     comp.setCompetence(competenceRepository.getReferenceById(idComp));
 
                     CompetencePersonnageId id = new CompetencePersonnageId();
@@ -129,7 +130,7 @@ public class PersonnageService implements IPersonnageService {
                 CaracteristiquePersonnageVolatile dtoCarac = personnageVolatile.getCaracteristiquePersonnageList().get(i);
 
                 if (dtoCarac.getCaracteristique() != null && dtoCarac.getCaracteristique().getIdCaracteristique() != null) {
-                    Long idCarac = dtoCarac.getCaracteristique().getIdCaracteristique();
+                    UUID idCarac = dtoCarac.getCaracteristique().getIdCaracteristique();
                     carac.setCaracteristique(caracteristiqueRepository.getReferenceById(idCarac));
 
                     CaracteristiquePersonnageId id = new CaracteristiquePersonnageId();
@@ -198,7 +199,7 @@ public class PersonnageService implements IPersonnageService {
     }
 
     @Override
-    public PersonnageVolatile updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile) {  // ← Changé le type de retour
+    public PersonnageVolatile updatePersonnage(UUID idPersonnage, PersonnageVolatile personnageVolatile) {  // ← Changé le type de retour
         log.info("Début de la mise à jour du personnage - ID : {} - Données : {}", idPersonnage, personnageVolatile);
         isValid(personnageVolatile);
 
@@ -223,7 +224,7 @@ public class PersonnageService implements IPersonnageService {
     }
 
     @Override
-    public void deletePersonnage(Long idPersonnage) {
+    public void deletePersonnage(UUID idPersonnage) {
         if (idPersonnage == null) {
             throw new WitcherToolkitExeption("L'ID du personnage est null.");
         }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -52,7 +53,7 @@ public class MagieService implements IMagieService {
     }
 
     @Override
-    public Magie getMagie(Long idMagie) {
+    public Magie getMagie(UUID idMagie) {
 
         if (idMagie == null) {
             throw new WitcherToolkitExeption("L'ID de la magie est null.");
@@ -71,7 +72,7 @@ public class MagieService implements IMagieService {
     }
 
     @Override
-    public Magie updateMagie(Long idMagie, MagieVolatile magieVolatile) {
+    public Magie updateMagie(UUID idMagie, MagieVolatile magieVolatile) {
         log.info("Début de la méthode updateMagie - ID : {} - Données reçues : {}", idMagie, magieVolatile);
 
         isValid(magieVolatile);
@@ -107,7 +108,7 @@ public class MagieService implements IMagieService {
     }
 
         @Override
-    public void deleteMagie(Long idMagie) {
+    public void deleteMagie(UUID idMagie) {
         Magie magieExistant = getMagie(idMagie);
         iMagieRepository.delete(magieExistant);
     }

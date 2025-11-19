@@ -2,22 +2,19 @@ package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.CaracteristiqueMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
-import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.ICaracteristiqueService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.ICaracteristiqueRepository;
 import fr.meya.witcher.message.response.CaracteristiqueVolatile;
-import fr.meya.witcher.message.response.MagieVolatile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -48,7 +45,7 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 	}
 
 	@Override
-	public Caracteristique getCaracteristique(Long idCaracteristique) {
+	public Caracteristique getCaracteristique(UUID idCaracteristique) {
 		if (idCaracteristique == null) {
 			throw new WitcherToolkitExeption("L'ID de la caractéristique est null.");
 		}
@@ -68,7 +65,7 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 	}
 
 	@Override
-	public Caracteristique updateCaracteristique(Long idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile) {
+	public Caracteristique updateCaracteristique(UUID idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile) {
 		log.info("Début de la méthode updateCaracteristique - ID : {} - Données reçues : {}", idCaracteristique, caracteristiqueVolatile);
 
 		isValid(caracteristiqueVolatile);
@@ -89,7 +86,7 @@ public class CaracteristiqueService implements ICaracteristiqueService {
 	}
 
 	@Override
-	public void deleteCaracteristique(Long idCaracteristique) {
+	public void deleteCaracteristique(UUID idCaracteristique) {
 		Caracteristique caracteristiqueExistant = getCaracteristique(idCaracteristique);
 		caracteristiqueRepository.delete(caracteristiqueExistant);
 	}

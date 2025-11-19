@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -32,7 +33,7 @@ public class RaceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RaceVolatile> getRaceById(@PathVariable Long id) {
+    public ResponseEntity<RaceVolatile> getRaceById(@PathVariable UUID id) {
 
         log.info("Consultation de la race avec l'ID : {}", id);
         Race race = iRaceService.getRaceById(id);
@@ -50,7 +51,7 @@ public class RaceController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<RaceVolatile> updateRace(@PathVariable Long id, @RequestBody RaceVolatile raceVolatile) {
+    public ResponseEntity<RaceVolatile> updateRace(@PathVariable UUID id, @RequestBody RaceVolatile raceVolatile) {
 
         log.info("Modification de la race - ID : {} - Données : {}", id, raceVolatile);
         Race updatedRace = iRaceService.updateRace(id, raceVolatile);
@@ -60,7 +61,7 @@ public class RaceController {
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteRace(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRace(@PathVariable UUID id) {
         log.info("Supprimer le race avec l'ID : {}", id);
 
         iRaceService.deleteRace(id);

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -33,7 +34,7 @@ public class EnvoutementController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<EnvoutementVolatile> updateEnvoutement(@PathVariable Long id, @Valid @RequestBody EnvoutementVolatile envoutementVolatile) {
+    public ResponseEntity<EnvoutementVolatile> updateEnvoutement(@PathVariable UUID id, @Valid @RequestBody EnvoutementVolatile envoutementVolatile) {
         log.info("Modification de l'envoutement - ID : {} - Données : {}", id, envoutementVolatile);
         Envoutement updatedEnvoutement = iEnvoutementService.updateEnvoutement(id, envoutementVolatile);
 
@@ -52,7 +53,7 @@ public class EnvoutementController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteEnvoutement(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEnvoutement(@PathVariable UUID id) {
         log.info("Supprimer l'envoûtement avec l'ID : {}", id);
 
         iEnvoutementService.deleteEnvoutement(id);

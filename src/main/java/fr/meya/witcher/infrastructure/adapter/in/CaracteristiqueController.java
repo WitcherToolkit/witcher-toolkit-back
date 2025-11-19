@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -31,7 +32,7 @@ public class CaracteristiqueController {
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<CaracteristiqueVolatile> updateCaracteristique( @PathVariable Long id, @RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
+	public ResponseEntity<CaracteristiqueVolatile> updateCaracteristique(@PathVariable UUID id, @RequestBody CaracteristiqueVolatile caracteristiqueVolatile) {
 		log.info("Modification de la caracteristique - ID : {} - Données : {}", id, caracteristiqueVolatile);
 		Caracteristique updatedCaracteristique = iCaracteristiqueService.updateCaracteristique(id, caracteristiqueVolatile);
 
@@ -47,7 +48,7 @@ public class CaracteristiqueController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Void> deleteCaracteristique(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCaracteristique(@PathVariable UUID id) {
 		log.info("Supprimer la caractéristique avec l'ID : {}", id);
 		iCaracteristiqueService.deleteCaracteristique(id);
 		// Retourne la caractéristique supprimée dans la réponse

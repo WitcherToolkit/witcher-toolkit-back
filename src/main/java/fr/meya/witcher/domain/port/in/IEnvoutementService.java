@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Envoutement;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IEnvoutementService {
 
@@ -11,11 +12,11 @@ public interface IEnvoutementService {
 
     List<EnvoutementVolatile> getEnvoutementList();
 
-    Envoutement getEnvoutement(Long idEnvoutement);
+    Envoutement getEnvoutement(UUID idEnvoutement);
 
     Envoutement createEnvoutement(EnvoutementVolatile envoutementVolatile);
 
-    Envoutement updateEnvoutement(Long idEnvoutement, EnvoutementVolatile envoutementVolatile);
+    Envoutement updateEnvoutement(UUID idEnvoutement, EnvoutementVolatile envoutementVolatile);
 
-    void deleteEnvoutement(Long idEnvoutement);
+    void deleteEnvoutement(UUID idEnvoutement);
 }

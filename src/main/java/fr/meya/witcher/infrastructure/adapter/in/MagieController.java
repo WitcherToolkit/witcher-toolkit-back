@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -31,7 +32,7 @@ public class MagieController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable Long id, @Valid @RequestBody MagieVolatile magieVolatile) {
+    public ResponseEntity<MagieVolatile> updateMagie(@PathVariable UUID id, @Valid @RequestBody MagieVolatile magieVolatile) {
         log.info("Modification de la magie - ID : {} - Données : {}", id, magieVolatile);
         Magie updatedMagie = iMagieService.updateMagie(id, magieVolatile);
 
@@ -50,7 +51,7 @@ public class MagieController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteMagie(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMagie(@PathVariable UUID id) {
         log.info("Supprimer la magie avec l'ID : {}", id);
 
         iMagieService.deleteMagie(id);

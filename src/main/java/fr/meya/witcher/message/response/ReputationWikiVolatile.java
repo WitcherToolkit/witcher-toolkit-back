@@ -1,12 +1,12 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.persistent.Race;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor

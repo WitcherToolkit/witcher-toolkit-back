@@ -2,22 +2,19 @@ package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.EnvoutementMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Envoutement;
-import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.IEnvoutementService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.IEnvoutementRepository;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
-import fr.meya.witcher.message.response.MagieVolatile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -50,7 +47,7 @@ public class EnvoutementService implements IEnvoutementService {
     }
 
     @Override
-    public Envoutement getEnvoutement(Long idEnvoutement) {
+    public Envoutement getEnvoutement(UUID idEnvoutement) {
         if (idEnvoutement == null) {
             throw new WitcherToolkitExeption("L'ID de l'envoûtement est null.");
         }
@@ -68,7 +65,7 @@ public class EnvoutementService implements IEnvoutementService {
     }
 
     @Override
-    public Envoutement updateEnvoutement(Long idEnvoutement, EnvoutementVolatile envoutementVolatile) {
+    public Envoutement updateEnvoutement(UUID idEnvoutement, EnvoutementVolatile envoutementVolatile) {
         log.info("Début de la méthode updateEnvoutement - ID : {} - Données reçues : {}", idEnvoutement, envoutementVolatile);
 
         isValid(envoutementVolatile);
@@ -99,7 +96,7 @@ public class EnvoutementService implements IEnvoutementService {
     }
 
     @Override
-    public void deleteEnvoutement(Long idEnvoutement) {
+    public void deleteEnvoutement(UUID idEnvoutement) {
         Envoutement envoutementExistant = getEnvoutement(idEnvoutement);
         envoutementRepository.delete(envoutementExistant);
     }

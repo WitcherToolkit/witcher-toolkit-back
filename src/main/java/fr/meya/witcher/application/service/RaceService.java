@@ -1,25 +1,18 @@
 package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.RaceMapper;
-import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
-import fr.meya.witcher.domain.model.persistent.Particularite;
 import fr.meya.witcher.domain.model.persistent.Race;
-import fr.meya.witcher.domain.model.persistent.ReputationWiki;
 import fr.meya.witcher.domain.port.in.IRaceService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
 import fr.meya.witcher.infrastructure.adapter.out.IRaceRepository;
-import fr.meya.witcher.message.response.ParticulariteVolatile;
 import fr.meya.witcher.message.response.RaceVolatile;
-import fr.meya.witcher.message.response.ReputationWikiVolatile;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -50,7 +43,7 @@ public class RaceService implements IRaceService {
     }
 
     @Override
-    public Race getRaceById(Long idRace) {
+    public Race getRaceById(UUID idRace) {
         if (idRace == null) {
             throw new IllegalArgumentException("L'ID de la race est null.");
         }
@@ -68,7 +61,7 @@ public class RaceService implements IRaceService {
     }
 
     @Override
-    public Race updateRace(Long idRace, RaceVolatile raceVolatile){
+    public Race updateRace(UUID idRace, RaceVolatile raceVolatile){
         log.info("Début de la méthode updateRace - ID : {} - Données reçues : {}", idRace, raceVolatile);
 
         isValid(raceVolatile);
@@ -89,7 +82,7 @@ public class RaceService implements IRaceService {
     }
 
     @Override
-    public void deleteRace(Long idRace) {
+    public void deleteRace(UUID idRace) {
         Race raceExistant = getRaceById(idRace);
         raceRepository.delete(raceExistant);
     }

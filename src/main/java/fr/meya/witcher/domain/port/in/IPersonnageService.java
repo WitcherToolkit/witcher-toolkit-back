@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Personnage;
 import fr.meya.witcher.message.response.PersonnageVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IPersonnageService {
 
@@ -11,12 +12,12 @@ public interface IPersonnageService {
 
     List<PersonnageVolatile> getPersonnageList();
 
-    PersonnageVolatile getPersonnage(Long idPersonnage);
+    PersonnageVolatile getPersonnage(UUID idPersonnage);
 
     PersonnageVolatile createPersonnage(PersonnageVolatile personnageVolatile);
 
-    PersonnageVolatile updatePersonnage(Long idPersonnage, PersonnageVolatile personnageVolatile);
+    PersonnageVolatile updatePersonnage(UUID idPersonnage, PersonnageVolatile personnageVolatile);
 
-    void deletePersonnage(Long idPersonnage);
+    void deletePersonnage(UUID idPersonnage);
 }
 

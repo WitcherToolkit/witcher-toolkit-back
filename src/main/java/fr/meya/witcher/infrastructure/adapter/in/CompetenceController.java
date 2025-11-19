@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -38,7 +39,7 @@ public class CompetenceController {
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<CompetenceVolatile> updateCompetence(@PathVariable Long id, @RequestBody CompetenceVolatile competenceVolatile) {
+	public ResponseEntity<CompetenceVolatile> updateCompetence(@PathVariable UUID id, @RequestBody CompetenceVolatile competenceVolatile) {
 		log.info("Modification de la competence - ID : {} - Données : {}", id, competenceVolatile);
 		Competence updatedCompetence = iCompetenceService.updateCompetence(id, competenceVolatile);
 
@@ -55,7 +56,7 @@ public class CompetenceController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Void> deleteCompetence(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCompetence(@PathVariable UUID id) {
 		log.info("Supprimer la compétence avec l'ID : {}", id);
 		iCompetenceService.deleteCompetence(id);
 		return ResponseEntity.noContent().build();

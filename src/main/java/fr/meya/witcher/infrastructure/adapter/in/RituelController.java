@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -30,7 +31,7 @@ public class RituelController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<RituelVolatile> updateRituel(@PathVariable Long id, @RequestBody RituelVolatile rituelVolatile) {
+    public ResponseEntity<RituelVolatile> updateRituel(@PathVariable UUID id, @RequestBody RituelVolatile rituelVolatile) {
         log.info("Modification du rituel - ID : {} - Données : {}", id, rituelVolatile);
         Rituel updatedRituel = iRituelService.updateRituel(id, rituelVolatile);
 
@@ -49,7 +50,7 @@ public class RituelController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteRituel(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRituel(@PathVariable UUID id) {
         log.info("Supprimer le rituel avec l'ID : {}", id);
 
         iRituelService.deleteRituel(id);

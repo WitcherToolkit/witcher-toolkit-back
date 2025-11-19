@@ -2,9 +2,7 @@ package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.CompetenceMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
-import fr.meya.witcher.domain.model.persistent.Caracteristique;
 import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.domain.port.in.ICompetenceService;
 import fr.meya.witcher.exeption.WitcherToolkitExeption;
@@ -16,7 +14,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -48,7 +46,7 @@ public class CompetenceService implements ICompetenceService {
 	}
 
 	@Override
-	public Competence getCompetence(Long idCompetence) {
+	public Competence getCompetence(UUID idCompetence) {
 		if (idCompetence == null) {
 			throw new WitcherToolkitExeption("L'ID de la competence est null.");
 		}
@@ -69,7 +67,7 @@ public class CompetenceService implements ICompetenceService {
 	}
 
 	@Override
-	public Competence updateCompetence(Long idCompetence, CompetenceVolatile competenceVolatile) {
+	public Competence updateCompetence(UUID idCompetence, CompetenceVolatile competenceVolatile) {
 		log.info("Début de la méthode updateCompetence - ID : {} - Données reçues : {}", idCompetence, competenceVolatile);
 
 		isValid(competenceVolatile);
@@ -106,7 +104,7 @@ public class CompetenceService implements ICompetenceService {
 
 
 	@Override
-	public void deleteCompetence(Long idCompetence) {
+	public void deleteCompetence(UUID idCompetence) {
 		Competence competenceExistant = getCompetence(idCompetence);
 		competenceRepository.delete(competenceExistant);
 	}

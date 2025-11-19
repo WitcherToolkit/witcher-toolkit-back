@@ -4,6 +4,7 @@ import fr.meya.witcher.message.response.CaracteristiqueVolatile;
 import fr.meya.witcher.domain.model.persistent.Caracteristique;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ICaracteristiqueService {
 
@@ -11,12 +12,12 @@ public interface ICaracteristiqueService {
 
 	List<CaracteristiqueVolatile> getCaracteristiqueList();
 
-	Caracteristique getCaracteristique(Long idCaracteristique);
+	Caracteristique getCaracteristique(UUID idCaracteristique);
 
 	Caracteristique createCaracteristique(CaracteristiqueVolatile caracteristique);
 
-	Caracteristique updateCaracteristique(Long idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile);
+	Caracteristique updateCaracteristique(UUID idCaracteristique, CaracteristiqueVolatile caracteristiqueVolatile);
 
-	void deleteCaracteristique(Long idCaracteristique);
+	void deleteCaracteristique(UUID idCaracteristique);
 
 }

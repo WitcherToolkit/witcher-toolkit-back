@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.message.response.MagieVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IMagieService {
 
@@ -11,11 +12,11 @@ public interface IMagieService {
 
     List<MagieVolatile> getMagieList(String niveau);
 
-    Magie getMagie(Long idMagie);
+    Magie getMagie(UUID idMagie);
 
     Magie createMagie(MagieVolatile magieVolatile);
 
-    Magie updateMagie(Long idMagie, MagieVolatile magieVolatile);
+    Magie updateMagie(UUID idMagie, MagieVolatile magieVolatile);
 
-    void deleteMagie(Long idMagie);
+    void deleteMagie(UUID idMagie);
 }

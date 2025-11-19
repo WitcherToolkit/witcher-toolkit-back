@@ -1,8 +1,6 @@
 package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.ProfessionMapper;
-import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.domain.model.persistent.CompetenceProfession;
@@ -14,12 +12,11 @@ import fr.meya.witcher.infrastructure.adapter.out.ICompetenceRepository;
 import fr.meya.witcher.infrastructure.adapter.out.IProfessionRepository;
 import fr.meya.witcher.message.response.ProfessionVolatile;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -52,7 +49,7 @@ public class ProfessionService implements IProfessionService {
     }
 
     @Override
-    public Profession getProfession(Long idProfession) {
+    public Profession getProfession(UUID idProfession) {
 
         if (idProfession == null) {
             throw new WitcherToolkitExeption("L'ID de la profession est null.");
@@ -63,7 +60,7 @@ public class ProfessionService implements IProfessionService {
     }
 
     @Override
-    public ProfessionVolatile getProfessionWithCompetences(Long idProfession) {
+    public ProfessionVolatile getProfessionWithCompetences(UUID idProfession) {
         if (idProfession == null) {
             throw new WitcherToolkitExeption("L'ID de la profession est null.");
         }
@@ -89,9 +86,10 @@ public class ProfessionService implements IProfessionService {
         if (profession.getCompetenceProfessionList() != null) {
             for (CompetenceProfession cp : profession.getCompetenceProfessionList()) {
                 cp.setProfession(profession);
-                // Correction ici :
-                Long idCompetence = cp.getCompetence().getIdCompetence();
-                Competence competence = iCompetenceRepository.findById(idCompetence).orElseThrow();
+
+                UUID idCompetence = cp.getCompetence().getIdCompetence();
+                Competence competence = iCompetenceRepository.findById(idCompetence)
+                        .orElseThrow(() -> new RuntimeException("Compétence non trouvée : " + idCompetence));
                 cp.setCompetence(competence);
             }
         }
@@ -105,7 +103,7 @@ public class ProfessionService implements IProfessionService {
     }
 
     @Override
-    public Profession updateProfession(Long idProfession, ProfessionVolatile professionVolatile) {
+    public Profession updateProfession(UUID idProfession, ProfessionVolatile professionVolatile) {
 
         log.info("Début de la méthode updateProfession - ID : {}, nom : {}, compétences reçues : {}",
                 idProfession,
@@ -150,7 +148,7 @@ public class ProfessionService implements IProfessionService {
     }
 
         @Override
-    public void deleteProfession(Long idProfession) {
+    public void deleteProfession(UUID idProfession) {
         Profession professionExistant = getProfession(idProfession);
         iProfessionRepository.delete(professionExistant);
     }

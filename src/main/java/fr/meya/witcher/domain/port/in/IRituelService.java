@@ -4,17 +4,18 @@ import fr.meya.witcher.domain.model.persistent.Rituel;
 import fr.meya.witcher.message.response.RituelVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IRituelService {
     boolean isValid(RituelVolatile rituelVolatile);
 
     List<RituelVolatile> getRituelList();
 
-    Rituel getRituel(Long idRituel);
+    Rituel getRituel(UUID idRituel);
 
     Rituel createRituel(RituelVolatile rituelVolatile);
 
-    Rituel updateRituel(Long idRituel, RituelVolatile rituelVolatile);
+    Rituel updateRituel(UUID idRituel, RituelVolatile rituelVolatile);
 
-    void deleteRituel(Long idRituel);
+    void deleteRituel(UUID idRituel);
 }

@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Race;
 import fr.meya.witcher.message.response.RaceVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IRaceService {
 
@@ -11,11 +12,11 @@ public interface IRaceService {
 
     List<RaceVolatile> getRaceList();
 
-    Race getRaceById(Long idRace);
+    Race getRaceById(UUID idRace);
 
     Race createRace(RaceVolatile raceVolatile);
 
-    Race updateRace(Long idRace, RaceVolatile raceVolatile);
+    Race updateRace(UUID idRace, RaceVolatile raceVolatile);
 
-    void deleteRace(Long idRace);
+    void deleteRace(UUID idRace);
 }

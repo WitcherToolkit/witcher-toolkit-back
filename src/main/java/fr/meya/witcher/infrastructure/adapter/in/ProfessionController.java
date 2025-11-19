@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -42,14 +43,14 @@ public class ProfessionController {
     }
 
     @GetMapping(value = "/detail/{id}") // Chemin mis à jour
-    public ResponseEntity<ProfessionVolatile> getProfessionCompetences(@PathVariable Long id) {
+    public ResponseEntity<ProfessionVolatile> getProfessionCompetences(@PathVariable UUID id) {
         log.info("Consultation des détails et compétences pour la profession avec l'ID : {}", id);
         ProfessionVolatile professionWithCompetences = iProfessionService.getProfessionWithCompetences(id);
         return ResponseEntity.ok(professionWithCompetences);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<ProfessionVolatile> updateProfession(@PathVariable Long id, @RequestBody ProfessionVolatile professionVolatile) {
+    public ResponseEntity<ProfessionVolatile> updateProfession(@PathVariable UUID id, @RequestBody ProfessionVolatile professionVolatile) {
         log.info("Modification de la profession' - ID : {} - Données : {}", id, professionVolatile);
         Profession updatedProfession = iProfessionService.updateProfession(id, professionVolatile);
 
@@ -57,7 +58,7 @@ public class ProfessionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteProfession(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProfession(@PathVariable UUID id) {
         log.info("Supprimer la profession avec l'ID : {}", id);
 
         iProfessionService.deleteProfession(id);

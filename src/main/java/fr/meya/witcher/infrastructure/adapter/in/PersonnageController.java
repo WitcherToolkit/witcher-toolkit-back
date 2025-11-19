@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -23,7 +24,7 @@ public class PersonnageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonnageVolatile> getPersonnage(@PathVariable Long id) {
+    public ResponseEntity<PersonnageVolatile> getPersonnage(@PathVariable UUID id) {
         log.info("Consultation du personnage - ID : {}", id);
         PersonnageVolatile personnage = iPersonnageService.getPersonnage(id);
         return ResponseEntity.ok(personnage);
@@ -39,14 +40,14 @@ public class PersonnageController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonnageVolatile> updatePersonnage(@PathVariable Long id, @RequestBody PersonnageVolatile personnageVolatile) {
+    public ResponseEntity<PersonnageVolatile> updatePersonnage(@PathVariable UUID id, @RequestBody PersonnageVolatile personnageVolatile) {
         log.info("Modification du personnage - ID : {}", id);
         PersonnageVolatile updatedPersonnage = iPersonnageService.updatePersonnage(id, personnageVolatile);
         return ResponseEntity.ok(updatedPersonnage);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePersonnage(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePersonnage(@PathVariable UUID id) {
         log.info("Suppression du personnage - ID : {}", id);
         iPersonnageService.deletePersonnage(id);
         return ResponseEntity.noContent().build();

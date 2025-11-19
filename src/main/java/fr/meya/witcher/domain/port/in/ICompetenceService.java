@@ -4,6 +4,7 @@ import fr.meya.witcher.domain.model.persistent.Competence;
 import fr.meya.witcher.message.response.CompetenceVolatile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ICompetenceService {
 
@@ -11,11 +12,11 @@ public interface ICompetenceService {
 
 	List<CompetenceVolatile> getCompetenceList();
 
-	Competence getCompetence(Long idCompetence);
+	Competence getCompetence(UUID idCompetence);
 
 	Competence createCompetence(CompetenceVolatile competenceVolatile);
 
-	Competence updateCompetence(Long idCompetence, CompetenceVolatile competenceVolatile);
+	Competence updateCompetence(UUID idCompetence, CompetenceVolatile competenceVolatile);
 
-	void deleteCompetence(Long idCompetence);
+	void deleteCompetence(UUID idCompetence);
 }

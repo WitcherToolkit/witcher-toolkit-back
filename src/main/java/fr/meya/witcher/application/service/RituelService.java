@@ -2,7 +2,6 @@ package fr.meya.witcher.application.service;
 
 import fr.meya.witcher.application.mapper.RituelMapper;
 import fr.meya.witcher.common.utils.ObjectUtils;
-import fr.meya.witcher.common.utils.ValidationRule;
 import fr.meya.witcher.common.utils.ValidationUtils;
 import fr.meya.witcher.domain.model.persistent.Rituel;
 import fr.meya.witcher.domain.port.in.IRituelService;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class RituelService implements IRituelService {
@@ -48,7 +47,7 @@ public class RituelService implements IRituelService {
     }
 
     @Override
-    public Rituel getRituel(Long idRituel) {
+    public Rituel getRituel(UUID idRituel) {
 
         if (idRituel == null) {
             throw new WitcherToolkitExeption("L'ID de la rituel est null.");
@@ -67,7 +66,7 @@ public class RituelService implements IRituelService {
     }
 
     @Override
-    public Rituel updateRituel(Long idRituel, RituelVolatile rituelVolatile) {
+    public Rituel updateRituel(UUID idRituel, RituelVolatile rituelVolatile) {
 
         Rituel rituelExistant = iRituelRepository.findById(idRituel)
                 .orElseThrow(() -> new WitcherToolkitExeption("Rituel non trouvée"));
@@ -79,7 +78,7 @@ public class RituelService implements IRituelService {
     }
 
     @Override
-    public void deleteRituel(Long idRituel) {
+    public void deleteRituel(UUID idRituel) {
         Rituel rituelExistant = getRituel(idRituel);
         iRituelRepository.delete(rituelExistant);
     }
