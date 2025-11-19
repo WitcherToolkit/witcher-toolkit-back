@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProfessionVolatile {
 
-    private Long idProfession;
+    private UUID idProfession;
 
     @NotBlank(message = "error.profession.nom.required")
     @Size( max = 50)

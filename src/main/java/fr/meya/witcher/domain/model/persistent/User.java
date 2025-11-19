@@ -4,10 +4,7 @@ import fr.meya.witcher.domain.model.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -17,10 +14,16 @@ import java.util.Set;
 @Table(name = "Users")
 public class User {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idUser == null) {
+            this.idUser = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
-	private Long idUser;
+	private UUID idUser;
 
 	@Column(unique = true, nullable = false)
 	private String email;

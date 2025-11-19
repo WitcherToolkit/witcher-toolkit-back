@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -16,10 +18,16 @@ import lombok.Setter;
 @Table(name = "reputation_wiki")
 public class ReputationWiki {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idReputationWiki == null) {
+            this.idReputationWiki = UUID.randomUUID();
+        }
+    }
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id_reputation_wiki")
-    private Long idReputationWiki;
+    private UUID idReputationWiki;
 
     @NotBlank
     @Size(max = 20)

@@ -1,6 +1,5 @@
 package fr.meya.witcher.message.response;
 
-import fr.meya.witcher.domain.model.enums.DangerEnum;
 import fr.meya.witcher.domain.model.enums.TypeCaracteristiqueEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +7,9 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
 /**
  * Caracteristiques volatiles
  */
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CaracteristiqueVolatile {
 
-	private Long idCaracteristique;
+	private UUID idCaracteristique;
 
 	@NotBlank(message = "error.caracteristique.nom.required")
 	@Size( max = 16)

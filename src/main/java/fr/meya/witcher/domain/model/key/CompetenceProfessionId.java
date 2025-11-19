@@ -5,6 +5,7 @@ import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Classe représentant la clé primaire composite de la table competence_profession.
@@ -19,9 +20,9 @@ import java.io.Serializable;
 public class CompetenceProfessionId implements Serializable {
 
     @Column(name = "id_profession")
-    private Long idProfession;
+    private UUID idProfession;
 
     @Column(name = "id_competence")
-    private Long idCompetence;
+    private UUID idCompetence;
 
 }

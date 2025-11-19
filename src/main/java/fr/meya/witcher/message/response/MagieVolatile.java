@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MagieVolatile {
 
-    private Long idMagie;
+    private UUID idMagie;
 
     @NotBlank(message = "error.magie.nom.required")
     @Size(max = 60, message = "{error.max.size}") //Mise en paramètre de la taille max pour le message d'erreur

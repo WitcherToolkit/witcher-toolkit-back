@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReputationWikiVolatile {
 
-    private Long idReputationWiki;
+    private UUID idReputationWiki;
 
     @NotBlank(message = "error.reputation.wiki.territoire.required")
     @Size( max = 20)

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -13,10 +15,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Particularite {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idParticularite == null) {
+            this.idParticularite = UUID.randomUUID();
+        }
+    }
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id_Particularite")
-    private Long idParticularite;
+    private UUID idParticularite;
 
     private String nom;
 

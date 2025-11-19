@@ -66,12 +66,19 @@
 			<version>3.0.0</version>
 		</dependency>
 
-		<!-- Base de données -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>3.3.3</version>
-		</dependency>
+        <!-- Base de données -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- UUID Generator (optionnel mais utile) -->
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>5.1.0</version>
+        </dependency>
 
 		<!-- Tests -->
 		<dependency>

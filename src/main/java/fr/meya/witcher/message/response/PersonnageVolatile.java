@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PersonnageVolatile {
 
-    private Long idPersonnage;
+    private UUID idPersonnage;
 
     private String nomJoueur;
 

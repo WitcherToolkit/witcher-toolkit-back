@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserVolatile {
 
-    private Long idUser;
+    private UUID idUser;
 
     private String email;
 

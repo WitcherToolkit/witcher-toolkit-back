@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InventaireVolatile {
 
-    private Long idInventaire;
+    private UUID idInventaire;
 
     private int quantite;
 

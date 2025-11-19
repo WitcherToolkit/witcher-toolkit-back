@@ -5,6 +5,7 @@ import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,9 +16,9 @@ import java.io.Serializable;
 public class CaracteristiquePersonnageId implements Serializable {
 
     @Column(name = "id_personnage")
-    private Long idPersonnage;
+    private UUID idPersonnage;
 
     @Column(name = "id_caracteristique")
-    private Long idCaracteristique;
+    private UUID idCaracteristique;
 
 }

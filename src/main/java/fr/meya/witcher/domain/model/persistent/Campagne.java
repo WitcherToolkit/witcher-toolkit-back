@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 /**
  * Campagne géré par les utilisateurs.
  */
@@ -13,10 +15,16 @@ import lombok.Setter;
 @Entity
 public class Campagne {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idCampagne == null) {
+            this.idCampagne = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_campagne")
-	private Long idCampagne;
+	private UUID idCampagne;
 
 	@NotBlank
 	private String nom;

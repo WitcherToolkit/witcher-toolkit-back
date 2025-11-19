@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe décrivant une race
@@ -19,10 +20,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Race {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idRace == null) {
+            this.idRace = UUID.randomUUID();
+        }
+    }
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id_race")
-    private Long idRace;
+    private UUID idRace;
 
     @NotBlank
     private String nom;

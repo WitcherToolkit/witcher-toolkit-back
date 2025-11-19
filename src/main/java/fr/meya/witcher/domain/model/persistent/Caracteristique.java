@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 /**
  * Classe représentant les caractéristiques d'un personnage (DEX, END, etc...)
  */
@@ -21,10 +23,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Caracteristique {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idCaracteristique == null) {
+            this.idCaracteristique = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_caracteristique")
-	private Long idCaracteristique;
+	private UUID idCaracteristique;
 
 	@NotBlank
 	@Size( max = 16)

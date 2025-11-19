@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RaceVolatile {
 
-    private Long idRace;
+    private UUID idRace;
 
     @NotBlank(message = "error.race.nom.required")
     @Size( max = 50)

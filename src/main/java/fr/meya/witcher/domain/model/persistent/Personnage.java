@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe décrivant un personnage
@@ -15,10 +16,16 @@ import java.util.List;
 @Entity
 public class Personnage {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idPersonnage == null) {
+            this.idPersonnage = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_personnage")
-	private Long idPersonnage;
+	private UUID idPersonnage;
 
 	@Column(name = "nom_joueur")
 	private String nomJoueur;

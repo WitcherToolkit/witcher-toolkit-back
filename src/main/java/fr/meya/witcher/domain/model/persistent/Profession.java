@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,10 +20,16 @@ import java.util.List;
 @Entity
 public class Profession {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idProfession == null) {
+            this.idProfession = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_profession")
-	private Long idProfession;
+	private UUID idProfession;
 
 	@NotBlank
 	@Size(max = 50)

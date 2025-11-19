@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Représente les sorts, signes et invocation qu'un mage, sorceleur ou prêtre peut faire.
@@ -24,10 +25,16 @@ import java.util.List;
 @Entity
 public class Magie {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idMagie == null) {
+            this.idMagie = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_magie")
-	private Long idMagie;
+	private UUID idMagie;
 
 	@NotBlank
 	@Size(max = 60)

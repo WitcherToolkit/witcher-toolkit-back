@@ -5,6 +5,7 @@ import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,8 +16,8 @@ import java.io.Serializable;
 public class CompetencePersonnageId implements Serializable {
 
     @Column(name = "id_personnage")
-    private Long idPersonnage;
+    private UUID idPersonnage;
 
     @Column(name = "id_competence")
-    private Long idCompetence;
+    private UUID idCompetence;
 }

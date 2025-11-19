@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,10 +21,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Envoutement {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idEnvoutement == null) {
+            this.idEnvoutement = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "id_envoutement")
-	private Long idEnvoutement;
+	private UUID idEnvoutement;
 
 	@NotBlank
 	@Size(max = 60)

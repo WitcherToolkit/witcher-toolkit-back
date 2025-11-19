@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InventaireWikiVolatile {
 
-    private Long idInventaireWiki;
+    private UUID idInventaireWiki;
 
     @NotNull(message = "error.inventaire.wiki.quantite.required")
     private int quantite;

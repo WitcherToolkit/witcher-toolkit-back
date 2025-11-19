@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnvoutementVolatile {
 
-    private Long idEnvoutement;
+    private UUID idEnvoutement;
 
     @NotBlank(message = "error.envoutement.nom.required")
     @Size( max = 60)

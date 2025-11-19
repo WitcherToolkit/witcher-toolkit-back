@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,10 +20,16 @@ import lombok.Setter;
 @Table(name = "inventaire")
 public class Inventaire {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idInventaire == null) {
+            this.idInventaire = UUID.randomUUID();
+        }
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inventaire")
-    private Long idInventaire;
+    private UUID idInventaire;
 
     @NotNull
     private int quantite;

@@ -8,16 +8,23 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 public class Rituel {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idRituel == null) {
+            this.idRituel = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "id_rituel")
-	private Long idRituel;
+	private UUID idRituel;
 
 	@NotBlank
 	@Size(max = 60)

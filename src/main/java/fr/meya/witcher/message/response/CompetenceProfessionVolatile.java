@@ -4,15 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompetenceProfessionVolatile {
-    private Long idCompetenceProfession;
+    private UUID idCompetenceProfession;
 
-    private Long idProfession;
+    private UUID idProfession;
 
-    private Long idCompetence;
+    private UUID idCompetence;
 
     private CompetenceVolatile competence;
 

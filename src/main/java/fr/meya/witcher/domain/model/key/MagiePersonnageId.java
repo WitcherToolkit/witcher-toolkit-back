@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,8 +15,8 @@ import lombok.*;
 public class MagiePersonnageId {
 
     @Column(name = "id_personnage")
-    private Long idPersonnage;
+    private UUID idPersonnage;
 
     @Column(name = "id_magie")
-    private Long idMagie;
+    private UUID idMagie;
 }

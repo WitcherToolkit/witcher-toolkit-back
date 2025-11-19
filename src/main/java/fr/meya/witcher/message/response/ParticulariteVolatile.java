@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParticulariteVolatile {
 
-    private Long idParticularite;
+    private UUID idParticularite;
 
     @NotBlank(message = "error.particularite.nom.required")
     @Size( max = 50)

@@ -11,6 +11,7 @@ import fr.meya.witcher.domain.model.persistent.Caracteristique;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe représentant les compétences d'un personnage (connaissance de la rue, arbalète, etc...).
@@ -22,10 +23,16 @@ import java.util.List;
 @Entity
 public class Competence {
 
+    @PrePersist
+    public void generateId() {
+        if (this.idCompetence == null) {
+            this.idCompetence = UUID.randomUUID();
+        }
+    }
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_competence")
-	private Long idCompetence;
+	private UUID idCompetence;
 
 	@Size(max = 50)
 	private String nom;
