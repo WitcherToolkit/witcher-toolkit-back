@@ -2,10 +2,8 @@ package fr.meya.witcher.infrastructure.adapter.in;
 
 import fr.meya.witcher.application.mapper.EnvoutementMapper;
 import fr.meya.witcher.domain.model.persistent.Envoutement;
-import fr.meya.witcher.domain.model.persistent.Magie;
 import fr.meya.witcher.domain.port.in.IEnvoutementService;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
-import fr.meya.witcher.message.response.MagieVolatile;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -3,7 +3,6 @@ package fr.meya.witcher.domain.model.persistent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.meya.witcher.domain.model.key.CompetenceProfessionId;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -26,6 +26,7 @@
 		<java.version>21</java.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 		<lombok.version>1.18.38</lombok.version>
+		<jjwt.version>0.12.6</jjwt.version>
 	</properties>
 
 	<dependencies>
@@ -80,6 +81,31 @@
             <version>5.1.0</version>
         </dependency>
 
+		<!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- JWT (Pour décoder le token) -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
 		<!-- Tests -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -111,31 +137,32 @@
 				<configuration>
 					<release>${java.version}</release>
 					<annotationProcessorPaths>
-						<!-- MapStruct processor -->
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${mapstruct.version}</version>
-						</path>
-						<!-- Lombok processor -->
+						<!-- 1. LOMBOK DOIT ÊTRE EN PREMIER -->
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
 						</path>
-						<!-- Binding Lombok <-> MapStruct (reconnaissance des builders/accessors Lombok) -->
+						<!-- 2. LE LIEN LOMBOK-MAPSTRUCT -->
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok-mapstruct-binding</artifactId>
 							<version>0.2.0</version>
 						</path>
+						<!-- 3. MAPSTRUCT EN DERNIER -->
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
 					</annotationProcessorPaths>
-					<!-- (optionnel) Quelques flags MapStruct utiles -->
 					<compilerArgs>
 						<arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
 						<arg>-Amapstruct.verbose=true</arg>
+						<arg>-Amapstruct.defaultComponentModel=spring</arg>
 					</compilerArgs>
 				</configuration>
+
 			</plugin>
 
 			<!-- Tests -->

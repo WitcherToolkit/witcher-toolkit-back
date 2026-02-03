@@ -1,6 +1,5 @@
 package fr.meya.witcher.domain.port.in;
 
-import fr.meya.witcher.domain.model.persistent.Personnage;
 import fr.meya.witcher.message.response.PersonnageVolatile;
 
 import java.util.List;

@@ -1,16 +1,12 @@
 package fr.meya.witcher.infrastructure.adapter.in;
 
-import fr.meya.witcher.application.mapper.PersonnageMapper;
-import fr.meya.witcher.domain.model.persistent.Personnage;
 import fr.meya.witcher.domain.port.in.IPersonnageService;
-import fr.meya.witcher.message.response.CompetencePersonnageVolatile;
 import fr.meya.witcher.message.response.PersonnageVolatile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j

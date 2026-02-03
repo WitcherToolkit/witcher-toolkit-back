@@ -26,7 +26,7 @@ public class PersonnageVolatile {
 
     private String terreNatale;
 
-    private String xp;
+    private Integer xp;
 
     private long age;
 

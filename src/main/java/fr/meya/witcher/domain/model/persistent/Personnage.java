@@ -44,7 +44,7 @@ public class Personnage {
 	@Column(name = "terre_natale")
 	private String terreNatale;
 
-	private String xp;
+	private Integer xp;
 
 	private long age;
 

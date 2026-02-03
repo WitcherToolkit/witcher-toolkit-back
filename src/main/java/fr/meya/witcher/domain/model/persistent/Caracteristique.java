@@ -1,6 +1,5 @@
 package fr.meya.witcher.domain.model.persistent;
 
-import fr.meya.witcher.domain.model.enums.DangerEnum;
 import fr.meya.witcher.domain.model.enums.TypeCaracteristiqueEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

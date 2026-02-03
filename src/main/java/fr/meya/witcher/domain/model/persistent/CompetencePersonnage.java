@@ -1,9 +1,7 @@
 package fr.meya.witcher.domain.model.persistent;
 
 import fr.meya.witcher.domain.model.key.CompetencePersonnageId;
-import fr.meya.witcher.domain.model.key.CompetenceProfessionId;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
