@@ -3,7 +3,6 @@ package fr.meya.witcher.application.mapper;
 import fr.meya.witcher.domain.model.persistent.Envoutement;
 import fr.meya.witcher.message.response.EnvoutementVolatile;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface EnvoutementMapper {
